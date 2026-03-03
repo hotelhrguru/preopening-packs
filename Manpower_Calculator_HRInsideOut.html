@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manpower Calculator™ — HR Inside Out</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+:root{--gold:#C9A252;--gold-l:#F0DCA8;--gold-p:#FBF5E8;--gold-d:#8B6A1F;--navy:#16213E;--navy2:#1E2A4A;--dark:#0D0F14;--ch:#2C2C3E;--mg:#6B6B80;--lg:#F2F2F7;--bd:#E4E4ED;--wh:#FFFFFF;--gr:#27AE60;--grp:#E8F8EE;--re:#E74C3C;--rep:#FFF0EE;--bl:#2980B9;--blp:#EBF4FB;--or:#F39C12;--orp:#FFF8E0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#F5F5F8;color:var(--ch);min-height:100vh}
+.hdr{background:var(--navy);height:56px;display:flex;align-items:center;padding:0 28px;justify-content:space-between;position:sticky;top:0;z-index:99;box-shadow:0 2px 16px rgba(0,0,0,.35)}
+.hdr-brand{display:flex;align-items:center;gap:10px}
+.hdr-dot{width:9px;height:9px;background:var(--gold);border-radius:50%}
+.hdr-name{font-size:10.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
+.hdr-sep{color:rgba(255,255,255,.2);margin:0 4px}
+.hdr-tool{font-size:10.5px;letter-spacing:1px;color:rgba(255,255,255,.45);text-transform:uppercase}
+.hdr-tag{background:rgba(201,162,82,.12);border:1px solid rgba(201,162,82,.3);color:var(--gold);font-size:9.5px;font-weight:700;letter-spacing:1.5px;padding:3px 11px;text-transform:uppercase}
+.hero{background:linear-gradient(145deg,var(--navy) 0%,var(--navy2) 55%,#1a2850 100%);padding:44px 28px 36px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(45deg,var(--gold) 0,var(--gold) 1px,transparent 0,transparent 50%);background-size:20px 20px}
+.hero-eye{font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px}
+.hero h1{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:6px}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font-size:13px;color:rgba(255,255,255,.5);max-width:500px;margin:0 auto 22px;line-height:1.6}
+.tabs{display:inline-flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:3px;gap:2px}
+.tb{padding:8px 20px;font-size:11.5px;font-weight:600;letter-spacing:.5px;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,.45);transition:all .18s;font-family:'DM Sans',sans-serif}
+.tb.on{background:var(--gold);color:var(--dark)}
+.tb:hover:not(.on){color:rgba(255,255,255,.8)}
+.wrap{max-width:1200px;margin:0 auto;padding:28px;display:grid;grid-template-columns:370px 1fr;gap:24px;align-items:start}
+.panel{background:var(--wh);border:1px solid var(--bd);box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.ph{background:var(--navy);padding:14px 18px;display:flex;align-items:center;gap:10px}
+.ph-ico{width:26px;height:26px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.ph h2{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff}
+.ph p{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:.4px;margin-top:1px}
+.pb{padding:18px}
+.fl{margin-bottom:14px}
+.fl:last-child{margin-bottom:0}
+.fl label{display:block;font-size:10.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--mg);margin-bottom:5px}
+.fl input[type=number],.fl select{width:100%;padding:9px 12px;border:1.5px solid var(--bd);font-size:13.5px;font-weight:500;color:var(--ch);background:var(--wh);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .18s;appearance:none;-webkit-appearance:none}
+.fl input:focus,.fl select:focus{border-color:var(--gold)}
+.fl select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M5 7 0 0h10z' fill='%23C9A252'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
+.fl-hint{font-size:10px;color:var(--mg);margin-top:3px;line-height:1.5}
+.fl-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.div{border:none;border-top:1px solid var(--bd);margin:16px 0}
+.sec{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec::after{content:'';flex:1;height:1px;background:var(--gold-p)}
+.cta{width:100%;padding:12px;background:var(--gold);border:none;font-size:11.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dark);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s;margin-top:18px}
+.cta:hover{background:var(--gold-l)}
+.res{display:flex;flex-direction:column;gap:16px}
+.empty{background:var(--wh);border:2px dashed var(--bd);padding:56px 28px;text-align:center}
+.empty-ico{font-size:36px;margin-bottom:10px;opacity:.25}
+.empty h3{font-size:13.5px;font-weight:600;color:var(--mg);margin-bottom:5px}
+.empty p{font-size:11.5px;color:#aaa}
+.sum{background:var(--navy);padding:18px 20px 16px;display:grid;grid-template-columns:repeat(4,1fr);position:relative;overflow:hidden}
+.sum::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+.sk{padding:3px 12px;border-right:1px solid rgba(255,255,255,.07)}
+.sk:last-child{border-right:none}
+.sk-v{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;line-height:1;margin-bottom:3px}
+.sk-v small{font-size:12px;color:var(--gold);font-family:'DM Sans';font-weight:400;margin-left:3px}
+.sk-l{font-size:9.5px;color:rgba(255,255,255,.38);letter-spacing:.4px}
+.sk-s{font-size:10.5px;color:var(--gold);font-weight:600;margin-top:2px}
+.range-banner{background:var(--gold-p);border-left:4px solid var(--gold);padding:12px 16px;font-size:12.5px;color:var(--navy);line-height:1.8}
+.range-banner strong{color:var(--gold-d)}
+.card{background:var(--wh);border:1px solid var(--bd);overflow:hidden}
+.card-h{padding:11px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.card-title{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;gap:8px}
+.card-title::before{content:'';width:3.5px;height:16px;background:var(--gold)}
+.card-num{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy)}
+.card-num small{font-size:10px;color:var(--mg);font-family:'DM Sans';font-weight:400;margin-left:3px}
+table.dt{width:100%;border-collapse:collapse;font-size:11.5px}
+table.dt thead th{background:var(--lg);font-size:9.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--mg);padding:7px 14px;text-align:left}
+table.dt thead th.rc{text-align:right}
+table.dt tbody td{padding:8px 14px;border-bottom:.5px solid var(--bd);vertical-align:top;line-height:1.55}
+table.dt tbody tr:last-child td{border-bottom:none}
+table.dt tbody tr:nth-child(even){background:#FAFAFA}
+.td-n{text-align:right;font-weight:700;font-size:13.5px;color:var(--navy)}
+.td-c{text-align:center}
+.td-range{text-align:center;font-size:10.5px;color:var(--mg);font-style:italic}
+.td-note{font-size:10px;color:var(--mg);font-style:italic}
+.sbadge{display:inline-block;padding:2px 7px;font-size:9.5px;font-weight:700}
+.sb-fix{background:#EEF0FF;color:#4A55CC}
+.sb-var{background:var(--orp);color:#B07800}
+.bench-row{display:flex;align-items:center;padding:9px 16px;border-bottom:.5px solid var(--bd);gap:10px}
+.bench-row:last-child{border-bottom:none}
+.bench-row.hi{background:rgba(201,162,82,.07)}
+.bench-lbl{font-size:12px;font-weight:500;flex:1.5}
+.bench-stars{font-size:10px;color:var(--gold);width:65px}
+.bench-ratio{font-size:10.5px;color:var(--mg);width:95px;text-align:center}
+.bench-bw{flex:2;height:5px;background:var(--lg)}
+.bench-b{height:100%;background:var(--gold)}
+.bench-val{font-size:12.5px;font-weight:700;color:var(--navy);width:80px;text-align:right}
+.notes-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px}
+.nc{padding:12px 14px;border-left:3px solid}
+.nc.g{background:var(--gold-p);border-color:var(--gold)}
+.nc.b{background:var(--blp);border-color:var(--bl)}
+.nc.gr{background:var(--grp);border-color:var(--gr)}
+.nc.r{background:var(--rep);border-color:var(--re)}
+.nc h4{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px}
+.nc.g h4{color:var(--gold-d)}.nc.b h4{color:var(--bl)}.nc.gr h4{color:var(--gr)}.nc.r h4{color:var(--re)}
+.nc p{font-size:11.5px;line-height:1.65;color:var(--ch)}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bd)}
+.si{background:var(--wh);padding:14px 16px}
+.si-tag{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.si-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:2px}
+.si-desc{font-size:10.5px;color:var(--mg);line-height:1.55}
+.tc{display:none}.tc.on{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fi{animation:fi .28s ease forwards}
+@media(max-width:880px){.wrap{grid-template-columns:1fr}.sum{grid-template-columns:repeat(2,1fr)}.notes-grid{grid-template-columns:1fr}.sg{grid-template-columns:1fr}}
+.foot{background:var(--navy);padding:12px 18px;font-size:10px;color:rgba(255,255,255,.35);text-align:center;line-height:1.8}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="hdr-brand"><div class="hdr-dot"></div><span class="hdr-name">HR Inside Out</span><span class="hdr-sep">·</span><span class="hdr-tool">Manpower Calculator™ v2.0</span></div>
+  <div class="hdr-tag">Internal Use Only</div>
+</header>
+
+<div class="hero">
+  <div class="hero-eye">Hospitality Workforce Planning Tool · ใช้งานภายในเท่านั้น</div>
+  <h1>Manpower <span>Calculator™</span></h1>
+  <p class="hero-sub">คำนวณ FTE ตาม Segment จริง · High/Low Season · แผนกรายละเอียด · Benchmark อุตสาหกรรม</p>
+  <div class="tabs">
+    <button class="tb on" onclick="switchTab('hotel',this)">🏨 Hotel</button>
+    <button class="tb" onclick="switchTab('restaurant',this)">🍽 Restaurant</button>
+    <button class="tb" onclick="switchTab('spa',this)">💆 Spa</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="panel">
+
+    <!-- HOTEL INPUT -->
+    <div id="ip-hotel" class="tc on">
+      <div class="ph"><div class="ph-ico">🏨</div><div><h2>Hotel Inputs</h2><p>กรอกข้อมูลโรงแรม</p></div></div>
+      <div class="pb">
+        <div class="sec">Segment & ขนาด</div>
+        <div class="fl">
+          <label>Segment</label>
+          <select id="h-seg">
+            <option value="economy">Economy / Budget (2★) — Ratio 0.5–0.8</option>
+            <option value="midscale" selected>Midscale / Upper Mid (3–3.5★) — Ratio 0.8–1.3</option>
+            <option value="upscale">Upscale (4★) — Ratio 1.0–1.5</option>
+            <option value="luxury">Luxury / Resort 5★ — Ratio 1.5–2.5</option>
+            <option value="boutique">Boutique High Touch (3–5★) — Ratio 1.3–2.0</option>
+          </select>
+        </div>
+        <div class="fl">
+          <label>จำนวนห้องพัก</label>
+          <input type="number" id="h-rooms" value="100" min="10" max="2000">
+        </div>
+        <div class="fl-row">
+          <div class="fl"><label>High Season Occ (%)</label><input type="number" id="h-occ-h" value="85" min="30" max="100"></div>
+          <div class="fl"><label>Low Season Occ (%)</label><input type="number" id="h-occ-l" value="50" min="10" max="100"></div>
+        </div>
+        <div class="fl">
+          <label>Average Annual Occ (%)</label>
+          <input type="number" id="h-occ-avg" value="68" min="20" max="100">
+          <div class="fl-hint">Effective Rooms = ห้อง × Avg Occ</div>
+        </div>
+        <div class="div"></div>
+        <div class="sec">F&B Outlets</div>
+        <div class="fl-row">
+          <div class="fl"><label>All-Day Dining</label><input type="number" id="h-add" value="1" min="0" max="5"></div>
+          <div class="fl"><label>Specialty Restaurant</label><input type="number" id="h-spec" value="0" min="0" max="5"></div>
+        </div>
+        <div class="fl-row">
+          <div class="fl"><label>Bar / Lounge</label><input type="number" id="h-bar" value="1" min="0" max="5"></div>
+          <div class="fl"><label>Room Service</label>
+            <select id="h-rs">
+              <option value="no">ไม่มี</option>
+              <option value="limited">Limited (07–22)</option>
+              <option value="full" selected>Full 24hr</option>
+            </select>
+          </div>
+        </div>
+        <div class="fl-row">
+          <div class="fl"><label>Banquet Space</label>
+            <select id="h-banq">
+              <option value="no">ไม่มี</option>
+              <option value="small">เล็ก (&lt;200 pax)</option>
+              <option value="large">ใหญ่ (200+ pax)</option>
+            </select>
+          </div>
+          <div class="fl"><label>Pool Bar</label>
+            <select id="h-poolbar">
+              <option value="no" selected>ไม่มี</option>
+              <option value="yes">มี</option>
+            </select>
+          </div>
+        </div>
+        <div class="div"></div>
+        <div class="sec">Wellness & Recreation</div>
+        <div class="fl-row">
+          <div class="fl"><label>Spa (จำนวน Tx Rooms)</label><input type="number" id="h-spa" value="0" min="0" max="30"><div class="fl-hint">0 = ไม่มีสปา</div></div>
+          <div class="fl"><label>Recreation</label>
+            <select id="h-rec">
+              <option value="no">ไม่มี</option>
+              <option value="basic">Basic (Gym+Pool)</option>
+              <option value="full" selected>Full (Gym+Pool+Kids)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESTAURANT INPUT -->
+    <div id="ip-restaurant" class="tc">
+      <div class="ph"><div class="ph-ico">🍽</div><div><h2>Restaurant Inputs</h2><p>คำนวณพนักงาน FOH + BOH</p></div></div>
+      <div class="pb">
+        <div class="sec">ขนาดและรูปแบบ</div>
+        <div class="fl"><label>ประเภทร้านอาหาร</label>
+          <select id="r-type">
+            <option value="qsr">Quick Service / Fast Food</option>
+            <option value="casual">Casual Dining</option>
+            <option value="alldaydining" selected>All-Day Dining (Hotel)</option>
+            <option value="upscale">Upscale / Semi Fine Dining</option>
+            <option value="finedining">Fine Dining / Luxury</option>
+            <option value="buffet">Buffet Restaurant</option>
+          </select>
+        </div>
+        <div class="fl"><label>จำนวนที่นั่ง (Seats)</label><input type="number" id="r-seats" value="80" min="10" max="500"></div>
+        <div class="fl"><label>Turn Rate (รอบ/วัน)</label><input type="number" id="r-turns" value="2.5" min="0.5" max="8" step="0.5"><div class="fl-hint">Fine Dining = 1–1.5 · Casual = 2.5–3.5 · Buffet = 2–3</div></div>
+        <div class="fl"><label>มื้อที่เปิดบริการ</label>
+          <select id="r-meals">
+            <option value="one">1 มื้อ</option>
+            <option value="two">2 มื้อ</option>
+            <option value="three" selected>3 มื้อ / All-Day</option>
+          </select>
+        </div>
+        <div class="fl"><label>Peak Breakfast (pax) — ถ้ามี</label><input type="number" id="r-bfast" value="60" min="0" max="500"><div class="fl-hint">Breakfast 100 pax peak → 5–7 คน</div></div>
+        <div class="div"></div>
+        <div class="sec">Kitchen</div>
+        <div class="fl"><label>ความซับซ้อนครัว</label>
+          <select id="r-kitchen">
+            <option value="simple">Simple (Set menu / Sandwiches)</option>
+            <option value="standard" selected>Standard (A la carte + Set)</option>
+            <option value="complex">Complex (Multi-cuisine + Bakery)</option>
+            <option value="show">Show / Open Kitchen</option>
+          </select>
+        </div>
+        <div class="fl"><label>Banquet / Catering (max pax)</label><input type="number" id="r-banq" value="0" min="0" max="1000"><div class="fl-hint">ใส่ 0 ถ้าไม่มี Banquet</div></div>
+      </div>
+    </div>
+
+    <!-- SPA INPUT -->
+    <div id="ip-spa" class="tc">
+      <div class="ph"><div class="ph-ico">💆</div><div><h2>Spa Inputs</h2><p>คำนวณพนักงานสปาและ Wellness</p></div></div>
+      <div class="pb">
+        <div class="sec">ขนาดและระดับ</div>
+        <div class="fl"><label>ประเภทสปา</label>
+          <select id="s-type">
+            <option value="city">City / Day Spa (Treatment 60 นาที)</option>
+            <option value="resort" selected>Resort Spa 4–5★ (90 นาที)</option>
+            <option value="destination">Destination / Wellness (120 นาที)</option>
+            <option value="medical">Medical Spa (90 นาที)</option>
+          </select>
+        </div>
+        <div class="fl"><label>จำนวนห้องบำบัด (Tx Rooms)</label><input type="number" id="s-txrooms" value="6" min="1" max="40"><div class="fl-hint">Rule: 1 Therapist : 1 Tx Room : 1 Shift</div></div>
+        <div class="fl-row">
+          <div class="fl"><label>ชั่วโมงเปิด/วัน</label><input type="number" id="s-hours" value="10" min="6" max="18"></div>
+          <div class="fl"><label>Utilization Target (%)</label><input type="number" id="s-util" value="65" min="30" max="95"></div>
+        </div>
+        <div class="div"></div>
+        <div class="sec">บริการเพิ่มเติม</div>
+        <div class="fl-row">
+          <div class="fl"><label>Fitness Center</label><select id="s-fit"><option value="no">ไม่มี</option><option value="yes" selected>มี</option></select></div>
+          <div class="fl"><label>Pool / Hydro</label><select id="s-pool"><option value="no">ไม่มี</option><option value="yes" selected>มี</option></select></div>
+        </div>
+        <div class="fl-row">
+          <div class="fl"><label>Yoga / Studio</label><select id="s-yoga"><option value="no" selected>ไม่มี</option><option value="yes">มี</option></select></div>
+          <div class="fl"><label>Retail Shop</label><select id="s-retail"><option value="no">ไม่มี</option><option value="yes" selected>มี</option></select></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:0 18px 18px"><button class="cta" onclick="calculate()">⚡ คำนวณ Manpower</button></div>
+  </div>
+
+  <div class="res" id="res-area">
+    <div class="empty"><div class="empty-ico">📊</div><h3>กรอกข้อมูลแล้วกด "คำนวณ Manpower"</h3><p>ผลลัพธ์จะแสดงที่นี่ พร้อม Benchmark และรายละเอียดแต่ละแผนก</p></div>
+  </div>
+</div>
+
+<script>
+let curTab='hotel';
+function switchTab(t,btn){curTab=t;document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.querySelectorAll('.tc').forEach(c=>c.classList.remove('on'));document.getElementById('ip-'+t).classList.add('on');document.getElementById('res-area').innerHTML='<div class="empty"><div class="empty-ico">📊</div><h3>กรอกข้อมูลแล้วกด "คำนวณ Manpower"</h3></div>'}
+
+const SEG={
+  economy:  {name:'Economy / Budget',    stars:'★★',         rL:0.5,rH:0.8, rM:0.65},
+  midscale: {name:'Midscale / Upper Mid', stars:'★★★–★★★½', rL:0.8,rH:1.3, rM:1.05},
+  upscale:  {name:'Upscale',              stars:'★★★★',      rL:1.0,rH:1.5, rM:1.25},
+  luxury:   {name:'Luxury / Resort 5★',  stars:'★★★★★',    rL:1.5,rH:2.5, rM:2.0},
+  boutique: {name:'Boutique High Touch',  stars:'★★★–★★★★★',rL:1.3,rH:2.0, rM:1.65},
+};
+const DEPT=[
+  {name:'Front Office',              pctL:0.08,pctM:0.10,pctH:0.12, fix:true,  note:'Manager + Supervisor + Agent + Bell / Driver'},
+  {name:'Housekeeping (+ Laundry)',  pctL:0.18,pctM:0.22,pctH:0.25, fix:false, note:'1 Room Attendant ต่อ 14–16 ห้อง/shift'},
+  {name:'F&B Service',               pctL:0.18,pctM:0.21,pctH:0.25, fix:false, note:'1 Server ต่อ 20–30 seats (midscale), 10–15 (luxury)'},
+  {name:'Culinary / Kitchen',        pctL:0.15,pctM:0.18,pctH:0.22, fix:false, note:'แปรผันตาม outlet และ complexity ของ menu'},
+  {name:'Spa & Recreation',          pctL:0.04,pctM:0.07,pctH:0.10, fix:false, note:'ขึ้นกับ resort vs city และ จำนวน Tx rooms'},
+  {name:'Engineering',               pctL:0.04,pctM:0.06,pctH:0.08, fix:true,  note:'Fixed — ต้องมีทุก segment'},
+  {name:'Finance & Accounting',      pctL:0.03,pctM:0.04,pctH:0.05, fix:true,  note:'Fixed — ปรับตาม complexity ธุรกิจ'},
+  {name:'Sales & Marketing',         pctL:0.04,pctM:0.06,pctH:0.08, fix:true,  note:'แปรผันตาม ADR strategy'},
+  {name:'HR & Training',             pctL:0.02,pctM:0.03,pctH:0.04, fix:true,  note:'เพิ่มตาม headcount รวม'},
+  {name:'Security',                  pctL:0.04,pctM:0.06,pctH:0.08, fix:true,  note:'ขึ้นกับพื้นที่และ risk profile'},
+];
+
+function calcHotel(){
+  const seg=document.getElementById('h-seg').value;
+  const rooms=+document.getElementById('h-rooms').value||100;
+  const occH=+document.getElementById('h-occ-h').value||85;
+  const occL=+document.getElementById('h-occ-l').value||50;
+  const occA=+document.getElementById('h-occ-avg').value||68;
+  const nADD=+document.getElementById('h-add').value||0;
+  const nSpec=+document.getElementById('h-spec').value||0;
+  const nBar=+document.getElementById('h-bar').value||0;
+  const rsType=document.getElementById('h-rs').value;
+  const banq=document.getElementById('h-banq').value;
+  const poolbar=document.getElementById('h-poolbar').value;
+  const spaTx=+document.getElementById('h-spa').value||0;
+  const rec=document.getElementById('h-rec').value;
+  const S=SEG[seg];
+  const eff=Math.round(rooms*occA/100);
+  const outlets=nADD+nSpec+nBar+(poolbar==='yes'?1:0);
+  const perOutlet=seg==='luxury'||seg==='boutique'?8:seg==='upscale'?6:5;
+  const fbAdd=outlets*perOutlet;
+  const rsAdd=rsType==='full'?Math.ceil(rooms/40):rsType==='limited'?Math.ceil(rooms/60):0;
+  const banqAdd=banq==='large'?Math.ceil(rooms*0.08):banq==='small'?Math.ceil(rooms*0.04):0;
+  const spaAdd=spaTx>0?Math.round(spaTx*(seg==='luxury'?2.0:1.6)):0;
+  const recAdd=rec==='full'?4:rec==='basic'?2:0;
+  const adj=fbAdd+rsAdd+banqAdd+spaAdd+recAdd;
+  const fteLow=Math.round(rooms*S.rL+adj);
+  const fteHigh=Math.round(rooms*S.rH+adj);
+  const fteMid=Math.round(rooms*S.rM+adj);
+  const fteHS=Math.round(rooms*S.rH+adj);
+  const fteLS=Math.round(rooms*S.rL+adj*0.8);
+  const hkPR=seg==='luxury'||seg==='boutique'?10:seg==='upscale'?12:15;
+  const raDay=Math.ceil(eff/hkPR);
+  const raRoster=Math.ceil(raDay*1.35);
+  const foD=seg==='economy'||rooms<=60?{a:'3–4',b:'0–2',c:'0',bu:'0',t:'4–7',n:'FD Agent ครอบ 24hr ไม่มี Concierge'}:seg==='midscale'||rooms<=120?{a:'4–6',b:'2–3',c:'0–1',bu:'0',t:'8–12',n:'Manager 1 + Sup 1 + Agent 4–6 + Bell 2–3'}:seg==='upscale'?{a:'5–7',b:'3–4',c:'1–2',bu:'0',t:'10–16',n:'เพิ่ม GRO 1–2 คน'}:{a:'6–10',b:'4–6',c:'2–4',bu:'2–4',t:'15–25',n:'GR + Concierge + Butler cluster สำหรับ 100 ห้อง'};
+  const depts=DEPT.map(d=>{
+    let pM=d.pctM;
+    if(d.name==='Spa & Recreation'&&spaTx===0&&rec==='no')return null;
+    if((d.name==='F&B Service'||d.name==='Culinary / Kitchen')&&outlets>2)pM*=(1+outlets*0.04);
+    return{name:d.name,lo:Math.max(1,Math.round(fteMid*d.pctL)),mi:Math.max(1,Math.round(fteMid*pM)),hi:Math.max(1,Math.round(fteMid*d.pctH)),fix:d.fix,note:d.note};
+  }).filter(Boolean);
+  const allSeg=Object.entries(SEG).map(([k,s])=>({name:s.name,stars:s.stars,rng:`${s.rL}–${s.rH}`,lo:Math.round(rooms*s.rL),hi:Math.round(rooms*s.rH),pct:Math.round(s.rM/2.5*100),act:k===seg}));
+  const benchHTML=allSeg.map(b=>`<div class="bench-row ${b.act?'hi':''}"><div class="bench-lbl">${b.act?'▶ ':''}<b>${b.name}</b></div><div class="bench-stars">${b.stars}</div><div class="bench-ratio">Ratio ${b.rng}</div><div class="bench-bw"><div class="bench-b" style="width:${b.pct}%"></div></div><div class="bench-val">${b.lo}–${b.hi} คน</div></div>`).join('');
+  const deptRows=depts.map(d=>`<tr><td>${d.name}</td><td class="td-c"><span class="sbadge ${d.fix?'sb-fix':'sb-var'}">${d.fix?'Fixed':'Variable'}</span></td><td class="td-range">${d.lo}–${d.hi}</td><td class="td-n">${d.mi}</td><td class="td-note">${d.note}</td></tr>`).join('');
+  document.getElementById('res-area').innerHTML=`
+<div class="sum fi"><div class="sk"><div class="sk-v">${fteMid}<small>FTE</small></div><div class="sk-l">Total Staff (Peak Avg)</div><div class="sk-s">${S.name}</div></div><div class="sk"><div class="sk-v">${rooms}<small>ห้อง</small></div><div class="sk-l">จำนวนห้องพัก</div><div class="sk-s">Eff. ${eff} ที่ ${occA}% Occ</div></div><div class="sk"><div class="sk-v">${S.rL}–${S.rH}<small>:1</small></div><div class="sk-l">Staff:Room Ratio</div><div class="sk-s">Industry Benchmark</div></div><div class="sk"><div class="sk-v">${fteHS}<small>FTE</small></div><div class="sk-l">High Season @ ${occH}%</div><div class="sk-s">Low: ${fteLS} FTE @ ${occL}%</div></div></div>
+<div class="range-banner fi">📌 <strong>${S.name} · ${rooms} ห้อง → FTE Range: ${fteLow}–${fteHigh} คน</strong><br>Effective Rooms = ${rooms} × ${occA}% = <strong>${eff} ห้อง</strong> · High Season ratio ${S.rH} → <strong>${fteHS} FTE</strong> · Low Season ratio ${S.rL} → <strong>${fteLS} FTE</strong> + เสริม Daily Casual แทน Fix headcount</div>
+<div class="card fi"><div class="card-h"><div class="card-title">Seasonal Staffing Plan</div></div><div class="sg"><div class="si"><div class="si-tag" style="color:var(--or)">🌞 HIGH SEASON — Occ ${occH}%</div><div class="si-num" style="color:var(--navy)">${fteHS} FTE</div><div class="si-desc">ใช้ ratio <b>${S.rH}</b> · Fixed + Variable เต็ม + Daily Casual เสริม peak<br>Effective rooms ≈ ${Math.round(rooms*occH/100)} ห้อง</div></div><div class="si"><div class="si-tag" style="color:var(--bl)">🌧 LOW SEASON — Occ ${occL}%</div><div class="si-num" style="color:var(--navy)">${fteLS} FTE</div><div class="si-desc">ใช้ ratio <b>${S.rL}</b> · Fixed คง + ลด Variable 30–40% + งด Casual<br>Effective rooms ≈ ${Math.round(rooms*occL/100)} ห้อง</div></div></div></div>
+<div class="card fi"><div class="card-h"><div class="card-title">Benchmark เปรียบเทียบ Segment (${rooms} ห้อง)</div></div>${benchHTML}</div>
+<div class="card fi"><div class="card-h"><div class="card-title">แผนกและ Headcount (อ้างอิง ${fteMid} FTE)</div><div class="card-num">${fteMid}<small>total</small></div></div><table class="dt"><thead><tr><th>แผนก</th><th class="td-c">ประเภท</th><th class="td-c">ช่วง Low–High</th><th class="rc">Mid Est.</th><th>หมายเหตุ</th></tr></thead><tbody>${deptRows}</tbody></table></div>
+<div class="card fi"><div class="card-h"><div class="card-title">Housekeeping — Room Attendant Detail</div></div><table class="dt"><tbody><tr><td>มาตรฐาน ${seg==='luxury'||seg==='boutique'?'Luxury':seg==='upscale'?'Upscale':'Midscale'}</td><td class="td-c"></td><td class="td-range">${hkPR} ห้อง/คน/shift</td><td class="td-n"></td><td class="td-note">≈ ${Math.round(480/hkPR)} นาที/ห้อง</td></tr><tr><td>Effective rooms/วัน</td><td></td><td></td><td class="td-n">${eff}</td><td class="td-note">${rooms} × ${occA}%</td></tr><tr><td>Room Attendant ต่อวัน</td><td></td><td></td><td class="td-n">${raDay}</td><td class="td-note">${eff} ÷ ${hkPR} = ${raDay} คน</td></tr><tr><td><b>Total RA Roster (รวม Off-day)</b></td><td></td><td class="td-range">${Math.ceil(raDay*1.2)}–${Math.ceil(raDay*1.5)}</td><td class="td-n"><b>${raRoster}</b></td><td class="td-note">× 1.35 buffer (Off-day + Leave)</td></tr></tbody></table></div>
+<div class="card fi"><div class="card-h"><div class="card-title">Front Office — Detail</div><div class="card-num">${foD.t}<small>คน</small></div></div><table class="dt"><tbody><tr><td>FD Agent / Guest Service</td><td></td><td class="td-range">${foD.a} คน</td><td></td><td class="td-note">ครอบ 24hr (3 shift)</td></tr><tr><td>Bell / Driver / Porter</td><td></td><td class="td-range">${foD.b} คน</td><td></td><td class="td-note">Day + Evening shift</td></tr><tr><td>Concierge / GRO</td><td></td><td class="td-range">${foD.c} คน</td><td></td><td class="td-note">${foD.c==='0'?'ไม่จำเป็นสำหรับ segment นี้':'Day shift เป็นหลัก'}</td></tr>${seg==='luxury'||seg==='boutique'?`<tr><td>Butler / Guest Relations</td><td></td><td class="td-range">${foD.bu} คน</td><td></td><td class="td-note">High-touch service</td></tr>`:''}<tr><td><b>FO รวม</b></td><td></td><td class="td-range">${foD.t} คน</td><td></td><td class="td-note">${foD.n}</td></tr></tbody></table></div>
+<div class="card fi"><div class="card-h"><div class="card-title">หลักการและข้อควรระวัง</div></div><div class="notes-grid"><div class="nc g"><h4>📐 Fixed vs Variable</h4><p>Fixed = Engineering, Finance, HR, Security → ไม่ลดตาม Occ<br>Variable = HK, F&B, Banquet → ปรับตาม Occupancy + Season</p></div><div class="nc b"><h4>🔄 Shift Coverage Factor</h4><p>24hr position: ต้องการ 3.5 FTE ต่อ 1 slot<br>Day-only: ×1.2–1.4 เพื่อรวม Off-day + Leave</p></div><div class="nc gr"><h4>📊 Effective Rooms Formula</h4><p>${rooms} × ${occA}% = <b>${eff} Effective Rooms</b><br>ใช้วางแผน Variable staff และ HK workload</p></div><div class="nc r"><h4>⚡ Daily Casual Strategy</h4><p>Low Season: ลด Variable 30–40% + ใช้ Daily Casual เสริม Peak day แทนการ Fix headcount ป้องกัน over-staffing</p></div></div></div>
+<div class="foot">HR Inside Out Consulting · Manpower Calculator™ v2.0 · Internal Use Only<br>ค่าที่แสดงเป็น Guideline ตามมาตรฐานอุตสาหกรรม · ควรปรับตาม Business Mix และ Service Concept ของแต่ละกิจการ</div>`;
+}
+
+function calcRestaurant(){
+  const type=document.getElementById('r-type').value;
+  const seats=+document.getElementById('r-seats').value||80;
+  const turns=+document.getElementById('r-turns').value||2.5;
+  const meals=document.getElementById('r-meals').value;
+  const bfast=+document.getElementById('r-bfast').value||0;
+  const kitchen=document.getElementById('r-kitchen').value;
+  const banqPax=+document.getElementById('r-banq').value||0;
+  const tMap={qsr:'Quick Service',casual:'Casual Dining',alldaydining:'All-Day Dining',upscale:'Upscale',finedining:'Fine Dining',buffet:'Buffet'};
+  const spr={qsr:0,casual:25,alldaydining:20,upscale:14,finedining:10,buffet:22}[type]||20;
+  const servers=spr>0?Math.ceil(seats/spr):Math.ceil(seats/10);
+  const runner=Math.ceil(servers*0.5);
+  const captain=(type==='finedining'||type==='upscale')?Math.ceil(servers/3):0;
+  const host=type!=='qsr'?1:0;
+  const mealM={one:0.8,two:1.0,three:1.2}[meals]||1.0;
+  const foh=Math.round((servers+runner+captain+host)*mealM);
+  const bfastS=bfast>0?Math.ceil(bfast/(type==='finedining'?12:18))+1:0;
+  const bohR={simple:0.25,standard:0.40,complex:0.55,show:0.50}[kitchen]||0.40;
+  const headC=1,sousC=seats>60?1:0;
+  const cdp=Math.ceil(seats/(type==='finedining'?8:type==='buffet'?18:12));
+  const commis=Math.ceil(cdp*0.6);
+  const steward=Math.max(1,Math.ceil(seats/55));
+  const bakery=kitchen==='complex'?2:0;
+  const banqF=banqPax>0?Math.ceil(banqPax/28):0;
+  const banqB=banqPax>0?Math.ceil(banqPax/50):0;
+  const boh=headC+sousC+cdp+commis+steward+bakery+banqB;
+  const grand=foh+boh+banqF+bfastS+1;
+  const covers=Math.round(seats*turns);
+  const rows=[
+    captain&&{r:'Captain / Maître d\'',n:captain,no:`1:${Math.floor(servers/Math.max(captain,1))} Waiter`},
+    {r:'Waiter / Server',n:servers,no:`1 Server : ${spr||10} ที่นั่ง (${tMap[type]})`},
+    {r:'Runner / Busser',n:runner,no:'ช่วย Server ช่วง Peak'},
+    host&&{r:'Host / Hostess',n:host,no:'รับแขก จัดที่นั่ง'},
+    bfastS&&{r:`อาหารเช้า (เพิ่มเติม) — ${bfast} pax`,n:bfastS,no:`1:${type==='finedining'?12:18} pax/คน`},
+    {r:'Head Chef',n:headC,no:'ดูแล concept + quality'},
+    sousC&&{r:'Sous Chef',n:sousC,no:'สำหรับร้านมากกว่า 60 ที่นั่ง'},
+    {r:'Chef de Partie / Line Cook',n:cdp,no:`${type==='finedining'?8:type==='buffet'?18:12} seats/คน`},
+    {r:'Commis / Prep Cook',n:commis,no:'Prep + support Line'},
+    {r:'Steward / Dishwasher',n:steward,no:'1:55 seats'},
+    bakery&&{r:'Baker / Pastry',n:bakery,no:'Complex menu เท่านั้น'},
+    banqF&&{r:'Banquet FOH',n:banqF,no:`${banqPax} pax · 1:28 pax`},
+    banqB&&{r:'Banquet BOH',n:banqB,no:`1:50 pax`},
+    {r:'Restaurant Manager',n:1,no:'หัวหน้าทีม FOH+BOH'},
+  ].filter(Boolean);
+  const benchData=[
+    {n:'Quick Service',r:'1:25–30',lo:Math.round(seats*.10),hi:Math.round(seats*.15),p:15},
+    {n:'Casual Dining',r:'1:20–25',lo:Math.round(seats*.15),hi:Math.round(seats*.22),p:28},
+    {n:'All-Day Dining (Hotel)',r:'1:18–22',lo:Math.round(seats*.20),hi:Math.round(seats*.28),p:35},
+    {n:'Upscale',r:'1:12–15',lo:Math.round(seats*.28),hi:Math.round(seats*.40),p:55},
+    {n:'Fine Dining',r:'1:8–12',lo:Math.round(seats*.40),hi:Math.round(seats*.60),p:80},
+    {n:'Buffet',r:'1:20–25',lo:Math.round(seats*.22),hi:Math.round(seats*.32),p:38},
+  ];
+  const benchHTML=benchData.map(b=>`<div class="bench-row"><div class="bench-lbl"><b>${b.n}</b></div><div class="bench-ratio">Server ${b.r} seats</div><div class="bench-bw"><div class="bench-b" style="width:${b.p}%"></div></div><div class="bench-val">${b.lo}–${b.hi} คน</div></div>`).join('');
+  const rowsHTML=rows.map(r=>`<tr><td>${r.r}</td><td class="td-n">${r.n}</td><td class="td-note">${r.no}</td></tr>`).join('');
+  document.getElementById('res-area').innerHTML=`
+<div class="sum fi"><div class="sk"><div class="sk-v">${grand}<small>คน</small></div><div class="sk-l">Total Staff</div><div class="sk-s">${tMap[type]}</div></div><div class="sk"><div class="sk-v">${seats}<small>ที่นั่ง</small></div><div class="sk-l">จำนวน Seats</div></div><div class="sk"><div class="sk-v">${covers}<small>cover</small></div><div class="sk-l">Cover/Day (${turns}× turn)</div></div><div class="sk"><div class="sk-v">1:${spr||10}</div><div class="sk-l">Server:Seats Ratio</div><div class="sk-s">${tMap[type]}</div></div></div>
+<div class="range-banner fi">📌 <strong>${tMap[type]} · ${seats} ที่นั่ง · ${turns} Turn/วัน</strong><br>FOH = <strong>${foh} คน</strong> · BOH = <strong>${boh} คน</strong>${bfastS?` · Breakfast extra = <strong>${bfastS} คน</strong>`:''}${banqF?` · Banquet = <strong>${banqF+banqB} คน</strong>`:''} · Manager = 1 คน</div>
+<div class="card fi"><div class="card-h"><div class="card-title">Benchmark เปรียบเทียบประเภทร้าน (${seats} ที่นั่ง)</div></div>${benchHTML}</div>
+<div class="card fi"><div class="card-h"><div class="card-title">รายละเอียด Staff ทุกตำแหน่ง</div><div class="card-num">${grand}<small>คน</small></div></div><table class="dt"><thead><tr><th>ตำแหน่ง</th><th class="rc">จำนวน</th><th>หมายเหตุ</th></tr></thead><tbody>${rowsHTML}</tbody></table></div>
+<div class="card fi"><div class="card-h"><div class="card-title">หลักการ Restaurant Staffing</div></div><div class="notes-grid"><div class="nc g"><h4>🍽 Server Ratio</h4><p>Casual/Mid = 1:20–25 seats<br>Upscale = 1:12–15 seats<br>Fine Dining = 1:8–12 seats</p></div><div class="nc b"><h4>🔄 Turn Rate Impact</h4><p>Turn สูง → เพิ่ม Runner + Busser ไม่ใช่ Server<br>Breakfast 100 pax → 5–7 คน (รวม runner)</p></div><div class="nc gr"><h4>📊 FOH:BOH Ratio</h4><p>Fine Dining = 60:40 · Casual/Mid = 50:50<br>Buffet = 45:55 (BOH มากกว่า เพราะ replenishment)</p></div><div class="nc r"><h4>⚡ Banquet Formula</h4><p>FOH: 1:25–30 pax · BOH: 1:40–50 pax<br>ใช้ Part-time / Casual สำหรับ event</p></div></div></div>
+<div class="foot">HR Inside Out Consulting · Manpower Calculator™ v2.0 · Internal Use Only</div>`;
+}
+
+function calcSpa(){
+  const type=document.getElementById('s-type').value;
+  const txR=+document.getElementById('s-txrooms').value||6;
+  const hours=+document.getElementById('s-hours').value||10;
+  const util=+document.getElementById('s-util').value||65;
+  const hasFit=document.getElementById('s-fit').value==='yes';
+  const hasPool=document.getElementById('s-pool').value==='yes';
+  const hasYoga=document.getElementById('s-yoga').value==='yes';
+  const hasRetail=document.getElementById('s-retail').value==='yes';
+  const tMap={city:'City / Day Spa',resort:'Resort Spa (4–5★)',destination:'Destination / Wellness',medical:'Medical Spa'};
+  const txDur={city:60,resort:90,destination:120,medical:90}[type];
+  const shifts=hours>9?2:1;
+  const tCore=Math.round(txR*(shifts===2?1.8:1.3));
+  const tRoster=txR<=2?Math.min(Math.ceil(tCore*1.25),txR+1):Math.ceil(tCore*1.25);
+  const sup=txR<=4?1:Math.ceil(txR/5);
+  const recep=txR<=2?1:Math.min(2,Math.ceil(hours/8));
+  const attend=Math.max(1,Math.ceil(txR/4));
+  const fitS=hasFit?Math.ceil(hours/8)+1:0;
+  const poolS=hasPool?1+Math.ceil(hours/10):0;
+  const yogaS=hasYoga?2:0;
+  const retS=hasRetail?1:0;
+  const grand=tRoster+sup+recep+attend+fitS+poolS+yogaS+retS+1;
+  const txPerDay=Math.round(txR*util/100*Math.floor(hours*60/txDur));
+  const isSmall=txR<=2;
+  const rows=[
+    {r:'Therapist Core (ต่อ Shift)',n:tCore,no:`${txR} ห้อง × ${shifts} shift = ${txR*shifts} slots/วัน`},
+    {r:'Therapist Roster (รวม Leave/Training)',n:tRoster,no:`+25% buffer · Leave, Training, วันหยุด`},
+    {r:'Spa Supervisor / Senior Therapist',n:sup,no:`1 Sup : ${Math.ceil(txR/sup)} ห้อง`},
+    {r:'Spa Receptionist / Coordinator',n:recep,no:`ครอบ ${hours} ชม./วัน`},
+    {r:'Spa Attendant (Locker / Linen)',n:attend,no:'1 : 4 Tx rooms'},
+    {r:'Spa Manager',n:1,no:'Ops + Revenue + Guest Experience'},
+    hasFit&&{r:'Fitness Instructor / PT',n:fitS,no:'ครอบ opening hours'},
+    hasPool&&{r:'Pool Attendant',n:poolS,no:'ความปลอดภัยและความสะอาด'},
+    hasYoga&&{r:'Yoga / Wellness Instructor',n:yogaS,no:'2 คนสลับ session'},
+    hasRetail&&{r:'Retail / Product Advisor',n:retS,no:'Retail + upsell'},
+  ].filter(Boolean);
+  const benchHTML=[
+    {n:'City Spa — 2 ห้อง',th:'2–3',tot:'4–6',p:20},
+    {n:'City Spa — 4 ห้อง',th:'4–6',tot:'7–10',p:35},
+    {n:'Resort Spa — 6 ห้อง',th:'8–11',tot:'12–16',p:55},
+    {n:'Resort Spa — 10 ห้อง',th:'13–18',tot:'20–28',p:80},
+    {n:'Destination Spa — 10+ ห้อง',th:'20–22',tot:'30–40',p:100},
+  ].map(b=>`<div class="bench-row ${Math.abs(txR-(b.n.match(/\d+/)||[0])[0])<3?'hi':''}"><div class="bench-lbl"><b>${b.n}</b></div><div class="bench-ratio">Therapist ${b.th}</div><div class="bench-bw"><div class="bench-b" style="width:${b.p}%"></div></div><div class="bench-val">${b.tot} คน</div></div>`).join('');
+  const rowsHTML=rows.map(r=>`<tr><td>${r.r}</td><td class="td-n">${r.n}</td><td class="td-note">${r.no}</td></tr>`).join('');
+  document.getElementById('res-area').innerHTML=`
+<div class="sum fi"><div class="sk"><div class="sk-v">${grand}<small>คน</small></div><div class="sk-l">Total Staff</div><div class="sk-s">${tMap[type]}</div></div><div class="sk"><div class="sk-v">${txR}<small>ห้อง</small></div><div class="sk-l">Treatment Rooms</div></div><div class="sk"><div class="sk-v">${tRoster}<small>คน</small></div><div class="sk-l">Therapist Roster</div><div class="sk-s">รวม Leave buffer 25%</div></div><div class="sk"><div class="sk-v">${txPerDay}<small>ครั้ง</small></div><div class="sk-l">Treatment/Day @ ${util}%</div><div class="sk-s">${txDur} นาที/ครั้ง</div></div></div>
+${isSmall?'<div class="range-banner fi">📌 <strong>City Spa ขนาดเล็ก (1–2 ห้อง)</strong> → 2–3 Therapist + 1 Receptionist (Part-time หรือ Therapist รับหน้าที่ด้วย) รวม 4–6 คน</div>':''}
+<div class="range-banner fi">📌 <strong>Rule: 1 Therapist : 1 Tx Room : 1 Shift</strong><br>${txR} ห้อง × ${shifts} shift = <strong>${tCore} Therapist core</strong> + 25% Leave/Training buffer = <strong>${tRoster} Therapist roster</strong></div>
+<div class="card fi"><div class="card-h"><div class="card-title">Benchmark เปรียบเทียบขนาดสปา</div></div>${benchHTML}</div>
+<div class="card fi"><div class="card-h"><div class="card-title">รายละเอียด Staff ทุกตำแหน่ง</div><div class="card-num">${grand}<small>คน</small></div></div><table class="dt"><thead><tr><th>ตำแหน่ง</th><th class="rc">จำนวน</th><th>หมายเหตุ</th></tr></thead><tbody>${rowsHTML}</tbody></table></div>
+<div class="card fi"><div class="card-h"><div class="card-title">หลักการ Spa Staffing</div></div><div class="notes-grid"><div class="nc g"><h4>💆 1:1 Rule</h4><p>1 Therapist : 1 Tx Room : 1 Shift<br>${txR} ห้อง เปิด ${hours} ชม. = ${tCore} Therapist core</p></div><div class="nc b"><h4>⏰ Duration Impact</h4><p>City = 60 นาที → ${Math.floor(hours*60/60)} ครั้ง/ห้อง/วัน<br>Resort = 90 นาที → ${Math.floor(hours*60/90)} ครั้ง<br>Destination = 120 นาที → ${Math.floor(hours*60/120)} ครั้ง</p></div><div class="nc gr"><h4>📊 Utilization ${util}%</h4><p>→ ${txPerDay} Treatment/วัน<br>&lt;50% = ลด staff / เพิ่ม marketing<br>&gt;85% = เพิ่ม Therapist</p></div><div class="nc r"><h4>🎓 Training Buffer 25%</h4><p>${tCore} core × 1.25 = <b>${tRoster} roster</b><br>Therapist Train 15–20% ของเวลา + Leave</p></div></div></div>
+<div class="foot">HR Inside Out Consulting · Manpower Calculator™ v2.0 · Internal Use Only</div>`;
+}
+
+function calculate(){if(curTab==='hotel')calcHotel();else if(curTab==='restaurant')calcRestaurant();else calcSpa();}
+</script>
+</body>
+</html>
