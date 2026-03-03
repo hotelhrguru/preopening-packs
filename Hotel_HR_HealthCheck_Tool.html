@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel HR Health Check — HR Inside Out</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0E1A;--navy:#111827;--navy2:#1C2844;--gold:#C9A252;--gold-l:#DDB96A;
+  --gold-p:#FAF4E8;--gold-d:#8B6A1F;--cream:#F8F7F2;--off:#F0EFE9;--mid:#777890;
+  --bd:#E2E1D8;--wh:#fff;
+  --red:#C0392B;--red-p:#FDECEA;--orange:#C86400;--orange-p:#FEF3E6;
+  --green:#1E8A4C;--green-p:#E8F5EE;--blue:#1A5F9E;--blue-p:#EAF2FB;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* NAV */
+nav{background:var(--navy);height:56px;display:flex;align-items:center;
+  padding:0 40px;justify-content:space-between;position:sticky;top:0;z-index:100;
+  border-bottom:1px solid rgba(201,162,82,.12)}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold)}
+.nav-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.nav-btn{background:var(--gold);color:var(--ink);font-size:9px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;padding:7px 18px;border:none;cursor:pointer;font-family:'Jost',sans-serif}
+.nav-btn:hover{background:var(--gold-l)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#162040 100%);
+  padding:48px 40px 36px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-60px;top:-60px;width:320px;height:320px;
+  border-radius:50%;background:radial-gradient(circle,rgba(201,162,82,.06),transparent 70%)}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.hero-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:6px}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero-th{font-size:14px;color:rgba(255,255,255,.38);font-weight:300;margin-bottom:12px}
+.hero-desc{font-size:12.5px;color:rgba(255,255,255,.45);line-height:1.7;max-width:520px}
+.hero-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.07)}
+.hs{padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+.hs:last-child{border-right:none}
+.hs-v{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold)}
+.hs-l{font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:2px}
+
+/* PROGRESS BAR */
+.progress-bar{background:rgba(255,255,255,.06);border-bottom:1px solid rgba(201,162,82,.1);
+  padding:0 40px}
+.progress-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:0;height:48px}
+.step{display:flex;align-items:center;gap:8px;padding:0 16px;font-size:10px;font-weight:600;
+  letter-spacing:.5px;color:rgba(255,255,255,.25);text-transform:uppercase;cursor:pointer;
+  border-bottom:2px solid transparent;height:100%;transition:all .2s;white-space:nowrap}
+.step.active{color:var(--gold);border-bottom-color:var(--gold)}
+.step.done{color:rgba(255,255,255,.5);border-bottom-color:rgba(255,255,255,.15)}
+.step-num{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+.step.active .step-num{background:var(--gold);color:var(--ink)}
+.step.done .step-num{background:rgba(255,255,255,.15)}
+.step-arrow{color:rgba(255,255,255,.12);font-size:12px;margin:0 4px}
+
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:32px 40px}
+
+/* SECTION */
+.section{display:none}
+.section.active{display:block}
+
+/* HOTEL INFO */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mid)}
+.field input,.field select{background:var(--wh);border:1px solid var(--bd);padding:10px 14px;
+  font-size:13px;font-family:'Jost',sans-serif;color:var(--ink);outline:none;transition:border .15s}
+.field input:focus,.field select:focus{border-color:var(--gold)}
+.field select{cursor:pointer}
+
+/* ASSESSMENT CATEGORIES */
+.cat-header{background:var(--navy);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:0}
+.cat-title{font-size:12px;font-weight:700;color:#fff}
+.cat-title-th{font-size:10px;color:rgba(255,255,255,.35);margin-top:2px}
+.cat-weight{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:3px 10px;background:rgba(201,162,82,.15);color:var(--gold)}
+.cat-block{background:var(--wh);border:1px solid var(--bd);margin-bottom:20px;overflow:hidden}
+.question-row{padding:14px 18px;border-bottom:.5px solid var(--bd);display:grid;
+  grid-template-columns:1fr auto;gap:20px;align-items:center}
+.question-row:last-child{border-bottom:none}
+.q-text{font-size:12.5px;color:var(--ink);line-height:1.5}
+.q-text-th{font-size:11px;color:var(--mid);margin-top:3px;line-height:1.4}
+.q-critical{font-size:9px;font-weight:700;color:var(--red);margin-top:3px;letter-spacing:.5px}
+.rating{display:flex;gap:6px}
+.r-btn{width:36px;height:36px;border:1px solid var(--bd);background:var(--wh);cursor:pointer;
+  font-size:11px;font-weight:700;color:var(--mid);font-family:'Jost',sans-serif;
+  transition:all .15s;display:flex;align-items:center;justify-content:center}
+.r-btn:hover{border-color:var(--gold);color:var(--gold)}
+.r-btn.selected-1{background:#FDECEA;border-color:var(--red);color:var(--red)}
+.r-btn.selected-2{background:#FEF3E6;border-color:var(--orange);color:var(--orange)}
+.r-btn.selected-3{background:#FEFCE8;border-color:#CA8A04;color:#CA8A04}
+.r-btn.selected-4{background:#F0FDF4;border-color:#16A34A;color:#16A34A}
+.r-btn.selected-5{background:#E8F5EE;border-color:var(--green);color:var(--green)}
+.r-label{display:flex;justify-content:space-between;padding:4px 18px 12px;font-size:9.5px;color:var(--mid)}
+
+/* SCALE LEGEND */
+.scale-legend{background:var(--gold-p);border:1px solid rgba(201,162,82,.2);
+  padding:12px 18px;margin-bottom:20px;display:flex;gap:24px;flex-wrap:wrap}
+.sl-item{display:flex;align-items:center;gap:6px;font-size:11px}
+.sl-dot{width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700}
+.sl-1{background:#FDECEA;color:var(--red)}
+.sl-2{background:#FEF3E6;color:var(--orange)}
+.sl-3{background:#FEFCE8;color:#CA8A04}
+.sl-4{background:#F0FDF4;color:#16A34A}
+.sl-5{background:#E8F5EE;color:var(--green)}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:12px;margin-top:28px;justify-content:flex-end}
+.btn-gold{background:var(--gold);color:var(--ink);font-size:11px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;padding:13px 32px;border:none;cursor:pointer;
+  font-family:'Jost',sans-serif;transition:all .15s}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--mid);font-size:11px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;padding:13px 24px;border:1px solid var(--bd);
+  cursor:pointer;font-family:'Jost',sans-serif;transition:all .15s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-print{background:var(--navy);color:#fff;font-size:11px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;padding:13px 28px;border:none;cursor:pointer;
+  font-family:'Jost',sans-serif}
+
+/* RESULTS */
+.result-hero{background:var(--navy);padding:36px 40px;margin-bottom:24px;
+  display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center}
+.score-circle{width:140px;height:140px;border-radius:50%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;border:3px solid;flex-shrink:0}
+.score-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;line-height:1}
+.score-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+.diagnosis-badge{display:inline-block;padding:6px 18px;font-size:11px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.result-hotel{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:4px}
+.result-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;max-width:540px}
+
+/* CATEGORY SCORES */
+.cat-scores{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.cat-score-card{background:var(--wh);border:1px solid var(--bd);padding:16px 18px;border-top:3px solid}
+.cs-name{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.cs-name-th{font-size:10px;color:var(--mid);margin-bottom:10px}
+.cs-bar-bg{background:var(--off);height:6px;margin-bottom:8px}
+.cs-bar{height:6px;transition:width .8s ease}
+.cs-score{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700}
+.cs-max{font-size:11px;color:var(--mid)}
+
+/* RADAR CHART */
+.chart-section{background:var(--wh);border:1px solid var(--bd);padding:24px;margin-bottom:24px}
+.chart-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.chart-sub{font-size:11px;color:var(--mid);margin-bottom:20px}
+.radar-wrap{display:flex;justify-content:center}
+
+/* ACTION PLAN */
+.action-section{margin-bottom:24px}
+.action-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:16px;
+  padding-bottom:10px;border-bottom:2px solid var(--gold);display:flex;align-items:center;gap:8px}
+.action-grid{display:flex;flex-direction:column;gap:10px}
+.action-card{background:var(--wh);border:1px solid var(--bd);padding:16px 18px;
+  border-left:4px solid;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start}
+.ac-priority{font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:3px 10px;white-space:nowrap}
+.ac-purgent{background:var(--red-p);color:var(--red)}
+.ac-pimportant{background:var(--orange-p);color:var(--orange)}
+.ac-pstandard{background:var(--blue-p);color:var(--blue)}
+.ac-text{font-size:12.5px;color:var(--ink);line-height:1.5}
+.ac-text-th{font-size:11px;color:var(--mid);margin-top:3px}
+.ac-time{font-size:10px;font-weight:700;color:var(--mid);white-space:nowrap;padding-top:2px}
+
+/* INSIGHT BOX */
+.insight{padding:16px 20px;margin-bottom:20px;border-left:4px solid}
+.insight-title{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.insight-text{font-size:12.5px;line-height:1.7}
+.insight-red{background:var(--red-p);border-color:var(--red)}
+.insight-red .insight-title{color:var(--red)}
+.insight-orange{background:var(--orange-p);border-color:var(--orange)}
+.insight-orange .insight-title{color:var(--orange)}
+.insight-green{background:var(--green-p);border-color:var(--green)}
+.insight-green .insight-title{color:var(--green)}
+.insight-gold{background:var(--gold-p);border-color:var(--gold)}
+.insight-gold .insight-title{color:var(--gold-d)}
+
+/* INCOMPLETE WARNING */
+.warn{background:var(--orange-p);border:1px solid rgba(200,100,0,.2);padding:14px 18px;
+  margin-bottom:20px;font-size:12.5px;color:var(--orange);display:none}
+
+/* TOOLTIP */
+.tooltip{position:relative;display:inline-block}
+.tt-text{visibility:hidden;background:var(--navy);color:#fff;font-size:10px;padding:6px 10px;
+  position:absolute;bottom:120%;left:50%;transform:translateX(-50%);white-space:nowrap;z-index:10;
+  font-family:'Jost',sans-serif;pointer-events:none}
+.tooltip:hover .tt-text{visibility:visible}
+
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-stats{display:none}
+  .info-grid{grid-template-columns:1fr}
+  .cat-scores{grid-template-columns:1fr 1fr}
+  .result-hero{grid-template-columns:1fr}
+  .main{padding:24px 20px}
+  nav{padding:0 20px}
+  .progress-bar{padding:0 20px}
+  .action-card{grid-template-columns:1fr}
+}
+@media print{
+  nav,.progress-bar,.btn-row,#section-info,#section-assess{display:none!important}
+  .section{display:block!important}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">HR Inside Out</div>
+  <div class="nav-title">Hotel HR Health Check Tool</div>
+  <button class="nav-btn" onclick="window.print()">Print Report</button>
+</nav>
+
+<div class="progress-bar" style="background:var(--navy)">
+  <div class="progress-inner">
+    <div class="step active" id="step1" onclick="goStep(1)">
+      <div class="step-num">1</div> Hotel Info
+    </div>
+    <div class="step-arrow">›</div>
+    <div class="step" id="step2" onclick="goStep(2)">
+      <div class="step-num">2</div> Assessment
+    </div>
+    <div class="step-arrow">›</div>
+    <div class="step" id="step3" onclick="goStep(3)">
+      <div class="step-num">3</div> Results & Action Plan
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">HR Inside Out Consulting — Diagnostic Tool</div>
+      <h1>Hotel HR <em>Health Check</em></h1>
+      <div class="hero-th">ประเมินสุขภาพ HR โรงแรมของคุณ — Bilingual EN/TH</div>
+      <p class="hero-desc">ตอบคำถาม 30 ข้อใน 6 หมวด รับ Score, Diagnosis และ Action Plan ทันที<br>
+      Answer 30 questions across 6 categories — get your HR Health Score, Diagnosis and personalized Action Plan instantly.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-v">30</div><div class="hs-l">Questions</div></div>
+      <div class="hs"><div class="hs-v">6</div><div class="hs-l">Categories</div></div>
+      <div class="hs"><div class="hs-v">100</div><div class="hs-l">Max Score</div></div>
+      <div class="hs"><div class="hs-v">5min</div><div class="hs-l">To Complete</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- SECTION 1: HOTEL INFO -->
+<div class="section active" id="section-info">
+  <div style="margin-bottom:24px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Step 1 of 3</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--ink);margin-bottom:4px">Hotel Information</div>
+    <div style="font-size:12px;color:var(--mid)">ข้อมูลโรงแรม — กรอกข้อมูลก่อนเริ่มประเมิน</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="field">
+      <label>Hotel Name / ชื่อโรงแรม *</label>
+      <input type="text" id="hotelName" placeholder="e.g. The Grand Luxury Hotel">
+    </div>
+    <div class="field">
+      <label>Hotel Type / ประเภทโรงแรม</label>
+      <select id="hotelType">
+        <option value="">Select type...</option>
+        <option>Luxury 5-Star / หรูหรา 5 ดาว</option>
+        <option>Upper Upscale 4-Star / 4 ดาว</option>
+        <option>Upscale 3-Star / 3 ดาว</option>
+        <option>Boutique Hotel / บูติกโฮเทล</option>
+        <option>Resort / รีสอร์ท</option>
+        <option>Budget / ประหยัด</option>
+        <option>Pre-Opening / กำลังเปิด</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Number of Rooms / จำนวนห้อง</label>
+      <select id="hotelRooms">
+        <option value="">Select range...</option>
+        <option>Under 50 rooms</option>
+        <option>50–100 rooms</option>
+        <option>101–200 rooms</option>
+        <option>201–500 rooms</option>
+        <option>500+ rooms</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Your Role / ตำแหน่งของคุณ</label>
+      <select id="userRole">
+        <option value="">Select role...</option>
+        <option>Hotel Owner / เจ้าของโรงแรม</option>
+        <option>General Manager / GM</option>
+        <option>HR Manager / Director</option>
+        <option>HR Consultant / ที่ปรึกษา HR</option>
+        <option>Department Head / หัวหน้าแผนก</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Years in Operation / ปีที่ดำเนินกิจการ</label>
+      <select id="hotelYears">
+        <option value="">Select...</option>
+        <option>Pre-Opening / กำลังเปิด</option>
+        <option>Less than 1 year</option>
+        <option>1–3 years</option>
+        <option>3–5 years</option>
+        <option>5–10 years</option>
+        <option>10+ years</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Assessment Date / วันที่ประเมิน</label>
+      <input type="date" id="assessDate">
+    </div>
+  </div>
+
+  <div style="background:var(--gold-p);border:1px solid rgba(201,162,82,.2);padding:16px 20px;margin-bottom:8px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold-d);margin-bottom:6px">How to Rate / วิธีให้คะแนน</div>
+    <div style="font-size:12px;color:var(--ink);line-height:1.7">
+      ให้คะแนน <strong>1–5</strong> ในแต่ละหัวข้อ — 
+      <strong style="color:var(--red)">1 = ไม่มีเลย / Critical Issue</strong> · 
+      <strong style="color:var(--orange)">2 = อ่อนแอมาก / Weak</strong> · 
+      <strong style="color:#CA8A04">3 = พอใช้ / Developing</strong> · 
+      <strong style="color:#16A34A">4 = ดี / Good</strong> · 
+      <strong style="color:var(--green)">5 = ยอดเยี่ยม / Excellent</strong>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-gold" onclick="startAssessment()">Start Assessment →</button>
+  </div>
+</div>
+
+<!-- SECTION 2: ASSESSMENT -->
+<div class="section" id="section-assess">
+  <div style="margin-bottom:20px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Step 2 of 3</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--ink);margin-bottom:4px">HR Health Assessment</div>
+    <div style="font-size:12px;color:var(--mid)">ประเมิน HR โรงแรมของคุณ — ให้คะแนน 1-5 ในแต่ละหัวข้อ</div>
+  </div>
+
+  <div class="scale-legend">
+    <div class="sl-item"><div class="sl-dot sl-1">1</div> ไม่มีเลย / Critical Issue</div>
+    <div class="sl-item"><div class="sl-dot sl-2">2</div> อ่อนแอมาก / Weak</div>
+    <div class="sl-item"><div class="sl-dot sl-3">3</div> พอใช้ / Developing</div>
+    <div class="sl-item"><div class="sl-dot sl-4">4</div> ดี / Good</div>
+    <div class="sl-item"><div class="sl-dot sl-5">5</div> ยอดเยี่ยม / Excellent</div>
+  </div>
+
+  <div id="warn-incomplete" class="warn">⚠️ Please answer all questions before calculating results. / กรุณาตอบคำถามทุกข้อก่อนดูผล</div>
+
+  <!-- CAT 1: RECRUITMENT -->
+  <div class="cat-block">
+    <div class="cat-header">
+      <div><div class="cat-title">01 — Recruitment & Hiring / การสรรหาและจ้างงาน</div><div class="cat-title-th">กระบวนการสรรหา คัดเลือก และจ้างพนักงาน</div></div>
+      <span class="cat-weight">Weight 20%</span>
+    </div>
+    <div class="r-label"><span>1 = Critical</span><span>5 = Excellent</span></div>
+    <div id="cat1-questions"></div>
+  </div>
+
+  <!-- CAT 2: ONBOARDING -->
+  <div class="cat-block">
+    <div class="cat-header">
+      <div><div class="cat-title">02 — Onboarding & Orientation / การปฐมนิเทศและต้อนรับพนักงาน</div><div class="cat-title-th">การรับพนักงานใหม่ การปฐมนิเทศ และการสร้างความผูกพัน</div></div>
+      <span class="cat-weight">Weight 15%</span>
+    </div>
+    <div class="r-label"><span>1 = Critical</span><span>5 = Excellent</span></div>
+    <div id="cat2-questions"></div>
+  </div>
+
+  <!-- CAT 3: TRAINING -->
+  <div class="cat-block">
+    <div class="cat-header">
+      <div><div class="cat-title">03 — Training & Development / การฝึกอบรมและพัฒนา</div><div class="cat-title-th">โปรแกรมฝึกอบรม การพัฒนาทักษะ และการเติบโตในสายอาชีพ</div></div>
+      <span class="cat-weight">Weight 20%</span>
+    </div>
+    <div class="r-label"><span>1 = Critical</span><span>5 = Excellent</span></div>
+    <div id="cat3-questions"></div>
+  </div>
+
+  <!-- CAT 4: CULTURE -->
+  <div class="cat-block">
+    <div class="cat-header">
+      <div><div class="cat-title">04 — Culture & Engagement / วัฒนธรรมและความผูกพัน</div><div class="cat-title-th">วัฒนธรรมองค์กร ความผูกพันพนักงาน และ Toxic Workplace</div></div>
+      <span class="cat-weight">Weight 20%</span>
+    </div>
+    <div class="r-label"><span>1 = Critical</span><span>5 = Excellent</span></div>
+    <div id="cat4-questions"></div>
+  </div>
+
+  <!-- CAT 5: PERFORMANCE -->
+  <div class="cat-block">
+    <div class="cat-header">
+      <div><div class="cat-title">05 — Performance Management / การบริหารผลการปฏิบัติงาน</div><div class="cat-title-th">การประเมินผล การให้ Feedback และการพัฒนาความสามารถ</div></div>
+      <span class="cat-weight">Weight 15%</span>
+    </div>
+    <div class="r-label"><span>1 = Critical</span><span>5 = Excellent</span></div>
+    <div id="cat5-questions"></div>
+  </div>
+
+  <!-- CAT 6: COMPLIANCE -->
+  <div class="cat-block">
+    <div class="cat-header">
+      <div><div class="cat-title">06 — HR Compliance & Admin / กฎหมายแรงงานและการบริหาร HR</div><div class="cat-title-th">กฎหมายแรงงาน เอกสาร นโยบาย และระบบ HR</div></div>
+      <span class="cat-weight">Weight 10%</span>
+    </div>
+    <div class="r-label"><span>1 = Critical</span><span>5 = Excellent</span></div>
+    <div id="cat6-questions"></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-ghost" onclick="goStep(1)">← Back</button>
+    <button class="btn-gold" onclick="calculateResults()">Calculate Results →</button>
+  </div>
+</div>
+
+<!-- SECTION 3: RESULTS -->
+<div class="section" id="section-results">
+  <div style="margin-bottom:20px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Step 3 of 3 — Results</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--ink);margin-bottom:4px">HR Health Check Report</div>
+    <div style="font-size:12px;color:var(--mid)" id="report-date"></div>
+  </div>
+
+  <div class="result-hero" id="result-hero"></div>
+  <div id="insight-box"></div>
+  <div class="cat-scores" id="cat-scores"></div>
+
+  <div class="chart-section">
+    <div class="chart-title">HR Health Radar / แผนภูมิสุขภาพ HR</div>
+    <div class="chart-sub">คะแนนทั้ง 6 หมวด — ยิ่งกว้างยิ่งแข็งแกร่ง</div>
+    <div class="radar-wrap">
+      <canvas id="radarChart" width="420" height="420"></canvas>
+    </div>
+  </div>
+
+  <div class="action-section">
+    <div class="action-title">
+      <span style="background:var(--gold);color:var(--ink);width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">!</span>
+      Priority Action Plan / แผนปฏิบัติการเร่งด่วน
+    </div>
+    <div class="action-grid" id="action-plan"></div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-ghost" onclick="goStep(2)">← Back to Assessment</button>
+    <button class="btn-print" onclick="window.print()">Print / Save PDF</button>
+    <button class="btn-gold" onclick="resetTool()">New Assessment</button>
+  </div>
+</div>
+
+</div><!-- end main -->
+
+<footer style="background:var(--navy);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;margin-top:40px">
+  <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--gold)">HR Inside Out</div>
+  <div style="font-size:10px;color:rgba(255,255,255,.25);text-align:center">Hotel HR Health Check Tool · Integrity · Compassion · Tolerance · HR Inside Out Consulting</div>
+  <div style="font-size:9px;color:rgba(255,255,255,.2);font-weight:700;letter-spacing:1px;text-transform:uppercase">v1.0 · Bilingual EN/TH</div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════
+// QUESTIONS DATA
+// ═══════════════════════════════════════════
+const questions = {
+  1: [
+    {en:"We have a clear job description for every position before posting.",th:"มี Job Description ชัดเจนทุกตำแหน่งก่อนประกาศรับสมัคร",critical:false},
+    {en:"Our interview process is structured — same questions for all candidates.",th:"กระบวนการสัมภาษณ์มีโครงสร้าง คำถามเดียวกันทุกผู้สมัคร",critical:false},
+    {en:"We complete background and reference checks for all new hires.",th:"ตรวจสอบ Background และอ้างอิงผู้สมัครทุกคนก่อนจ้าง",critical:false},
+    {en:"Our offer process is clear — offer letter, start date and conditions in writing.",th:"ขั้นตอนการเสนองานชัดเจน — มีหนังสือเสนองาน เงื่อนไขเป็นลายลักษณ์อักษร",critical:false},
+    {en:"We can fill critical positions within 30 days without compromising standards.",th:"สามารถจ้างตำแหน่งสำคัญได้ภายใน 30 วันโดยไม่ลดมาตรฐาน",critical:false},
+  ],
+  2: [
+    {en:"New employees complete a formal orientation on Day 1 — not just a tour.",th:"พนักงานใหม่ผ่านการปฐมนิเทศอย่างเป็นทางการวันแรก ไม่ใช่แค่ทัวร์",critical:true},
+    {en:"Every new hire has a 30-60-90 day plan with clear milestones.",th:"พนักงานใหม่ทุกคนมีแผน 30-60-90 วัน พร้อม Milestone ที่ชัดเจน",critical:false},
+    {en:"New staff are assigned a buddy or mentor for their first 30 days.",th:"พนักงานใหม่ได้รับการแต่งตั้ง Buddy หรือ Mentor 30 วันแรก",critical:false},
+    {en:"We check in with new employees at 30 and 90 days to measure satisfaction.",th:"ติดตามความพึงพอใจพนักงานใหม่ที่ 30 และ 90 วัน",critical:false},
+    {en:"Our early turnover (under 6 months) rate is below 20%.",th:"อัตราการลาออกใน 6 เดือนแรกต่ำกว่า 20%",critical:true},
+  ],
+  3: [
+    {en:"We have an annual training plan for every department.",th:"มีแผนฝึกอบรมประจำปีทุกแผนก",critical:false},
+    {en:"All managers receive leadership and people management training.",th:"ผู้จัดการทุกคนได้รับการฝึกอบรมด้านภาวะผู้นำและการบริหารคน",critical:true},
+    {en:"Service standard training is delivered to all front-line staff regularly.",th:"ฝึกอบรม Service Standard ให้พนักงานหน้างานสม่ำเสมอ",critical:false},
+    {en:"We track training hours and completion rates per employee.",th:"ติดตามชั่วโมงฝึกอบรมและอัตราการผ่านต่อพนักงาน",critical:false},
+    {en:"We have a clear career development path for high-potential staff.",th:"มีเส้นทางความก้าวหน้าชัดเจนสำหรับพนักงานศักยภาพสูง",critical:false},
+  ],
+  4: [
+    {en:"Staff feel psychologically safe to speak up — no fear of retaliation.",th:"พนักงานรู้สึกปลอดภัยทางจิตใจในการพูด — ไม่กลัวถูกแก้แค้น",critical:true},
+    {en:"We have zero tolerance for bullying, harassment and toxic behavior.",th:"มีนโยบาย Zero Tolerance ต่อการกลั่นแกล้ง คุกคาม และพฤติกรรมเป็นพิษ",critical:true},
+    {en:"Our managers lead with empathy — they don't use fear as a management tool.",th:"ผู้จัดการนำด้วยความเห็นอกเห็นใจ ไม่ใช้ความกลัวเป็นเครื่องมือ",critical:true},
+    {en:"Employee satisfaction survey is conducted at least once a year.",th:"สำรวจความพึงพอใจพนักงานอย่างน้อยปีละครั้ง",critical:false},
+    {en:"Our annual turnover rate is below 30%.",th:"อัตราการลาออกประจำปีต่ำกว่า 30%",critical:true},
+  ],
+  5: [
+    {en:"All employees have clear KPIs aligned to hotel goals.",th:"พนักงานทุกคนมี KPI ชัดเจน สอดคล้องกับเป้าหมายโรงแรม",critical:false},
+    {en:"Performance reviews happen at least twice a year — with written feedback.",th:"ประเมินผลงานอย่างน้อย 2 ครั้งต่อปี พร้อม Feedback เป็นลายลักษณ์อักษร",critical:false},
+    {en:"Managers give real-time feedback — not just once a year reviews.",th:"ผู้จัดการให้ Feedback แบบ Real-time ไม่ใช่แค่รอประเมินรายปี",critical:false},
+    {en:"We have a formal recognition program for high performers.",th:"มีโปรแกรมยกย่องพนักงานดีเด่นอย่างเป็นทางการ",critical:false},
+    {en:"Underperformance is addressed promptly — not ignored or delayed.",th:"จัดการ Underperformance ทันที ไม่ปล่อยผ่านหรือล่าช้า",critical:false},
+  ],
+  6: [
+    {en:"All employment contracts comply with Thai Labour Law.",th:"สัญญาจ้างงานทุกฉบับสอดคล้องกับกฎหมายแรงงานไทย",critical:true},
+    {en:"Employee files are complete — ID, contract, tax, SSO documents.",th:"ไฟล์พนักงานครบ — บัตรประชาชน สัญญา ภาษี เอกสารประกันสังคม",critical:true},
+    {en:"We have a documented Employee Handbook distributed to all staff.",th:"มีคู่มือพนักงานเป็นลายลักษณ์อักษรและแจกให้พนักงานทุกคน",critical:false},
+    {en:"HR data is stored securely — not in Excel sheets or personal email.",th:"ข้อมูล HR เก็บอย่างปลอดภัย ไม่ใช้แค่ Excel หรืออีเมลส่วนตัว",critical:false},
+    {en:"We have a clear grievance and disciplinary procedure that staff know.",th:"มีขั้นตอนร้องทุกข์และวินัยที่ชัดเจน พนักงานรับทราบ",critical:false},
+  ]
+};
+
+const catNames = {
+  1:{en:"Recruitment & Hiring",th:"การสรรหา",color:"#C9A252",w:0.20},
+  2:{en:"Onboarding",th:"การปฐมนิเทศ",color:"#2563EB",w:0.15},
+  3:{en:"Training & Development",th:"การฝึกอบรม",color:"#16A34A",w:0.20},
+  4:{en:"Culture & Engagement",th:"วัฒนธรรม",color:"#DC2626",w:0.20},
+  5:{en:"Performance Mgmt",th:"การบริหารผลงาน",color:"#7C3AED",w:0.15},
+  6:{en:"Compliance & Admin",th:"กฎหมายและระบบ",color:"#0D9488",w:0.10}
+};
+
+// ═══════════════════════════════════════════
+// BUILD QUESTIONS
+// ═══════════════════════════════════════════
+function buildQuestions(){
+  for(let cat=1;cat<=6;cat++){
+    const container=document.getElementById(`cat${cat}-questions`);
+    questions[cat].forEach((q,i)=>{
+      const qid=`q_${cat}_${i}`;
+      const critical=q.critical?`<div class="q-critical">⚠ Critical Indicator</div>`:'';
+      const btns=[1,2,3,4,5].map(n=>`<button class="r-btn" id="${qid}_${n}" onclick="rate('${qid}',${n})">${n}</button>`).join('');
+      container.innerHTML+=`<div class="question-row">
+        <div><div class="q-text">${q.en}${critical}</div><div class="q-text-th">${q.th}</div></div>
+        <div class="rating">${btns}</div>
+      </div>`;
+    });
+  }
+}
+
+const ratings={};
+function rate(qid,val){
+  ratings[qid]=val;
+  [1,2,3,4,5].forEach(n=>{
+    const btn=document.getElementById(`${qid}_${n}`);
+    btn.className='r-btn'+(n===val?` selected-${n}`:'');
+  });
+}
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function goStep(n){
+  [1,2,3].forEach(i=>{
+    document.getElementById(`section-${['info','assess','results'][i-1]}`).classList.remove('active');
+    document.getElementById(`step${i}`).className='step'+(i<n?' done':'')+(i===n?' active':'');
+  });
+  document.getElementById(`section-${['info','assess','results'][n-1]}`).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function startAssessment(){
+  const name=document.getElementById('hotelName').value.trim();
+  if(!name){document.getElementById('hotelName').focus();document.getElementById('hotelName').style.borderColor='var(--red)';return;}
+  document.getElementById('hotelName').style.borderColor='';
+  goStep(2);
+}
+
+// ═══════════════════════════════════════════
+// CALCULATE
+// ═══════════════════════════════════════════
+function calculateResults(){
+  // Check completeness
+  let missing=false;
+  for(let cat=1;cat<=6;cat++){
+    for(let i=0;i<questions[cat].length;i++){
+      if(!ratings[`q_${cat}_${i}`]){missing=true;break;}
+    }
+    if(missing)break;
+  }
+  if(missing){
+    document.getElementById('warn-incomplete').style.display='block';
+    window.scrollTo(0,200);
+    return;
+  }
+  document.getElementById('warn-incomplete').style.display='none';
+
+  // Calculate category scores
+  const catScores={};
+  let totalWeighted=0;
+  for(let cat=1;cat<=6;cat++){
+    let sum=0;
+    questions[cat].forEach((_,i)=>{ sum+=ratings[`q_${cat}_${i}`]; });
+    const pct=Math.round((sum/(questions[cat].length*5))*100);
+    catScores[cat]=pct;
+    totalWeighted+=pct*catNames[cat].w;
+  }
+  const totalScore=Math.round(totalWeighted);
+
+  goStep(3);
+  renderResults(totalScore,catScores);
+}
+
+// ═══════════════════════════════════════════
+// RENDER RESULTS
+// ═══════════════════════════════════════════
+function getDiagnosis(score){
+  if(score>=85)return{label:"Excellent HR",labelTh:"HR ยอดเยี่ยม",color:"#1E8A4C",bg:"#E8F5EE",desc:"Your hotel HR function is strong and well-structured. Focus on sustaining excellence and continuous improvement.",descTh:"ระบบ HR โรงแรมของคุณแข็งแกร่งและมีโครงสร้างดี มุ่งเน้นการรักษาความเป็นเลิศและพัฒนาต่อเนื่อง"};
+  if(score>=70)return{label:"Good HR Health",labelTh:"HR สุขภาพดี",color:"#16A34A",bg:"#F0FDF4",desc:"Good foundation with clear areas for improvement. Address the gaps systematically to reach excellence.",descTh:"รากฐานดี มีจุดที่ต้องพัฒนาชัดเจน แก้ไขจุดอ่อนอย่างเป็นระบบเพื่อไปสู่ความเป็นเลิศ"};
+  if(score>=55)return{label:"Developing",labelTh:"กำลังพัฒนา",color:"#CA8A04",bg:"#FEFCE8",desc:"Some systems in place but significant gaps exist. Prioritize the critical areas immediately to stabilize HR operations.",descTh:"มีระบบบางส่วนแต่ยังมีช่องว่างสำคัญ จัดลำดับความสำคัญด้านวิกฤตทันทีเพื่อทำให้ HR มั่นคง"};
+  if(score>=40)return{label:"Weak HR Systems",labelTh:"ระบบ HR อ่อนแอ",color:"#C86400",bg:"#FEF3E6",desc:"Multiple critical gaps in HR. Immediate intervention needed. Consider bringing in an HR consultant for a structured recovery plan.",descTh:"ช่องว่างวิกฤตหลายจุดใน HR ต้องดำเนินการทันที พิจารณาจ้างที่ปรึกษา HR เพื่อวางแผนฟื้นฟูอย่างเป็นระบบ"};
+  return{label:"Critical — Toxic Risk",labelTh:"วิกฤต — เสี่ยง Toxic",color:"#C0392B",bg:"#FDECEA",desc:"HR systems are critically underdeveloped. High risk of toxic workplace, legal non-compliance and high turnover. Urgent professional intervention required.",descTh:"ระบบ HR อ่อนแอวิกฤต เสี่ยงสูงต่อ Toxic Workplace ปัญหากฎหมาย และการลาออกสูง ต้องการความช่วยเหลือจากผู้เชี่ยวชาญโดยเร่งด่วน"};
+}
+
+function renderResults(score,catScores){
+  const hotel=document.getElementById('hotelName').value||'Your Hotel';
+  const role=document.getElementById('userRole').value||'';
+  const date=document.getElementById('assessDate').value;
+  const d=getDiagnosis(score);
+
+  // Date
+  document.getElementById('report-date').textContent=`${hotel} · ${role} · ${date||new Date().toLocaleDateString('en-GB')}`;
+
+  // Hero
+  document.getElementById('result-hero').innerHTML=`
+    <div class="score-circle" style="border-color:${d.color};background:rgba(0,0,0,.15)">
+      <div class="score-num" style="color:${d.color}">${score}</div>
+      <div class="score-label" style="color:rgba(255,255,255,.4)">/ 100</div>
+    </div>
+    <div>
+      <div class="diagnosis-badge" style="background:${d.bg};color:${d.color}">${d.label} — ${d.labelTh}</div>
+      <div class="result-hotel">${hotel}</div>
+      <div class="result-desc">${d.desc}<br><span style="color:rgba(255,255,255,.3)">${d.descTh}</span></div>
+    </div>`;
+
+  // Insight
+  let insightClass='insight-gold',insightTitle='Key Insight',insightText='';
+  if(score<40){insightClass='insight-red';insightTitle='🚨 Urgent Action Required';insightText=`Score ${score}/100 indicates critical HR deficiencies. The risk of toxic workplace behavior, legal violations and staff exodus is HIGH. Immediate professional intervention is strongly recommended.<br><span style="color:var(--red);font-size:11px">คะแนน ${score}/100 บ่งชี้ว่าระบบ HR อยู่ในสภาวะวิกฤต เสี่ยงสูงต่อ Toxic Workplace การละเมิดกฎหมาย และพนักงานลาออกเป็นจำนวนมาก ต้องการผู้เชี่ยวชาญโดยเร่งด่วน</span>`;}
+  else if(score<55){insightClass='insight-orange';insightTitle='⚠️ Multiple Gaps Found';insightText=`Score ${score}/100 shows several important HR areas need attention. Without addressing these systematically, operational performance and staff morale will be affected.<br><span style="color:var(--orange);font-size:11px">คะแนน ${score}/100 แสดงให้เห็นหลายด้าน HR ที่ต้องแก้ไข หากไม่ดำเนินการอย่างเป็นระบบ ผลงานและขวัญกำลังใจพนักงานจะได้รับผลกระทบ</span>`;}
+  else if(score<70){insightClass='insight-gold';insightTitle='📋 Good Foundation — Keep Building';insightText=`Score ${score}/100 shows a developing HR function. You have some good systems in place. Focus on the priority areas below to move from developing to excellent.<br><span style="color:var(--gold-d);font-size:11px">คะแนน ${score}/100 แสดงถึง HR ที่กำลังพัฒนา มีระบบที่ดีบางส่วน มุ่งเน้นด้านที่ต้องพัฒนาด้านล่างเพื่อก้าวสู่ความเป็นเลิศ</span>`;}
+  else{insightClass='insight-green';insightTitle='✅ Strong HR Foundation';insightText=`Score ${score}/100 reflects a well-functioning HR environment. Continue to invest in your people and culture to sustain and grow your competitive advantage.<br><span style="color:var(--green);font-size:11px">คะแนน ${score}/100 สะท้อนถึงสภาพแวดล้อม HR ที่ทำงานได้ดี ลงทุนต่อเนื่องในด้านคนและวัฒนธรรมเพื่อรักษาความได้เปรียบ</span>`;}
+  document.getElementById('insight-box').innerHTML=`<div class="insight ${insightClass}"><div class="insight-title">${insightTitle}</div><div class="insight-text">${insightText}</div></div>`;
+
+  // Category scores
+  let catHtml='';
+  for(let cat=1;cat<=6;cat++){
+    const s=catScores[cat];
+    const c=catNames[cat];
+    const barColor=s>=70?'#16A34A':s>=55?'#CA8A04':s>=40?'#C86400':'#C0392B';
+    catHtml+=`<div class="cat-score-card" style="border-top-color:${c.color}">
+      <div class="cs-name">${c.en}</div>
+      <div class="cs-name-th">${c.th}</div>
+      <div class="cs-bar-bg"><div class="cs-bar" style="width:${s}%;background:${barColor}"></div></div>
+      <div><span class="cs-score" style="color:${barColor}">${s}</span><span class="cs-max">/100</span></div>
+    </div>`;
+  }
+  document.getElementById('cat-scores').innerHTML=catHtml;
+
+  // Draw radar
+  drawRadar(catScores);
+
+  // Action plan
+  buildActionPlan(catScores,score);
+}
+
+// ═══════════════════════════════════════════
+// RADAR CHART
+// ═══════════════════════════════════════════
+function drawRadar(catScores){
+  const canvas=document.getElementById('radarChart');
+  const ctx=canvas.getContext('2d');
+  const cx=210,cy=210,r=150;
+  const labels=['Recruitment','Onboarding','Training','Culture','Performance','Compliance'];
+  const vals=[1,2,3,4,5,6].map(i=>catScores[i]/100);
+  const n=6;
+  ctx.clearRect(0,0,420,420);
+
+  // Grid
+  for(let ring=1;ring<=5;ring++){
+    ctx.beginPath();
+    for(let i=0;i<n;i++){
+      const angle=(Math.PI*2/n)*i-Math.PI/2;
+      const pr=r*(ring/5);
+      const x=cx+pr*Math.cos(angle),y=cy+pr*Math.sin(angle);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle='rgba(0,0,0,.06)';ctx.lineWidth=1;ctx.stroke();
+    // Ring label
+    ctx.fillStyle='rgba(0,0,0,.25)';ctx.font='10px Jost,sans-serif';ctx.textAlign='center';
+    ctx.fillText(ring*20,cx+3,cy-r*(ring/5)+3);
+  }
+
+  // Spokes
+  for(let i=0;i<n;i++){
+    const angle=(Math.PI*2/n)*i-Math.PI/2;
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+r*Math.cos(angle),cy+r*Math.sin(angle));
+    ctx.strokeStyle='rgba(0,0,0,.08)';ctx.lineWidth=1;ctx.stroke();
+  }
+
+  // Data polygon
+  ctx.beginPath();
+  for(let i=0;i<n;i++){
+    const angle=(Math.PI*2/n)*i-Math.PI/2;
+    const pv=vals[i];
+    const x=cx+r*pv*Math.cos(angle),y=cy+r*pv*Math.sin(angle);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+  ctx.fillStyle='rgba(201,162,82,.15)';ctx.fill();
+  ctx.strokeStyle='#C9A252';ctx.lineWidth=2;ctx.stroke();
+
+  // Dots
+  for(let i=0;i<n;i++){
+    const angle=(Math.PI*2/n)*i-Math.PI/2;
+    const x=cx+r*vals[i]*Math.cos(angle),y=cy+r*vals[i]*Math.sin(angle);
+    ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);
+    ctx.fillStyle='#C9A252';ctx.fill();
+  }
+
+  // Labels
+  const catArr=[1,2,3,4,5,6].map(i=>catNames[i]);
+  for(let i=0;i<n;i++){
+    const angle=(Math.PI*2/n)*i-Math.PI/2;
+    const lx=cx+(r+26)*Math.cos(angle),ly=cy+(r+26)*Math.sin(angle);
+    ctx.fillStyle='#0A0E1A';ctx.font='bold 10px Jost,sans-serif';ctx.textAlign='center';
+    ctx.fillText(labels[i],lx,ly);
+    ctx.fillStyle='#777890';ctx.font='10px Jost,sans-serif';
+    ctx.fillText(catArr[i].th,lx,ly+13);
+    ctx.fillStyle='#C9A252';ctx.font='bold 11px Jost,sans-serif';
+    ctx.fillText(catArr[i].score||catScores[i+1]+'%',cx+r*vals[i]*Math.cos(angle)+2,cy+r*vals[i]*Math.sin(angle)-8);
+  }
+}
+
+// ═══════════════════════════════════════════
+// ACTION PLAN
+// ═══════════════════════════════════════════
+const actionDB = {
+  1:{
+    low:[
+      {en:"Create Job Description templates for all positions immediately.",th:"จัดทำ Template Job Description ทุกตำแหน่งทันที",priority:"Urgent",time:"This Month"},
+      {en:"Design a structured interview guide — same questions for all candidates.",th:"ออกแบบคู่มือสัมภาษณ์แบบมีโครงสร้าง คำถามเดียวกันทุกคน",priority:"Urgent",time:"This Month"},
+      {en:"Implement mandatory background checks for all new hires.",th:"กำหนดให้ตรวจสอบ Background พนักงานใหม่ทุกคน",priority:"Important",time:"30 Days"},
+    ],
+    mid:[
+      {en:"Audit your current JDs — update any that are over 2 years old.",th:"ตรวจสอบ JD ปัจจุบัน — อัปเดตที่เก่ากว่า 2 ปี",priority:"Important",time:"60 Days"},
+      {en:"Track time-to-fill for critical positions and set a 30-day target.",th:"ติดตาม Time-to-Fill ตำแหน่งสำคัญ กำหนดเป้า 30 วัน",priority:"Standard",time:"90 Days"},
+    ]
+  },
+  2:{
+    low:[
+      {en:"Design a formal Day 1 Orientation program — not just a tour.",th:"ออกแบบโปรแกรมปฐมนิเทศวันแรกอย่างเป็นทางการ ไม่ใช่แค่ทัวร์",priority:"Urgent",time:"This Month"},
+      {en:"Create a 30-60-90 Day Plan template for every new hire.",th:"สร้าง Template แผน 30-60-90 วัน สำหรับพนักงานใหม่ทุกคน",priority:"Urgent",time:"This Month"},
+      {en:"Assign a Buddy/Mentor for every new employee starting Day 1.",th:"แต่งตั้ง Buddy/Mentor ให้พนักงานใหม่ทุกคนตั้งแต่วันแรก",priority:"Important",time:"30 Days"},
+    ],
+    mid:[
+      {en:"Add a 30-day and 90-day check-in survey for all new hires.",th:"เพิ่มแบบสำรวจ Check-in ที่ 30 และ 90 วันสำหรับพนักงานใหม่",priority:"Important",time:"60 Days"},
+    ]
+  },
+  3:{
+    low:[
+      {en:"Create an Annual Training Calendar for all departments immediately.",th:"จัดทำ Training Calendar ประจำปีทุกแผนกทันที",priority:"Urgent",time:"This Month"},
+      {en:"Schedule mandatory Leadership Training for all managers.",th:"กำหนด Leadership Training บังคับสำหรับผู้จัดการทุกคน",priority:"Urgent",time:"30 Days"},
+      {en:"Build a Service Standards Training program for all front-line staff.",th:"สร้างโปรแกรม Service Standards Training สำหรับพนักงานหน้างาน",priority:"Urgent",time:"30 Days"},
+    ],
+    mid:[
+      {en:"Implement a Training Hours tracking system per employee.",th:"ใช้ระบบติดตามชั่วโมงฝึกอบรมต่อพนักงาน",priority:"Important",time:"60 Days"},
+      {en:"Identify 3-5 high-potential staff and create development plans.",th:"ระบุพนักงานศักยภาพสูง 3-5 คน และจัดทำแผนพัฒนา",priority:"Standard",time:"90 Days"},
+    ]
+  },
+  4:{
+    low:[
+      {en:"Conduct an anonymous Toxic Workplace Assessment immediately.",th:"ดำเนินการ Toxic Workplace Assessment แบบไม่ระบุชื่อทันที",priority:"Urgent",time:"This Week"},
+      {en:"Issue a Zero Tolerance Policy for bullying and harassment — communicate to ALL staff.",th:"ออกนโยบาย Zero Tolerance ต่อการกลั่นแกล้ง แจ้งพนักงานทุกคน",priority:"Urgent",time:"This Month"},
+      {en:"Provide Empathetic Leadership training for all managers immediately.",th:"จัด Empathetic Leadership Training ให้ผู้จัดการทุกคนทันที",priority:"Urgent",time:"30 Days"},
+      {en:"Run an Employee Satisfaction Survey — act on the results.",th:"ดำเนินการสำรวจความพึงพอใจ — และดำเนินการตามผลลัพธ์",priority:"Urgent",time:"30 Days"},
+    ],
+    mid:[
+      {en:"Review your exit interview data — find the real reason people leave.",th:"ทบทวนข้อมูล Exit Interview — หาสาเหตุที่แท้จริงที่คนลาออก",priority:"Important",time:"60 Days"},
+    ]
+  },
+  5:{
+    low:[
+      {en:"Define KPIs for every position — aligned to hotel business goals.",th:"กำหนด KPI ทุกตำแหน่ง สอดคล้องกับเป้าหมายธุรกิจโรงแรม",priority:"Urgent",time:"30 Days"},
+      {en:"Implement bi-annual Performance Reviews with written feedback.",th:"ใช้การประเมินผลงานปีละ 2 ครั้ง พร้อม Feedback เป็นลายลักษณ์อักษร",priority:"Important",time:"60 Days"},
+    ],
+    mid:[
+      {en:"Train managers to give real-time feedback — not just once a year.",th:"ฝึกผู้จัดการให้ Feedback แบบ Real-time ไม่ใช่แค่รอประเมินรายปี",priority:"Important",time:"60 Days"},
+      {en:"Create a formal Employee Recognition Program.",th:"สร้างโปรแกรมยกย่องพนักงานดีเด่นอย่างเป็นทางการ",priority:"Standard",time:"90 Days"},
+    ]
+  },
+  6:{
+    low:[
+      {en:"Conduct a full HR Compliance Audit — check all employment contracts against Thai Labour Law.",th:"ดำเนินการ HR Compliance Audit เต็มรูปแบบ ตรวจสอบสัญญาจ้างกับกฎหมายแรงงาน",priority:"Urgent",time:"This Month"},
+      {en:"Complete all employee files — ID, contract, tax forms, SSO documents.",th:"เติมเต็มไฟล์พนักงานทุกคน — บัตรประชาชน สัญญา เอกสารภาษีและประกันสังคม",priority:"Urgent",time:"This Month"},
+      {en:"Create and distribute an Employee Handbook to all staff.",th:"จัดทำและแจกคู่มือพนักงานให้พนักงานทุกคน",priority:"Important",time:"30 Days"},
+    ],
+    mid:[
+      {en:"Move HR data to a secure system — not Excel or personal email.",th:"ย้ายข้อมูล HR ไปยังระบบที่ปลอดภัย ไม่ใช้ Excel หรืออีเมลส่วนตัว",priority:"Important",time:"60 Days"},
+    ]
+  }
+};
+
+function buildActionPlan(catScores,total){
+  let actions=[];
+  for(let cat=1;cat<=6;cat++){
+    const s=catScores[cat];
+    const db=actionDB[cat];
+    if(s<55)actions.push(...db.low);
+    else if(s<75)actions.push(...db.mid);
+  }
+  if(total>=75)actions=[
+    {en:"Continue investing in Leadership Development — it sustains your culture.",th:"ลงทุนต่อเนื่องใน Leadership Development — รักษาวัฒนธรรมองค์กร",priority:"Standard",time:"Ongoing"},
+    {en:"Build a Succession Planning program for key positions.",th:"สร้างโปรแกรม Succession Planning สำหรับตำแหน่งสำคัญ",priority:"Standard",time:"90 Days"},
+    {en:"Benchmark your HR metrics against industry best practices annually.",th:"เปรียบเทียบ HR Metrics กับ Best Practice อุตสาหกรรมทุกปี",priority:"Standard",time:"Annually"},
+  ];
+
+  const priority={'Urgent':'ac-purgent','Important':'ac-pimportant','Standard':'ac-pstandard'};
+  const borderColor={'Urgent':'var(--red)','Important':'var(--orange)','Standard':'var(--blue)'};
+  let html=actions.slice(0,10).map((a,i)=>`
+    <div class="action-card" style="border-left-color:${borderColor[a.priority]}">
+      <span class="ac-priority ${priority[a.priority]}">${a.priority}</span>
+      <div><div class="ac-text">${a.en}</div><div class="ac-text-th">${a.th}</div></div>
+      <div class="ac-time">⏱ ${a.time}</div>
+    </div>`).join('');
+  if(!html)html='<div style="padding:16px;color:var(--green);font-size:13px">✅ Excellent! No critical actions required. Focus on sustaining your HR excellence.</div>';
+  document.getElementById('action-plan').innerHTML=html;
+}
+
+function resetTool(){
+  // Clear ratings
+  Object.keys(ratings).forEach(k=>delete ratings[k]);
+  document.querySelectorAll('.r-btn').forEach(b=>b.className='r-btn');
+  document.getElementById('hotelName').value='';
+  document.getElementById('hotelType').value='';
+  document.getElementById('hotelRooms').value='';
+  document.getElementById('userRole').value='';
+  document.getElementById('hotelYears').value='';
+  document.getElementById('assessDate').value='';
+  goStep(1);
+}
+
+// Init
+buildQuestions();
+document.getElementById('assessDate').value=new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
