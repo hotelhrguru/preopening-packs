@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Housekeeping — Pre-Opening Department Pack | HR Inside Out</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#16213E;--navy2:#1A2744;--gold:#C9A252;--gold-l:#E2C47A;--gold-p:#FBF5E8;--gold-d:#8B6A1F;
+  --cream:#F9F8F4;--off:#F2F1EC;--ink:#0D1117;--mid:#7A7A8C;--bd:#E0DFD8;--wh:#fff;
+  --green:#1E8A4C;--green-p:#E8F5EE;--red:#C0392B;--red-p:#FDECEA;
+  --blue:#1A5F9E;--blue-p:#EAF2FB;--orange:#C86400;--orange-p:#FEF3E6;
+  --dept:#16A34A;--dept-p:#F0FDF4;--dept-d:#14532D;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+
+.topbar{background:var(--navy);height:52px;display:flex;align-items:center;
+  padding:0 28px;justify-content:space-between;position:sticky;top:0;z-index:200;
+  border-bottom:1px solid rgba(22,163,74,.2)}
+.tb-brand{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold)}
+.tb-dept{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.tb-right{display:flex;gap:8px}
+.btn{padding:6px 16px;font-size:10px;font-weight:700;letter-spacing:.8px;border:none;cursor:pointer;font-family:'Lato',sans-serif;transition:all .15s;text-transform:uppercase}
+.btn-gold{background:var(--gold);color:var(--navy)}.btn-gold:hover{background:var(--gold-l)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
+.btn-ghost:hover{border-color:var(--dept);color:#4ADE80}
+
+.hero{background:linear-gradient(155deg,#0D1F18 0%,#132A1E 50%,#1a3525 100%);
+  padding:44px 36px 32px;position:relative;overflow:hidden}
+.hero::before{content:'HK';position:absolute;right:-10px;top:-20px;
+  font-family:'Playfair Display',serif;font-size:200px;font-weight:900;
+  color:rgba(22,163,74,.05);line-height:1;pointer-events:none;user-select:none}
+.hero-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:20px}
+.hero-tag{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#4ADE80;margin-bottom:10px}
+.hero h1{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:6px}
+.hero h1 em{color:#4ADE80;font-style:normal}
+.hero-th{font-size:16px;color:rgba(255,255,255,.4);font-weight:300;margin-bottom:10px}
+.hero-sub{font-size:12.5px;color:rgba(255,255,255,.38);line-height:1.7;max-width:540px}
+.pack-badge{background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.25);padding:16px 20px;text-align:center;min-width:160px}
+.pb-label{font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px}
+.pb-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#4ADE80;line-height:1.3}
+.pb-ver{font-size:9px;color:rgba(255,255,255,.2);margin-top:4px}
+.hero-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.07)}
+.hstat{flex:1;padding:12px 16px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+.hstat:last-child{border-right:none}
+.hstat-v{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#4ADE80}
+.hstat-l{font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:2px}
+
+.sec-nav{background:var(--off);border-bottom:1px solid var(--bd);padding:0 28px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.sec-nav::-webkit-scrollbar{display:none}
+.snav{padding:11px 16px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+  border:none;background:transparent;color:var(--mid);cursor:pointer;border-bottom:2px solid transparent;
+  margin-bottom:-1px;transition:all .15s;white-space:nowrap;font-family:'Lato',sans-serif}
+.snav:hover{color:var(--navy)}.snav.on{color:var(--dept-d);border-bottom-color:var(--dept)}
+
+.main{padding:28px 32px;max-width:1280px;margin:0 auto}
+.sec-pane{display:none}.sec-pane.on{display:block}
+.stitle{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dept);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--dept-p);display:flex;align-items:center;gap:8px}
+.stitle::after{content:'';flex:1;height:1px;background:var(--dept-p)}
+
+.crit-intro{background:var(--red-p);border-left:4px solid var(--red);padding:12px 16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:10px}
+.crit-intro-icon{font-size:20px;flex-shrink:0}
+.crit-intro-text{font-size:11.5px;color:var(--red);line-height:1.6}
+
+.area-block{margin-bottom:28px}
+.area-head{background:var(--navy);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.area-title{font-size:12px;font-weight:700;color:#fff}
+.area-title-th{font-size:10.5px;color:rgba(255,255,255,.4);margin-left:8px}
+.area-badge{font-size:8px;font-weight:700;letter-spacing:.5px;padding:3px 10px}
+.ab-crit{background:var(--red);color:#fff}
+.ab-imp{background:var(--orange);color:#fff}
+.ab-std{background:var(--dept);color:#fff}
+
+.checklist-table{width:100%;border-collapse:collapse;background:var(--wh);border:1px solid var(--bd);border-top:none}
+.checklist-table th{background:var(--navy2);color:rgba(255,255,255,.5);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 12px;text-align:left}
+.checklist-table td{padding:9px 12px;border-bottom:.5px solid var(--bd);vertical-align:top}
+.checklist-table tr:last-child td{border-bottom:none}
+.checklist-table tr:hover td{background:#FAFAFA}
+.ct-num{font-size:10px;font-weight:700;color:var(--mid);width:32px;white-space:nowrap}
+.ct-en{font-size:12px;color:var(--ink);line-height:1.4}
+.ct-th{font-size:10.5px;color:var(--mid);margin-top:2px;line-height:1.4}
+.ct-note{font-size:10px;color:var(--mid);font-style:italic;margin-top:3px}
+.timing-badge{display:inline-block;font-size:9.5px;font-weight:700;padding:3px 10px;background:var(--gold-p);color:var(--gold-d)}
+.timing-badge.red{background:var(--red-p);color:var(--red)}
+.timing-badge.green{background:var(--green-p);color:var(--green)}
+.pri{font-size:8.5px;font-weight:700;padding:2px 8px}
+.pri-c{background:var(--red-p);color:var(--red)}
+.pri-i{background:var(--orange-p);color:var(--orange)}
+.pri-s{background:var(--blue-p);color:var(--blue)}
+
+.tl-wrap{background:var(--wh);border:1px solid var(--bd);margin-bottom:24px;overflow:hidden}
+.tl-hd{background:var(--navy);padding:12px 16px}
+.tl-hd-title{font-size:12px;font-weight:700;color:#fff}
+.tl-hd-sub{font-size:10px;color:rgba(255,255,255,.38);margin-top:2px}
+.tl-table{width:100%;border-collapse:collapse}
+.tl-table th{background:var(--navy2);color:rgba(255,255,255,.5);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 12px;text-align:left;border-right:.5px solid rgba(255,255,255,.08)}
+.tl-table td{padding:10px 12px;border-bottom:.5px solid var(--bd);vertical-align:top;border-right:.5px solid var(--bd)}
+.tl-table td:last-child{border-right:none}
+.tl-table tr:last-child td{border-bottom:none}
+.tl-table tr:nth-child(even) td{background:#FAFAFA}
+.phase-tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;background:var(--gold-p);color:var(--gold-d);white-space:nowrap}
+.phase-tag.crit{background:var(--red-p);color:var(--red)}
+.phase-tag.done{background:var(--green-p);color:var(--green)}
+.tl-task-en{font-size:12px;color:var(--ink);line-height:1.4}
+.tl-task-th{font-size:10.5px;color:var(--mid);margin-top:2px}
+.tl-owner{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 9px;background:var(--off);color:var(--navy)}
+.tl-crit-flag{font-size:9px;font-weight:700;color:var(--red);margin-top:3px}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.kpi-card{background:var(--wh);border:1px solid var(--bd);padding:16px;border-top:3px solid var(--dept);text-align:center}
+.kpi-card.red{border-top-color:var(--red)}
+.kpi-card.gold{border-top-color:var(--gold)}
+.kpi-v{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy)}
+.kpi-label{font-size:10px;font-weight:700;color:var(--mid);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.kpi-label-th{font-size:10px;color:var(--mid);margin-top:2px}
+.kpi-target{font-size:9.5px;color:var(--green);font-weight:700;margin-top:4px}
+
+.note-box{background:var(--dept-p);border:1px solid rgba(22,163,74,.2);border-left:4px solid var(--dept);padding:14px 16px;margin-bottom:20px}
+.note-title{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dept-d);margin-bottom:6px}
+.note-text{font-size:11.5px;color:var(--ink);line-height:1.7}
+
+.doc-intro{background:var(--blue-p);border-left:4px solid var(--blue);padding:12px 16px;margin-bottom:20px;font-size:11.5px;color:var(--blue);line-height:1.6}
+.doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.doc-card{background:var(--wh);border:1px solid var(--bd);padding:14px 16px;border-left:3px solid var(--dept);transition:all .15s}
+.doc-card:hover{border-left-color:var(--navy);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.doc-card.sop{border-left-color:var(--red)}
+.doc-card.form{border-left-color:var(--green)}
+.doc-card.policy{border-left-color:var(--blue)}
+.doc-card.template{border-left-color:var(--orange)}
+.doc-type-tag{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;margin-bottom:8px;display:inline-block}
+.dtt-sop{background:var(--red-p);color:var(--red)}
+.dtt-form{background:var(--green-p);color:var(--green)}
+.dtt-policy{background:var(--blue-p);color:var(--blue)}
+.dtt-template{background:var(--orange-p);color:var(--orange)}
+.doc-name{font-size:12px;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:3px}
+.doc-name-th{font-size:10.5px;color:var(--mid);line-height:1.4;margin-bottom:6px}
+.doc-desc{font-size:10.5px;color:var(--mid);line-height:1.5}
+
+.pack-footer{background:var(--navy);padding:20px 28px;margin-top:32px;display:flex;align-items:center;justify-content:space-between}
+.pf-brand{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--gold)}
+.pf-copy{font-size:9.5px;color:rgba(255,255,255,.28);line-height:1.8;text-align:center}
+.pf-pack{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);text-align:right}
+
+@media print{.topbar,.sec-nav,.btn{display:none!important}.sec-pane{display:block!important}body{background:#fff}.area-block,.doc-card,.kpi-card{break-inside:avoid}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.sec-pane.on > *{animation:fadeIn .2s ease forwards}
+@media(max-width:900px){.doc-grid{grid-template-columns:1fr 1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.hero-top{grid-template-columns:1fr}.hero h1{font-size:28px}.main{padding:20px 16px}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="tb-brand">HR Inside Out</div>
+  <div class="tb-dept">Housekeeping — Pre-Opening Department Pack</div>
+  <div class="tb-right">
+    <button class="btn btn-ghost" onclick="window.print()">Print / PDF</button>
+    <button class="btn btn-gold" onclick="window.scrollTo(0,0)">Top</button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-tag">Pre-Opening Department Pack — HR Inside Out Consulting</div>
+      <h1>Housekeeping<br>&amp; <em>Room Excellence</em></h1>
+      <div class="hero-th">แผนกแม่บ้านและความเป็นเลิศด้านห้องพัก</div>
+      <p class="hero-sub">Housekeeping is the silent promise of every hotel — guests may forget a great breakfast, but they never forget a dirty room. Every standard, every SOP, and every team member must be flawless before the first guest arrives.<br><br>
+      <em style="color:rgba(255,255,255,.3)">แม่บ้านคือคำสัญญาที่เงียบงันของโรงแรม — แขกอาจลืมอาหารเช้าดีๆ แต่ไม่เคยลืมห้องที่ไม่สะอาด</em></p>
+    </div>
+    <div class="pack-badge">
+      <div class="pb-label">Department Pack</div>
+      <div class="pb-name">Housekeeping<br>Pre-Opening Kit</div>
+      <div class="pb-ver">HR Inside Out · v1.0</div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-v">M-10</div><div class="hstat-l">Start Month</div></div>
+    <div class="hstat"><div class="hstat-v">6</div><div class="hstat-l">Critical Areas</div></div>
+    <div class="hstat"><div class="hstat-v">40+</div><div class="hstat-l">Critical Tasks</div></div>
+    <div class="hstat"><div class="hstat-v">16+</div><div class="hstat-l">Key Documents</div></div>
+    <div class="hstat"><div class="hstat-v">100%</div><div class="hstat-l">Rooms Ready M-1</div></div>
+  </div>
+</div>
+
+<nav class="sec-nav">
+  <button class="snav on" onclick="showSec('checklist',this)">Critical Checklist</button>
+  <button class="snav" onclick="showSec('timeline',this)">Timeline</button>
+  <button class="snav" onclick="showSec('kpi',this)">KPI &amp; Success Criteria</button>
+  <button class="snav" onclick="showSec('documents',this)">Key Documents</button>
+</nav>
+
+<div class="main">
+
+<!-- CHECKLIST -->
+<div id="sec-checklist" class="sec-pane on">
+  <div class="crit-intro">
+    <div class="crit-intro-icon">&#9888;</div>
+    <div class="crit-intro-text">
+      <strong>A hotel room is the product guests are actually paying for.</strong> Housekeeping must deep-clean every single room, inspect to standard, and complete a full trial run before the first guest checks in.<br>
+      <strong>ห้องพักคือสินค้าที่แขกจ่ายเงินซื้อ</strong> — แม่บ้านต้องทำความสะอาดทุกห้อง ตรวจตามมาตรฐาน และซ้อมก่อนแขกคนแรกเช็คอิน
+    </div>
+  </div>
+
+  <!-- AREA 1: SETUP -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">01 — Department Setup &amp; Inventory</span><span class="area-title-th">การจัดตั้งแผนกและคลังสินค้า</span></div>
+      <span class="area-badge ab-crit">CRITICAL</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Hire Executive Housekeeper — first HK hire</div><div class="ct-th">จ้าง Executive Housekeeper — พนักงาน HK คนแรก</div></td><td><span class="timing-badge red">M-10</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">Calculate PAR stock — linen, towels, amenities by room count</div><div class="ct-th">คำนวณ PAR Stock — ผ้าปูที่นอน ผ้าขนหนู Amenity ตามจำนวนห้อง</div><div class="ct-note">Minimum 3 PAR for linen and towels — in use, in laundry, in store</div></td><td><span class="timing-badge red">M-10</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Order and receive all linen, towels and room amenities</div><div class="ct-th">สั่งซื้อและรับมอบผ้าปู ผ้าขนหนู และ Amenity ทั้งหมด</div></td><td><span class="timing-badge">M-6</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Housekeeping trolleys assembled and stocked per floor</div><div class="ct-th">จัดเตรียมและเติมสินค้า Trolley แม่บ้านทุกชั้น</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">05</td><td><div class="ct-en">Cleaning chemicals received, tested and safety data sheets filed</div><div class="ct-th">รับ ทดสอบน้ำยาทำความสะอาด และจัดเก็บ Safety Data Sheet</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">06</td><td><div class="ct-en">Linen room and housekeeping store organized and labeled</div><div class="ct-th">จัดห้องผ้าและคลังแม่บ้านให้เป็นระเบียบและติดป้ายกำกับ</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-i">Important</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 2: ROOM STANDARDS -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">02 — Room Setup &amp; Standards</span><span class="area-title-th">การจัดห้องและมาตรฐาน</span></div>
+      <span class="area-badge ab-crit">CRITICAL</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Room setup standard defined — bed make, amenity placement, towel fold</div><div class="ct-th">กำหนดมาตรฐานการจัดห้อง — ปูที่นอน วางของ พับผ้า</div><div class="ct-note">Create photo standards for every room type — the "Bible" for all RAs</div></td><td><span class="timing-badge red">M-8</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">Amenity setup standard per room category (Standard, Deluxe, Suite)</div><div class="ct-th">กำหนดมาตรฐาน Amenity แยกตามประเภทห้อง</div></td><td><span class="timing-badge">M-6</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Turndown service standard designed and photographed</div><div class="ct-th">ออกแบบและถ่ายภาพมาตรฐานบริการ Turndown</div></td><td><span class="timing-badge">M-6</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">VIP room setup standard — special amenities, flowers, welcome note</div><div class="ct-th">มาตรฐานจัดห้อง VIP — Amenity พิเศษ ดอกไม้ จดหมายต้อนรับ</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">05</td><td><div class="ct-en">All rooms deep cleaned and inspected before Dry Run</div><div class="ct-th">ทำความสะอาดลึกและตรวจทุกห้องก่อน Dry Run</div></td><td><span class="timing-badge green">M-2</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">06</td><td><div class="ct-en">All rooms set to opening standard — final inspection sign-off</div><div class="ct-th">ห้องทุกห้องจัดตามมาตรฐานเปิด ตรวจผ่านรับรองขั้นสุดท้าย</div></td><td><span class="timing-badge green">M-1</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 3: LAUNDRY -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">03 — Laundry Operations</span><span class="area-title-th">การดำเนินงานห้องซักรีด</span></div>
+      <span class="area-badge ab-crit">CRITICAL</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Laundry equipment installed and tested (washers, dryers, pressers)</div><div class="ct-th">ติดตั้งและทดสอบเครื่องซักรีด (เครื่องซัก อบ รีด)</div></td><td><span class="timing-badge red">M-8</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">Linen flow procedure — soil collection, wash, dry, fold, store, issue</div><div class="ct-th">กำหนดขั้นตอน Linen Flow ครบวงจร</div></td><td><span class="timing-badge">M-6</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Laundry SOP for guest garments — collection, processing, delivery</div><div class="ct-th">SOP ซักรีดเสื้อผ้าแขก — รับ, ซัก, ส่งคืน</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Laundry production test — full load of hotel linen processed</div><div class="ct-th">ทดสอบซักผ้าโรงแรมเต็มรูปแบบก่อนเปิด</div></td><td><span class="timing-badge green">M-2</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 4: PUBLIC AREAS -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">04 — Public Area Cleaning</span><span class="area-title-th">การทำความสะอาดพื้นที่ส่วนกลาง</span></div>
+      <span class="area-badge ab-imp">IMPORTANT</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Public area cleaning schedule — lobby, corridors, restrooms, F&amp;B areas</div><div class="ct-th">กำหนดตารางทำความสะอาดพื้นที่ส่วนกลาง</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">Lobby and entrance cleaning standard — frequency and method</div><div class="ct-th">มาตรฐานทำความสะอาด Lobby และทางเข้า — ความถี่และวิธีการ</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Public restroom inspection checklist — 30-minute cycle standard</div><div class="ct-th">Checklist ตรวจห้องน้ำสาธารณะ — มาตรฐานทุก 30 นาที</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Pool area and gym cleaning procedure</div><div class="ct-th">ขั้นตอนทำความสะอาดสระว่ายน้ำและฟิตเนส</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-i">Important</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 5: LOST & FOUND / PROCEDURES -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">05 — Lost &amp; Found / Special Requests</span><span class="area-title-th">Lost and Found และคำขอพิเศษ</span></div>
+      <span class="area-badge ab-imp">IMPORTANT</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Lost &amp; found SOP — logging, tagging, storage, claiming, disposal</div><div class="ct-th">SOP Lost and Found — บันทึก ติดแท็ก เก็บ คืน ทิ้ง</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">Extra pillow, blanket and amenity request procedure</div><div class="ct-th">ขั้นตอนขอหมอน ผ้าห่ม และ Amenity เพิ่มเติม</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Do Not Disturb and Make Up Room procedure</div><div class="ct-th">ขั้นตอน Do Not Disturb และ Make Up Room</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Room discrepancy procedure — HK vs PMS room status reconciliation</div><div class="ct-th">ขั้นตอนจัดการสถานะห้องไม่ตรงกัน ระหว่าง HK และ PMS</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 6: TRAINING -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">06 — Training &amp; Inspection</span><span class="area-title-th">การฝึกอบรมและการตรวจห้อง</span></div>
+      <span class="area-badge ab-crit">CRITICAL</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Train all Room Attendants to room standard — minimum 3 supervised cleans</div><div class="ct-th">ฝึกอบรม Room Attendant ทุกคน — ทำความสะอาดภายใต้การดูแลอย่างน้อย 3 ครั้ง</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">Supervisors trained on room inspection technique and checklist</div><div class="ct-th">ฝึก Supervisor เทคนิคการตรวจห้องและการใช้ Checklist</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Productivity standard set — rooms cleaned per attendant per shift</div><div class="ct-th">กำหนดมาตรฐาน Productivity — จำนวนห้องต่อแม่บ้านต่อกะ</div><div class="ct-note">Typical standard: 12-16 rooms per 8-hour shift depending on room size</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Chemical handling and safety training — all HK staff certified</div><div class="ct-th">อบรมการใช้สารเคมีและความปลอดภัย — พนักงาน HK ทุกคนผ่านรับรอง</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- TIMELINE -->
+<div id="sec-timeline" class="sec-pane">
+  <div class="note-box">
+    <div class="note-title">Housekeeping Timeline Note</div>
+    <div class="note-text">Housekeeping setup begins at M-10 with the Executive Housekeeper hire. The critical milestone is completing the deep clean of 100% of rooms before Dry Run at M-2.<br>
+    แม่บ้านเริ่มจัดตั้งที่ M-10 จุดสำคัญคือทำความสะอาดลึก 100% ของห้องให้เสร็จก่อน Dry Run M-2</div>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl-hd">
+      <div class="tl-hd-title">Housekeeping — Pre-Opening Timeline</div>
+      <div class="tl-hd-sub">Month -10 to Opening Day / เดือน -10 ถึงวันเปิด</div>
+    </div>
+    <table class="tl-table">
+      <thead><tr><th style="width:90px">Phase</th><th>Task / งาน</th><th style="width:120px">Owner</th><th style="width:90px">Flag</th></tr></thead>
+      <tbody>
+        <tr><td><span class="phase-tag crit">M-10</span></td><td><div class="tl-task-en">Hire Executive Housekeeper</div><div class="tl-task-th">จ้าง Executive Housekeeper</div></td><td><span class="tl-owner">HR + GM</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag crit">M-10</span></td><td><div class="tl-task-en">Calculate PAR stock and submit purchase orders</div><div class="tl-task-th">คำนวณ PAR Stock และส่ง Purchase Order</div></td><td><span class="tl-owner">EHK + Purchasing</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag crit">M-8</span></td><td><div class="tl-task-en">Laundry equipment installed and tested</div><div class="tl-task-th">ติดตั้งและทดสอบเครื่องซักรีด</div></td><td><span class="tl-owner">Engineering + EHK</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag crit">M-8</span></td><td><div class="tl-task-en">Define room setup photo standards — all room types</div><div class="tl-task-th">จัดทำมาตรฐานการจัดห้องด้วยภาพถ่าย</div></td><td><span class="tl-owner">EHK + GM</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-6</span></td><td><div class="tl-task-en">Receive linen, towels and all room amenities</div><div class="tl-task-th">รับมอบผ้าปู ผ้าขนหนู และ Amenity ทั้งหมด</div></td><td><span class="tl-owner">EHK + Purchasing</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-6</span></td><td><div class="tl-task-en">Finalize all HK SOPs — room cleaning, turndown, laundry, L&amp;F</div><div class="tl-task-th">จัดทำ SOP ทั้งหมด — ทำห้อง Turndown ซักรีด L&amp;F</div></td><td><span class="tl-owner">EHK</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-5</span></td><td><div class="tl-task-en">Hire all Room Attendants and Housekeeping staff</div><div class="tl-task-th">จ้างพนักงานแม่บ้านและ Room Attendant ทั้งหมด</div></td><td><span class="tl-owner">HR + EHK</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-4</span></td><td><div class="tl-task-en">Public area cleaning schedule finalized</div><div class="tl-task-th">กำหนดตารางทำความสะอาดพื้นที่ส่วนกลาง</div></td><td><span class="tl-owner">EHK</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-3</span></td><td><div class="tl-task-en">Full training — all RAs and supervisors certified to standard</div><div class="tl-task-th">ฝึกอบรมครบ — RA และ Supervisor ทุกคนผ่านมาตรฐาน</div></td><td><span class="tl-owner">EHK + HR</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-3</span></td><td><div class="tl-task-en">Chemical safety training completed for all staff</div><div class="tl-task-th">ฝึกอบรมความปลอดภัยสารเคมีครบทุกคน</div></td><td><span class="tl-owner">EHK + Safety</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-3</span></td><td><div class="tl-task-en">Set up housekeeping trolleys — all floors stocked</div><div class="tl-task-th">เตรียม Trolley แม่บ้านทุกชั้นพร้อมสินค้าครบ</div></td><td><span class="tl-owner">EHK</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-2</span></td><td><div class="tl-task-en">100% rooms deep cleaned and inspected — sign-off by EHK</div><div class="tl-task-th">ทำความสะอาดลึกและตรวจทุกห้อง 100% EHK ลงนามรับรอง</div></td><td><span class="tl-owner">EHK + Supervisors</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-2</span></td><td><div class="tl-task-en">Laundry production test — full hotel linen load</div><div class="tl-task-th">ทดสอบซักผ้าเต็มรูปแบบ</div></td><td><span class="tl-owner">EHK + Laundry</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-1</span></td><td><div class="tl-task-en">All rooms set to opening standard — final GM inspection</div><div class="tl-task-th">ห้องทุกห้องพร้อมมาตรฐานเปิด GM ตรวจขั้นสุดท้าย</div></td><td><span class="tl-owner">GM + EHK</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag done">M-0</span></td><td><div class="tl-task-en">Opening Day — Housekeeping fully operational</div><div class="tl-task-th">วันเปิด — แม่บ้านพร้อมใช้งานเต็มรูปแบบ</div></td><td><span class="tl-owner">ALL HK TEAM</span></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- KPI -->
+<div id="sec-kpi" class="sec-pane">
+  <div class="note-box">
+    <div class="note-title">Success Criteria — What does "Ready to Open" mean for Housekeeping?</div>
+    <div class="note-text">Every room must be inspected and signed off before the first guest. These KPIs are the minimum standard for a luxury hotel opening.<br>
+    ทุกห้องต้องผ่านการตรวจและรับรองก่อนแขกคนแรก KPI เหล่านี้คือมาตรฐานขั้นต่ำสำหรับ Luxury Hotel</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card red"><div class="kpi-v" style="color:var(--red)">100%</div><div class="kpi-label">Rooms Inspected</div><div class="kpi-label-th">ห้องผ่านการตรวจ</div><div class="kpi-target">All rooms signed off M-1</div></div>
+    <div class="kpi-card"><div class="kpi-v" style="color:var(--dept)">3 PAR</div><div class="kpi-label">Linen Par Stock</div><div class="kpi-label-th">PAR Stock ผ้า</div><div class="kpi-target">Min 3 PAR all linen</div></div>
+    <div class="kpi-card gold"><div class="kpi-v" style="color:var(--gold)">&lt;30min</div><div class="kpi-label">Room Clean Time</div><div class="kpi-label-th">เวลาทำห้อง</div><div class="kpi-target">Standard room target</div></div>
+    <div class="kpi-card red"><div class="kpi-v" style="color:var(--red)">100%</div><div class="kpi-label">Staff Certified</div><div class="kpi-label-th">พนักงานผ่านรับรอง</div><div class="kpi-target">All RAs to standard</div></div>
+    <div class="kpi-card"><div class="kpi-v" style="color:var(--dept)">0</div><div class="kpi-label">Defect Rooms</div><div class="kpi-label-th">ห้องที่มีปัญหา</div><div class="kpi-target">Zero defects on opening</div></div>
+    <div class="kpi-card gold"><div class="kpi-v" style="color:var(--gold)">12-16</div><div class="kpi-label">Rooms / RA / Shift</div><div class="kpi-label-th">ห้องต่อแม่บ้านต่อกะ</div><div class="kpi-target">Productivity standard met</div></div>
+    <div class="kpi-card"><div class="kpi-v" style="color:var(--dept)">Pass</div><div class="kpi-label">Chemical Safety</div><div class="kpi-label-th">ผ่านอบรมสารเคมี</div><div class="kpi-target">100% staff certified</div></div>
+    <div class="kpi-card red"><div class="kpi-v" style="color:var(--red)">&gt;9.0</div><div class="kpi-label">Cleanliness Score</div><div class="kpi-label-th">คะแนนความสะอาด</div><div class="kpi-target">Guest survey at 30 days</div></div>
+  </div>
+</div>
+
+<!-- DOCUMENTS -->
+<div id="sec-documents" class="sec-pane">
+  <div class="doc-intro">
+    Key documents Housekeeping must prepare before Opening Day — SOPs, inspection forms, standards and operational templates.<br>
+    เอกสารสำคัญที่แม่บ้านต้องเตรียมก่อนเปิด
+  </div>
+  <div class="stitle">Housekeeping Documents / รายการเอกสาร Housekeeping</div>
+  <div class="doc-grid">
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Room Cleaning SOP</div><div class="doc-name-th">SOP ทำความสะอาดห้อง</div><div class="doc-desc">Step-by-step occupied and vacant room cleaning procedure with sequence and timing</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Turndown Service SOP</div><div class="doc-name-th">SOP บริการ Turndown</div><div class="doc-desc">Evening turndown procedure with chocolate, card, slippers and music standard</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Lost &amp; Found SOP</div><div class="doc-name-th">SOP Lost and Found</div><div class="doc-desc">Complete L&amp;F cycle from discovery to handover or disposal with logging</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Laundry Operations SOP</div><div class="doc-name-th">SOP การดำเนินงานห้องซักรีด</div><div class="doc-desc">Sorting, washing, drying, pressing and quality check procedure</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Guest Laundry SOP</div><div class="doc-name-th">SOP ซักรีดเสื้อผ้าแขก</div><div class="doc-desc">Collection, processing times, delivery and damage handling procedure</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Room Inspection Checklist</div><div class="doc-name-th">Checklist ตรวจห้อง</div><div class="doc-desc">100-point inspection form covering bathroom, bedroom, amenities, linen and equipment</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Public Area Inspection Form</div><div class="doc-name-th">แบบฟอร์มตรวจพื้นที่ส่วนกลาง</div><div class="doc-desc">Lobby, corridor, restroom and pool area inspection form with frequency</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Housekeeping Daily Report</div><div class="doc-name-th">รายงานแม่บ้านประจำวัน</div><div class="doc-desc">Rooms cleaned, discrepancies, L&amp;F items, maintenance requests and productivity</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Lost &amp; Found Register</div><div class="doc-name-th">ทะเบียน Lost and Found</div><div class="doc-desc">Item log with date, room, description, found by, stored location and status</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">Room Setup Photo Standard</div><div class="doc-name-th">มาตรฐานการจัดห้องด้วยภาพ</div><div class="doc-desc">Visual guide per room type — bed, bathroom, amenity placement with measurements</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">PAR Stock Calculation Template</div><div class="doc-name-th">Template คำนวณ PAR Stock</div><div class="doc-desc">Linen, towel and amenity par calculation by room count and category</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">HK Productivity Tracker</div><div class="doc-name-th">Template ติดตาม Productivity แม่บ้าน</div><div class="doc-desc">Daily rooms per attendant tracking with target vs actual comparison</div></div>
+    <div class="doc-card policy"><span class="doc-type-tag dtt-policy">Policy</span><div class="doc-name">Do Not Disturb Policy</div><div class="doc-name-th">นโยบาย Do Not Disturb</div><div class="doc-desc">Handling DND rooms — timeframes, welfare check procedure and escalation</div></div>
+    <div class="doc-card policy"><span class="doc-type-tag dtt-policy">Policy</span><div class="doc-name">Chemical Safety Policy</div><div class="doc-name-th">นโยบายความปลอดภัยสารเคมี</div><div class="doc-desc">Storage, labeling, dilution ratios, PPE requirements and spill procedure</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Maintenance Request Form</div><div class="doc-name-th">แบบฟอร์มแจ้งซ่อม</div><div class="doc-desc">Room defect reporting form for HK to Engineering — priority and follow-up</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">Trolley Setup Standard</div><div class="doc-name-th">มาตรฐานการจัด Trolley</div><div class="doc-desc">What goes on each shelf of the trolley — quantities and restocking guide</div></div>
+  </div>
+</div>
+
+</div>
+
+<footer class="pack-footer">
+  <div class="pf-brand">HR Inside Out</div>
+  <div class="pf-copy">Housekeeping &amp; Room Excellence — Pre-Opening Department Pack<br>Integrity · Compassion · Tolerance · HR Inside Out Consulting</div>
+  <div class="pf-pack">Department Pack 03 of 08<br>v1.0 · Bilingual EN/TH</div>
+</footer>
+
+<script>
+function showSec(name,btn){
+  document.querySelectorAll('.sec-pane').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.snav').forEach(function(b){b.classList.remove('on');});
+  document.getElementById('sec-'+name).classList.add('on');
+  if(btn)btn.classList.add('on');
+}
+</script>
+</body>
+</html>

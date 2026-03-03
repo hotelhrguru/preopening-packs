@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Culinary Pre-Opening Pack | HR Inside Out</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{--c:#DC2626;--cp:#FEF2F2;--cd:#7F1D1D;--ac:#FCA5A5;}
+
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:#F9F8F4;color:#0D1117;line-height:1.6}
+.bar{background:#16213E;height:52px;display:flex;align-items:center;padding:0 28px;justify-content:space-between;position:sticky;top:0;z-index:200}
+.brand{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#C9A252}
+.dep{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.btn{padding:6px 16px;font-size:10px;font-weight:700;border:none;cursor:pointer;font-family:'Lato',sans-serif;text-transform:uppercase;letter-spacing:.8px}
+.bg{background:#C9A252;color:#16213E}.bx{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
+.hero{padding:44px 36px 32px;overflow:hidden}
+.ht{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:10px}
+.hero h1{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:6px}
+.hth{font-size:16px;color:rgba(255,255,255,.4);font-weight:300;margin-bottom:10px}
+.hsub{font-size:12.5px;color:rgba(255,255,255,.38);line-height:1.7;max-width:560px}
+.htop{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:20px}
+.pbdg{padding:16px 20px;text-align:center;min-width:160px}
+.pbl{font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px}
+.pbn{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;line-height:1.3}
+.pbv{font-size:9px;color:rgba(255,255,255,.2);margin-top:4px}
+.hst{display:flex;border:1px solid rgba(255,255,255,.07)}
+.hsi{flex:1;padding:12px 16px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+.hsi:last-child{border-right:none}
+.hsv{font-family:'Playfair Display',serif;font-size:24px;font-weight:700}
+.hsl{font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:2px}
+.nav{background:#F2F1EC;border-bottom:1px solid #E0DFD8;padding:0 28px;display:flex;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nb{padding:11px 16px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border:none;background:transparent;color:#7A7A8C;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;font-family:'Lato',sans-serif}
+.main{padding:28px 32px;max-width:1280px;margin:0 auto}
+.sp{display:none}.sp.on{display:block}
+.ci{border-left:4px solid #C0392B;padding:12px 16px;margin-bottom:20px;font-size:11.5px;line-height:1.6;background:#FDECEA;color:#C0392B}
+.ab{margin-bottom:28px}
+.ah{background:#16213E;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.at{font-size:12px;font-weight:700;color:#fff}
+.ath{font-size:10.5px;color:rgba(255,255,255,.4);margin-left:8px}
+.bdg{font-size:8px;font-weight:700;padding:3px 10px}
+.bc2{background:#C0392B;color:#fff}.bi2{background:#C86400;color:#fff}.bs2{background:#1A5F9E;color:#fff}
+table.cl{width:100%;border-collapse:collapse;background:#fff;border:1px solid #E0DFD8;border-top:none}
+table.cl th{background:#1A2744;color:rgba(255,255,255,.5);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 12px;text-align:left}
+table.cl td{padding:9px 12px;border-bottom:.5px solid #E0DFD8;vertical-align:top}
+table.cl tr:last-child td{border-bottom:none}
+table.cl tr:hover td{background:#fafafa}
+.rn{font-size:10px;font-weight:700;color:#7A7A8C;width:32px}
+.re{font-size:12px;color:#0D1117;line-height:1.4}
+.rt{font-size:10.5px;color:#7A7A8C;margin-top:2px;line-height:1.4}
+.rnt{font-size:10px;color:#7A7A8C;font-style:italic;margin-top:3px}
+.tb{display:inline-block;font-size:9.5px;font-weight:700;padding:3px 10px;background:#FBF5E8;color:#8B6A1F}
+.tbr{background:#FDECEA;color:#C0392B}.tbg{background:#E8F5EE;color:#1E8A4C}
+.pr{font-size:8.5px;font-weight:700;padding:2px 8px}
+.prc{background:#FDECEA;color:#C0392B}.pri{background:#FEF3E6;color:#C86400}.prs{background:#EAF2FB;color:#1A5F9E}
+.tlw{background:#fff;border:1px solid #E0DFD8;margin-bottom:24px;overflow:hidden}
+.tlh{background:#16213E;padding:12px 16px}
+.tlht{font-size:12px;font-weight:700;color:#fff}
+.tlhs{font-size:10px;color:rgba(255,255,255,.38);margin-top:2px}
+table.tl{width:100%;border-collapse:collapse}
+table.tl th{background:#1A2744;color:rgba(255,255,255,.5);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 12px;text-align:left;border-right:.5px solid rgba(255,255,255,.08)}
+table.tl td{padding:10px 12px;border-bottom:.5px solid #E0DFD8;vertical-align:top;border-right:.5px solid #E0DFD8}
+table.tl td:last-child{border-right:none}
+table.tl tr:last-child td{border-bottom:none}
+table.tl tr:nth-child(even) td{background:#fafafa}
+.pt{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;background:#FBF5E8;color:#8B6A1F;white-space:nowrap}
+.ptc{background:#FDECEA;color:#C0392B}.ptd{background:#E8F5EE;color:#1E8A4C}
+.te{font-size:12px;color:#0D1117;line-height:1.4}
+.tt{font-size:10.5px;color:#7A7A8C;margin-top:2px}
+.ow{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 9px;background:#F2F1EC;color:#16213E}
+.fl{font-size:9px;font-weight:700;color:#C0392B;margin-top:3px}
+.kg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.kc{background:#fff;border:1px solid #E0DFD8;padding:16px;text-align:center;border-top-width:3px;border-top-style:solid}
+.kv{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#16213E}
+.kl{font-size:10px;font-weight:700;color:#7A7A8C;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.klt{font-size:10px;color:#7A7A8C;margin-top:2px}
+.ktg{font-size:9.5px;color:#1E8A4C;font-weight:700;margin-top:4px}
+.nb2{border-left-width:4px;border-left-style:solid;padding:14px 16px;margin-bottom:20px}
+.nt{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.ntx{font-size:11.5px;color:#0D1117;line-height:1.7}
+.di{background:#EAF2FB;border-left:4px solid #1A5F9E;padding:12px 16px;margin-bottom:20px;font-size:11.5px;color:#1A5F9E;line-height:1.6}
+.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.dc{background:#fff;border:1px solid #E0DFD8;padding:14px 16px;border-left-width:3px;border-left-style:solid;transition:box-shadow .15s}
+.dc:hover{box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.dcs{border-left-color:#C0392B}.dcf{border-left-color:#1E8A4C}.dcp{border-left-color:#1A5F9E}.dct{border-left-color:#C86400}
+.dtag{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;margin-bottom:8px;display:inline-block}
+.dts{background:#FDECEA;color:#C0392B}.dtf{background:#E8F5EE;color:#1E8A4C}.dtp{background:#EAF2FB;color:#1A5F9E}.dtt{background:#FEF3E6;color:#C86400}
+.dn{font-size:12px;font-weight:700;color:#16213E;line-height:1.4;margin-bottom:3px}
+.dnt{font-size:10.5px;color:#7A7A8C;line-height:1.4;margin-bottom:6px}
+.dd{font-size:10.5px;color:#7A7A8C;line-height:1.5}
+.foot{background:#16213E;padding:20px 28px;margin-top:32px;display:flex;align-items:center;justify-content:space-between}
+.fb{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#C9A252}
+.fc{font-size:9.5px;color:rgba(255,255,255,.28);line-height:1.8;text-align:center}
+.fp{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);text-align:right}
+@media print{.bar,.nav,.btn{display:none!important}.sp{display:block!important}body{background:#fff}}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.sp.on>*{animation:fi .2s ease forwards}
+@media(max-width:900px){.dg{grid-template-columns:1fr 1fr}.kg{grid-template-columns:repeat(2,1fr)}.htop{grid-template-columns:1fr}.hero h1{font-size:28px}.main{padding:20px 16px}}
+
+.hero{background:linear-gradient(155deg,#1A0000 0%,#2D0A0A 50%,#3a1010 100%);}
+.ht{color:#FCA5A5;}
+.hero h1 em{color:#FCA5A5;font-style:normal;}
+.hsv{color:#FCA5A5;}
+.pbdg{background:rgba(0,0,0,.15);border:1px solid rgba(255,255,255,.1);}
+.pbn{color:#FCA5A5;}
+.nb.on{color:var(--cd);border-bottom-color:var(--c);}
+.nb2{background:var(--cp);border-color:var(--c);}
+.nt{color:var(--cd);}
+.kc{border-top-color:var(--c);}
+.dc{border-left-color:var(--c);}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="brand">HR Inside Out</div>
+  <div class="dep">Culinary — Pre-Opening Pack</div>
+  <div style="display:flex;gap:8px">
+    <button class="btn bx" onclick="window.print()">Print / PDF</button>
+    <button class="btn bg" onclick="window.scrollTo(0,0)">Top</button>
+  </div>
+</header>
+<div class="hero">
+  <div class="htop">
+    <div>
+      <div class="ht">Pre-Opening Department Pack — HR Inside Out Consulting</div>
+      <h1>Culinary</h1>
+      <div class="hth">ครัว</div>
+      <p class="hsub">The kitchen is the engine of the hotel. No menu, no HACCP, no health certificate — no opening. Every chef must know every dish to standard before the first guest is served.<br><br><em style="color:rgba(255,255,255,.3)">ครัวคือเครื่องยนต์ของโรงแรม — ไม่มีเมนู ไม่มี HACCP ไม่มีใบรับรอง = เปิดไม่ได้</em></p>
+    </div>
+    <div class="pbdg">
+      <div class="pbl">Department Pack</div>
+      <div class="pbn">Culinary<br>Pre-Opening Kit</div>
+      <div class="pbv">HR Inside Out · v1.0</div>
+    </div>
+  </div>
+  <div class="hst">
+    <div class="hsi"><div class="hsv">M-12</div><div class="hsl">Start Month</div></div>
+    <div class="hsi"><div class="hsv">5</div><div class="hsl">Critical Areas</div></div>
+    <div class="hsi"><div class="hsv">35+</div><div class="hsl">Critical Tasks</div></div>
+    <div class="hsi"><div class="hsv">12+</div><div class="hsl">Key Documents</div></div>
+    <div class="hsi"><div class="hsv">100%</div><div class="hsl">Ready by M-2</div></div>
+  </div>
+</div>
+<nav class="nav">
+  <button class="nb on" onclick="show('cl',this)">Critical Checklist</button>
+  <button class="nb" onclick="show('tl',this)">Timeline</button>
+  <button class="nb" onclick="show('kp',this)">KPI &amp; Success Criteria</button>
+  <button class="nb" onclick="show('dc',this)">Key Documents</button>
+</nav>
+<div class="main"><div id="cl" class="sp on"><div class="ci"><strong>The kitchen is the engine of the hotel.</strong> No menu, no HACCP, no health certificate — no opening. Every chef must master every dish to standard before a single guest is served.<br><strong>ครัวคือเครื่องยนต์ของโรงแรม</strong> — ไม่มีเมนู ไม่มี HACCP ไม่มีใบรับรอง = เปิดไม่ได้</div><div class="ab"><div class="ah"><div><span class="at">01 — Kitchen Equipment & Setup</span><span class="ath">อุปกรณ์ครัวและการจัดตั้ง</span></div><span class="bdg bc2">CRITICAL</span></div>
+<table class="cl"><thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead><tbody><tr><td class="rn">01</td><td><div class="re">All kitchen equipment installed — ranges, ovens, fryers, steamers, blast chillers</div><div class="rt">ติดตั้งอุปกรณ์ครัวทั้งหมด</div></td><td><span class="tbr">M-6</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">02</td><td><div class="re">All equipment tested at full load — burners, temperatures, capacities verified</div><div class="rt">ทดสอบอุปกรณ์เต็มกำลัง</div></td><td><span class="tb">M-4</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">03</td><td><div class="re">Cold storage calibrated — cooler 1-4°C, freezer -18°C or below</div><div class="rt">สอบเทียบห้องเย็น — ตู้เย็น 1-4°C ตู้แช่แข็ง -18°C หรือต่ำกว่า</div><div class="rnt">Walk-in cooler and freezer must hold temperatures consistently</div></td><td><span class="tb">M-4</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">04</td><td><div class="re">All small equipment and utensils received and inventoried</div><div class="rt">รับมอบและทำ Inventory อุปกรณ์ครัวขนาดเล็กครบ</div></td><td><span class="tb">M-4</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">05</td><td><div class="re">Kitchen mise en place stations designed, labeled and photographed</div><div class="rt">ออกแบบ ติดป้าย และถ่ายภาพ Mise en Place Station ทุกจุด</div></td><td><span class="tb">M-4</span></td><td><span class="pr pri">Important</span></td></tr></tbody></table></div><div class="ab"><div class="ah"><div><span class="at">02 — Menu Development & Recipe Standards</span><span class="ath">การพัฒนาเมนูและมาตรฐานสูตรอาหาร</span></div><span class="bdg bc2">CRITICAL</span></div>
+<table class="cl"><thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead><tbody><tr><td class="rn">01</td><td><div class="re">Opening menu costed and approved — all recipes standardized</div><div class="rt">คำนวณต้นทุนและอนุมัติเมนูเปิด — Standardized Recipe ครบ</div></td><td><span class="tbr">M-8</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">02</td><td><div class="re">Recipe cards for all items — yield, method, plating photo, allergen info</div><div class="rt">Recipe Card ทุกเมนู — Yield วิธีทำ ภาพจัดจาน สารก่อภูมิแพ้</div></td><td><span class="tbr">M-6</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">03</td><td><div class="re">Menu tasting session — GM and Owner approve every dish</div><div class="rt">ชิมเมนู GM และเจ้าของอนุมัติทุกเมนู</div></td><td><span class="tb">M-4</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">04</td><td><div class="re">Allergen information compiled and documented for all menu items</div><div class="rt">รวบรวมข้อมูลสารก่อภูมิแพ้ทุกเมนู</div></td><td><span class="tb">M-4</span></td><td><span class="pr prc">Critical</span></td></tr></tbody></table></div><div class="ab"><div class="ah"><div><span class="at">03 — HACCP & Food Safety Compliance</span><span class="ath">HACCP และความปลอดภัยอาหาร</span></div><span class="bdg bc2">CRITICAL</span></div>
+<table class="cl"><thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead><tbody><tr><td class="rn">01</td><td><div class="re">HACCP plan developed — all critical control points documented</div><div class="rt">จัดทำ HACCP Plan ครบทุก Critical Control Point</div></td><td><span class="tbr">M-6</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">02</td><td><div class="re">Temperature log system established — all fridges and hot holding monitored</div><div class="rt">ระบบบันทึกอุณหภูมิครบทุกจุด</div></td><td><span class="tb">M-4</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">03</td><td><div class="re">All kitchen staff HACCP trained and food handler certified</div><div class="rt">พนักงานครัวทุกคนผ่าน HACCP และใบรับรอง Food Handler</div></td><td><span class="tb">M-3</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">04</td><td><div class="re">Pest control pre-opening treatment completed and documented</div><div class="rt">กำจัดแมลงและสัตว์ศัตรูก่อนเปิดและบันทึกแล้ว</div></td><td><span class="tb">M-3</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">05</td><td><div class="re">Health department inspection passed — certificate obtained</div><div class="rt">ผ่านตรวจสาธารณสุข ได้รับใบอนุญาต</div></td><td><span class="tb">M-2</span></td><td><span class="pr prc">Critical</span></td></tr></tbody></table></div><div class="ab"><div class="ah"><div><span class="at">04 — Supplier & Receiving Setup</span><span class="ath">ซัพพลายเออร์และการรับสินค้า</span></div><span class="bdg bc2">CRITICAL</span></div>
+<table class="cl"><thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead><tbody><tr><td class="rn">01</td><td><div class="re">Approved supplier list finalized — produce, protein, dairy, dry goods</div><div class="rt">รายชื่อซัพพลายเออร์ที่อนุมัติแล้วครบทุกประเภท</div></td><td><span class="tbr">M-6</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">02</td><td><div class="re">Receiving SOP — quality check, temperature check, rejection procedure</div><div class="rt">SOP รับสินค้า — ตรวจคุณภาพ วัดอุณหภูมิ ขั้นตอนส่งคืน</div></td><td><span class="tb">M-4</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">03</td><td><div class="re">Opening food stock ordered and received</div><div class="rt">สั่งและรับมอบ Stock อาหารเปิด</div></td><td><span class="tbr">M-1</span></td><td><span class="pr prc">Critical</span></td></tr></tbody></table></div><div class="ab"><div class="ah"><div><span class="at">05 — Training & Kitchen Dry Run</span><span class="ath">การฝึกอบรมและ Dry Run ครัว</span></div><span class="bdg bc2">CRITICAL</span></div>
+<table class="cl"><thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead><tbody><tr><td class="rn">01</td><td><div class="re">All cooks trained per recipe card — taste, presentation, timing certified</div><div class="rt">ฝึก Cook ทุกคนตาม Recipe Card ผ่านรับรอง</div></td><td><span class="tb">M-3</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">02</td><td><div class="re">Kitchen stations fully organized — mise en place to standard</div><div class="rt">จัดตั้งทุก Station เต็มรูปแบบตามมาตรฐาน</div></td><td><span class="tb">M-2</span></td><td><span class="pr prc">Critical</span></td></tr><tr><td class="rn">03</td><td><div class="re">Full kitchen Dry Run — complete service at full cover capacity</div><div class="rt">Dry Run ครัวเต็มรูปแบบ จำลองเต็ม Capacity</div></td><td><span class="tb">M-2</span></td><td><span class="pr prc">Critical</span></td></tr></tbody></table></div></div><div id='tl' class='sp'><div class="nb2"><div class="nt">Culinary Timeline Note</div><div class="ntx">Chef hiring at M-12 is non-negotiable. Menu development takes 4+ months. Health inspection certificate must be in hand before Opening Day.<br>จ้าง Chef M-12 — พัฒนาเมนูต้องใช้เวลา 4+ เดือน ใบรับรองสาธารณสุขต้องได้ก่อนเปิด</div></div>
+<div class="tlw"><div class="tlh"><div class="tlht">Culinary — Pre-Opening Timeline</div><div class="tlhs">Month to Opening Day / เดือนถึงวันเปิด</div></div>
+<table class="tl"><thead><tr><th style="width:90px">Phase</th><th>Task / งาน</th><th style="width:120px">Owner</th><th style="width:90px">Flag</th></tr></thead><tbody><tr><td><span class="pt ptc">M-12</span></td><td><div class="te">Hire Executive Chef and Sous Chef</div><div class="tt">จ้าง Executive Chef และ Sous Chef</div></td><td><span class="ow">GM + HR</span></td><td><span class="fl">CRITICAL</span></td></tr><tr><td><span class="pt ptc">M-10</span></td><td><div class="te">Menu concept and development begins</div><div class="tt">เริ่มพัฒนา Menu Concept</div></td><td><span class="ow">Chef + F&B Mgr</span></td><td><span class="fl">CRITICAL</span></td></tr><tr><td><span class="pt ptc">M-8</span></td><td><div class="te">Opening menu approved — recipe cards drafted</div><div class="tt">อนุมัติเมนูเปิด จัดทำ Recipe Card เบื้องต้น</div></td><td><span class="ow">Chef + GM</span></td><td><span class="fl">CRITICAL</span></td></tr><tr><td><span class="pt ptc">M-6</span></td><td><div class="te">Kitchen equipment fully installed and tested</div><div class="tt">ติดตั้งและทดสอบอุปกรณ์ครัวครบ</div></td><td><span class="ow">Engineering + Chef</span></td><td><span class="fl">CRITICAL</span></td></tr><tr><td><span class="pt ptc">M-6</span></td><td><div class="te">HACCP plan developed and documented</div><div class="tt">จัดทำ HACCP Plan ครบ</div></td><td><span class="ow">Chef + Food Safety</span></td><td><span class="fl">CRITICAL</span></td></tr><tr><td><span class="pt">M-6</span></td><td><div class="te">Approved supplier list finalized</div><div class="tt">รายชื่อซัพพลายเออร์ที่อนุมัติ</div></td><td><span class="ow">Chef + Purchasing</span></td><td></td></tr><tr><td><span class="pt">M-5</span></td><td><div class="te">Hire all kitchen staff — CDPs, Commis, Stewards</div><div class="tt">จ้างพนักงานครัวทั้งหมด</div></td><td><span class="ow">HR + Chef</span></td><td></td></tr><tr><td><span class="pt ptc">M-4</span></td><td><div class="te">Menu tasting — GM and Owner approval</div><div class="tt">ชิมเมนู GM และเจ้าของอนุมัติ</div></td><td><span class="ow">Chef + GM + Owner</span></td><td><span class="fl">CRITICAL</span></td></tr><tr><td><span class="pt">M-4</span></td><td><div class="te">Cold storage calibrated — all temperatures verified</div><div class="tt">สอบเทียบห้องเย็นทุกห้อง</div></td><td><span class="ow">Engineering + Chef</span></td><td></td></tr><tr><td><span class="pt ptc">M-3</span></td><td><div class="te">HACCP training and food handler certification completed</div><div class="tt">ฝึก HACCP และรับรอง Food Handler ครบ</div></td><td><span class="ow">Chef + HR</span></td><td><span class="fl">CRITICAL</span></td></tr><tr><td><span class="pt">M-3</span></td><td><div class="te">Recipe card training — all cooks certified per station</div><div class="tt">ฝึก Recipe Card ทุก Station</div></td><td><span class="ow">Sous Chef</span></td><td></td></tr><tr><td><span class="pt ptc">M-2</span></td><td><div class="te">Health department inspection — certificate received</div><div class="tt">ผ่านตรวจสาธารณสุข ได้ใบรับรอง</div></td><td><span class="ow">Chef + GM</span></td><td><span class="fl">CRITICAL</span></td></tr><tr><td><span class="pt ptc">M-2</span></td><td><div class="te">Full kitchen Dry Run at full capacity</div><div class="tt">Dry Run ครัวเต็ม Capacity</div></td><td><span class="ow">Chef + All Kitchen</span></td><td><span class="fl">CRITICAL</span></td></tr><tr><td><span class="pt">M-1</span></td><td><div class="te">Opening food stock received and stored</div><div class="tt">รับมอบและจัดเก็บ Stock อาหารเปิด</div></td><td><span class="ow">Chef + Purchasing</span></td><td></td></tr><tr><td><span class="pt">M-0</span></td><td><div class="te">Opening Day — kitchen fully operational</div><div class="tt">วันเปิด — ครัวพร้อมใช้งาน</div></td><td><span class="ow">ALL KITCHEN TEAM</span></td><td></td></tr></tbody></table></div></div><div id='kp' class='sp'><div class="nb2"><div class="nt">Culinary Success Criteria</div><div class="ntx">No kitchen opens without a health inspection certificate. Every chef must demonstrate every dish before Opening Day.</div></div><div class="kg"><div class="kc" style="border-top-color:#C0392B"><div class="kv" style="color:#C0392B">Pass</div><div class="kl">Health Inspection</div><div class="klt">ผ่านสาธารณสุข</div><div class="ktg">Certificate before M-1</div></div><div class="kc" style="border-top-color:var(--c)"><div class="kv" style="color:var(--c)">100%</div><div class="kl">Recipe Cards</div><div class="klt">Recipe Card ครบ</div><div class="ktg">All items standardized</div></div><div class="kc" style="border-top-color:#C9A252"><div class="kv" style="color:#C9A252">1-4°C</div><div class="kl">Cooler Temp</div><div class="klt">อุณหภูมิห้องเย็น</div><div class="ktg">Maintained consistently</div></div><div class="kc" style="border-top-color:#C0392B"><div class="kv" style="color:#C0392B">100%</div><div class="kl">HACCP Trained</div><div class="klt">ผ่าน HACCP</div><div class="ktg">All kitchen staff</div></div><div class="kc" style="border-top-color:var(--c)"><div class="kv" style="color:var(--c)">Pass</div><div class="kl">Menu Tasting</div><div class="klt">ชิมเมนูผ่าน</div><div class="ktg">GM and Owner approve</div></div><div class="kc" style="border-top-color:#C9A252"><div class="kv" style="color:#C9A252">0</div><div class="kl">Food Safety Issues</div><div class="klt">ปัญหา Food Safety</div><div class="ktg">Zero at opening</div></div><div class="kc" style="border-top-color:var(--c)"><div class="kv" style="color:var(--c)">1x</div><div class="kl">Dry Run Done</div><div class="klt">Dry Run ผ่าน</div><div class="ktg">Full capacity simulation</div></div><div class="kc" style="border-top-color:#C0392B"><div class="kv" style="color:#C0392B">&gt;9.0</div><div class="kl">Food Score</div><div class="klt">คะแนนอาหาร</div><div class="ktg">Guest survey 30 days</div></div></div></div><div id='dc' class='sp'><div class="di">Key Culinary documents before Opening Day — recipes, HACCP, food safety and operations.<br>เอกสารสำคัญ Culinary ก่อนเปิด</div><div class="dg"><div class="dc dcs"><span class="dtag dts">SOP</span><div class="dn">Receiving & Quality Check SOP</div><div class="dnt">SOP รับสินค้าและตรวจคุณภาพ</div><div class="dd">Temperature check, visual inspection, documentation and rejection</div></div><div class="dc dcs"><span class="dtag dts">SOP</span><div class="dn">Kitchen Cleaning SOP</div><div class="dnt">SOP ทำความสะอาดครัว</div><div class="dd">Daily, weekly and deep clean schedule for all kitchen areas</div></div><div class="dc dcs"><span class="dtag dts">SOP</span><div class="dn">Allergen Management SOP</div><div class="dnt">SOP การจัดการสารก่อภูมิแพ้</div><div class="dd">Identification, labeling, cross-contamination prevention</div></div><div class="dc dct"><span class="dtag dtt">Template</span><div class="dn">Standardized Recipe Card</div><div class="dnt">Template Standardized Recipe Card</div><div class="dd">Ingredients, yield, method, plating photo, cost and allergen info</div></div><div class="dc dcf"><span class="dtag dtf">Form</span><div class="dn">Temperature Log Form</div><div class="dnt">แบบฟอร์มบันทึกอุณหภูมิ</div><div class="dd">Daily AM/PM log for all fridges, freezers and hot holding</div></div><div class="dc dcp"><span class="dtag dtp">Policy</span><div class="dn">HACCP Plan Documentation</div><div class="dnt">เอกสาร HACCP Plan</div><div class="dd">Hazard analysis, critical control points, monitoring, corrective actions</div></div><div class="dc dcf"><span class="dtag dtf">Form</span><div class="dn">Waste & Spoilage Log</div><div class="dnt">แบบฟอร์มบันทึก Waste</div><div class="dd">Daily waste tracking for cost control and menu adjustment</div></div><div class="dc dct"><span class="dtag dtt">Template</span><div class="dn">Approved Supplier List</div><div class="dnt">รายชื่อซัพพลายเออร์ที่อนุมัติ</div><div class="dd">Vendor contacts, MOQs, lead times, quality specs, status</div></div><div class="dc dcf"><span class="dtag dtf">Form</span><div class="dn">Kitchen Equipment Checklist</div><div class="dnt">Checklist อุปกรณ์ครัว</div><div class="dd">Daily startup, shutdown and weekly maintenance checklist</div></div><div class="dc dcp"><span class="dtag dtp">Policy</span><div class="dn">Personal Hygiene Policy</div><div class="dnt">นโยบายสุขอนามัยส่วนตัว</div><div class="dd">Uniform, jewelry, illness reporting, handwashing requirements</div></div><div class="dc dcf"><span class="dtag dtf">Form</span><div class="dn">Menu Tasting Evaluation</div><div class="dnt">แบบประเมินการชิมเมนู</div><div class="dd">Scoring: taste, presentation, portion, temperature, consistency</div></div><div class="dc dct"><span class="dtag dtt">Template</span><div class="dn">Kitchen Dry Run Evaluation</div><div class="dnt">แบบประเมิน Kitchen Dry Run</div><div class="dd">Speed, accuracy, HACCP compliance, plating consistency</div></div></div></div></div>
+<footer class="foot">
+  <div class="fb">HR Inside Out</div>
+  <div class="fc">Culinary — Pre-Opening Department Pack<br>Integrity · Compassion · Tolerance · HR Inside Out Consulting</div>
+  <div class="fp">Department Pack 05 of 08<br>v1.0 · Bilingual EN/TH</div>
+</footer>
+<script>
+function show(n,b){
+  document.querySelectorAll('.sp').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.nb').forEach(function(x){x.classList.remove('on');});
+  document.getElementById(n).classList.add('on');
+  if(b)b.classList.add('on');
+}
+</script>
+</body></html>

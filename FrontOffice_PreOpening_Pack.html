@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Front Office — Pre-Opening Department Pack | HR Inside Out</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#16213E;--navy2:#1A2744;--gold:#C9A252;--gold-l:#E2C47A;--gold-p:#FBF5E8;--gold-d:#8B6A1F;
+  --cream:#F9F8F4;--off:#F2F1EC;--ink:#0D1117;--mid:#7A7A8C;--bd:#E0DFD8;--wh:#fff;
+  --green:#1E8A4C;--green-p:#E8F5EE;--red:#C0392B;--red-p:#FDECEA;
+  --blue:#1A5F9E;--blue-p:#EAF2FB;--orange:#C86400;--orange-p:#FEF3E6;
+  --dept:#2563EB;--dept-p:#EFF6FF;--dept-d:#1E40AF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+
+.topbar{background:var(--navy);height:52px;display:flex;align-items:center;
+  padding:0 28px;justify-content:space-between;position:sticky;top:0;z-index:200;
+  border-bottom:1px solid rgba(37,99,235,.2)}
+.tb-brand{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold)}
+.tb-dept{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.tb-right{display:flex;gap:8px}
+.btn{padding:6px 16px;font-size:10px;font-weight:700;letter-spacing:.8px;border:none;
+  cursor:pointer;font-family:'Lato',sans-serif;transition:all .15s;text-transform:uppercase}
+.btn-gold{background:var(--gold);color:var(--navy)}.btn-gold:hover{background:var(--gold-l)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
+.btn-ghost:hover{border-color:var(--dept);color:#60A5FA}
+
+.hero{background:linear-gradient(155deg,#0F1E3D 0%,#162244 50%,#1a2a55 100%);
+  padding:44px 36px 32px;position:relative;overflow:hidden}
+.hero::before{content:'FO';position:absolute;right:-10px;top:-20px;
+  font-family:'Playfair Display',serif;font-size:200px;font-weight:900;
+  color:rgba(37,99,235,.05);line-height:1;pointer-events:none;user-select:none}
+.hero-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:20px}
+.hero-tag{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#60A5FA;margin-bottom:10px}
+.hero h1{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:6px}
+.hero h1 em{color:#60A5FA;font-style:normal}
+.hero-th{font-size:16px;color:rgba(255,255,255,.4);font-weight:300;margin-bottom:10px}
+.hero-sub{font-size:12.5px;color:rgba(255,255,255,.38);line-height:1.7;max-width:540px}
+.pack-badge{background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);
+  padding:16px 20px;text-align:center;min-width:160px}
+.pb-label{font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px}
+.pb-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#60A5FA;line-height:1.3}
+.pb-ver{font-size:9px;color:rgba(255,255,255,.2);margin-top:4px}
+.hero-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.07)}
+.hstat{flex:1;padding:12px 16px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+.hstat:last-child{border-right:none}
+.hstat-v{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#60A5FA}
+.hstat-l{font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:2px}
+
+.sec-nav{background:var(--off);border-bottom:1px solid var(--bd);
+  padding:0 28px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.sec-nav::-webkit-scrollbar{display:none}
+.snav{padding:11px 16px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+  border:none;background:transparent;color:var(--mid);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;
+  white-space:nowrap;font-family:'Lato',sans-serif}
+.snav:hover{color:var(--navy)}.snav.on{color:var(--dept-d);border-bottom-color:var(--dept)}
+
+.main{padding:28px 32px;max-width:1280px;margin:0 auto}
+.sec-pane{display:none}.sec-pane.on{display:block}
+
+.stitle{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--dept);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--dept-p);
+  display:flex;align-items:center;gap:8px}
+.stitle::after{content:'';flex:1;height:1px;background:var(--dept-p)}
+
+.crit-intro{background:var(--red-p);border-left:4px solid var(--red);
+  padding:12px 16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:10px}
+.crit-intro-icon{font-size:20px;flex-shrink:0}
+.crit-intro-text{font-size:11.5px;color:var(--red);line-height:1.6}
+
+.area-block{margin-bottom:28px}
+.area-head{background:var(--navy);padding:10px 16px;display:flex;align-items:center;justify-content:space-between}
+.area-title{font-size:12px;font-weight:700;color:#fff}
+.area-title-th{font-size:10.5px;color:rgba(255,255,255,.4);margin-left:8px}
+.area-badge{font-size:8px;font-weight:700;letter-spacing:.5px;padding:3px 10px}
+.ab-crit{background:var(--red);color:#fff}
+.ab-imp{background:var(--orange);color:#fff}
+.ab-std{background:var(--dept);color:#fff}
+
+.checklist-table{width:100%;border-collapse:collapse;background:var(--wh);border:1px solid var(--bd);border-top:none}
+.checklist-table th{background:var(--navy2);color:rgba(255,255,255,.5);font-size:9px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;padding:8px 12px;text-align:left}
+.checklist-table td{padding:9px 12px;border-bottom:.5px solid var(--bd);vertical-align:top}
+.checklist-table tr:last-child td{border-bottom:none}
+.checklist-table tr:hover td{background:#FAFAFA}
+.ct-num{font-size:10px;font-weight:700;color:var(--mid);width:32px;white-space:nowrap}
+.ct-en{font-size:12px;color:var(--ink);line-height:1.4}
+.ct-th{font-size:10.5px;color:var(--mid);margin-top:2px;line-height:1.4}
+.ct-note{font-size:10px;color:var(--mid);font-style:italic;margin-top:3px}
+.timing-badge{display:inline-block;font-size:9.5px;font-weight:700;padding:3px 10px;background:var(--gold-p);color:var(--gold-d)}
+.timing-badge.red{background:var(--red-p);color:var(--red)}
+.timing-badge.green{background:var(--green-p);color:var(--green)}
+.timing-badge.blue{background:var(--blue-p);color:var(--blue)}
+.timing-badge.dept{background:var(--dept-p);color:var(--dept-d)}
+.pri{font-size:8.5px;font-weight:700;padding:2px 8px}
+.pri-c{background:var(--red-p);color:var(--red)}
+.pri-i{background:var(--orange-p);color:var(--orange)}
+.pri-s{background:var(--blue-p);color:var(--blue)}
+
+.tl-wrap{background:var(--wh);border:1px solid var(--bd);margin-bottom:24px;overflow:hidden}
+.tl-hd{background:var(--navy);padding:12px 16px}
+.tl-hd-title{font-size:12px;font-weight:700;color:#fff}
+.tl-hd-sub{font-size:10px;color:rgba(255,255,255,.38);margin-top:2px}
+.tl-table{width:100%;border-collapse:collapse}
+.tl-table th{background:var(--navy2);color:rgba(255,255,255,.5);font-size:9px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;padding:8px 12px;text-align:left;border-right:.5px solid rgba(255,255,255,.08)}
+.tl-table td{padding:10px 12px;border-bottom:.5px solid var(--bd);vertical-align:top;border-right:.5px solid var(--bd)}
+.tl-table td:last-child{border-right:none}
+.tl-table tr:last-child td{border-bottom:none}
+.tl-table tr:nth-child(even) td{background:#FAFAFA}
+.phase-tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;background:var(--gold-p);color:var(--gold-d);white-space:nowrap}
+.phase-tag.crit{background:var(--red-p);color:var(--red)}
+.phase-tag.done{background:var(--green-p);color:var(--green)}
+.tl-task-en{font-size:12px;color:var(--ink);line-height:1.4}
+.tl-task-th{font-size:10.5px;color:var(--mid);margin-top:2px}
+.tl-owner{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 9px;background:var(--off);color:var(--navy)}
+.tl-crit-flag{font-size:9px;font-weight:700;color:var(--red);margin-top:3px}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.kpi-card{background:var(--wh);border:1px solid var(--bd);padding:16px;border-top:3px solid var(--dept);text-align:center}
+.kpi-card.red{border-top-color:var(--red)}
+.kpi-card.green{border-top-color:var(--green)}
+.kpi-card.gold{border-top-color:var(--gold)}
+.kpi-v{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy)}
+.kpi-label{font-size:10px;font-weight:700;color:var(--mid);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.kpi-label-th{font-size:10px;color:var(--mid);margin-top:2px}
+.kpi-target{font-size:9.5px;color:var(--green);font-weight:700;margin-top:4px}
+
+.note-box{background:var(--dept-p);border:1px solid rgba(37,99,235,.2);border-left:4px solid var(--dept);
+  padding:14px 16px;margin-bottom:20px}
+.note-title{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--dept-d);margin-bottom:6px}
+.note-text{font-size:11.5px;color:var(--ink);line-height:1.7}
+
+.doc-intro{background:var(--blue-p);border-left:4px solid var(--blue);padding:12px 16px;margin-bottom:20px;font-size:11.5px;color:var(--blue);line-height:1.6}
+.doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.doc-card{background:var(--wh);border:1px solid var(--bd);padding:14px 16px;border-left:3px solid var(--dept);transition:all .15s}
+.doc-card:hover{border-left-color:var(--navy);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.doc-card.sop{border-left-color:var(--red)}
+.doc-card.form{border-left-color:var(--green)}
+.doc-card.policy{border-left-color:var(--blue)}
+.doc-card.template{border-left-color:var(--orange)}
+.doc-type-tag{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;margin-bottom:8px;display:inline-block}
+.dtt-sop{background:var(--red-p);color:var(--red)}
+.dtt-form{background:var(--green-p);color:var(--green)}
+.dtt-policy{background:var(--blue-p);color:var(--blue)}
+.dtt-template{background:var(--orange-p);color:var(--orange)}
+.doc-name{font-size:12px;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:3px}
+.doc-name-th{font-size:10.5px;color:var(--mid);line-height:1.4;margin-bottom:6px}
+.doc-desc{font-size:10.5px;color:var(--mid);line-height:1.5}
+
+.pack-footer{background:var(--navy);padding:20px 28px;margin-top:32px;display:flex;align-items:center;justify-content:space-between}
+.pf-brand{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--gold)}
+.pf-copy{font-size:9.5px;color:rgba(255,255,255,.28);line-height:1.8;text-align:center}
+.pf-pack{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);text-align:right}
+
+@media print{
+  .topbar,.sec-nav,.btn{display:none!important}
+  .sec-pane{display:block!important}
+  body{background:#fff}
+  .area-block,.doc-card,.kpi-card{break-inside:avoid}
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.sec-pane.on > *{animation:fadeIn .2s ease forwards}
+@media(max-width:900px){
+  .doc-grid{grid-template-columns:1fr 1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-top{grid-template-columns:1fr}
+  .hero h1{font-size:28px}
+  .main{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="tb-brand">HR Inside Out</div>
+  <div class="tb-dept">Front Office — Pre-Opening Department Pack</div>
+  <div class="tb-right">
+    <button class="btn btn-ghost" onclick="window.print()">Print / PDF</button>
+    <button class="btn btn-gold" onclick="window.scrollTo(0,0)">Top</button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-tag">Pre-Opening Department Pack — HR Inside Out Consulting</div>
+      <h1>Front Office<br>&amp; <em>Guest Experience</em></h1>
+      <div class="hero-th">แผนกต้อนรับส่วนหน้าและประสบการณ์แขก</div>
+      <p class="hero-sub">The face of the hotel — every guest interaction begins and ends here. Front Office must be the most rehearsed, most polished department before Opening Day. One bad first impression lasts forever.<br><br>
+      <em style="color:rgba(255,255,255,.3)">หน้าตาของโรงแรม — ทุกประสบการณ์แขกเริ่มและจบที่นี่ ต้องพร้อมที่สุดก่อนเปิด</em></p>
+    </div>
+    <div class="pack-badge">
+      <div class="pb-label">Department Pack</div>
+      <div class="pb-name">Front Office<br>Pre-Opening Kit</div>
+      <div class="pb-ver">HR Inside Out · v1.0</div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-v">M-12</div><div class="hstat-l">Start Month</div></div>
+    <div class="hstat"><div class="hstat-v">6</div><div class="hstat-l">Critical Areas</div></div>
+    <div class="hstat"><div class="hstat-v">45+</div><div class="hstat-l">Critical Tasks</div></div>
+    <div class="hstat"><div class="hstat-v">18+</div><div class="hstat-l">Key Documents</div></div>
+    <div class="hstat"><div class="hstat-v">100%</div><div class="hstat-l">Ready by M-2</div></div>
+  </div>
+</div>
+
+<nav class="sec-nav">
+  <button class="snav on" onclick="showSec('checklist',this)">Critical Checklist</button>
+  <button class="snav" onclick="showSec('timeline',this)">Timeline</button>
+  <button class="snav" onclick="showSec('kpi',this)">KPI &amp; Success Criteria</button>
+  <button class="snav" onclick="showSec('documents',this)">Key Documents</button>
+</nav>
+
+<div class="main">
+
+<!-- CHECKLIST -->
+<div id="sec-checklist" class="sec-pane on">
+
+  <div class="crit-intro">
+    <div class="crit-intro-icon">&#9888;</div>
+    <div class="crit-intro-text">
+      <strong>Front Office is where the guest forms their first and last impression.</strong> Every system, script, and staff member must be fully rehearsed before a single guest arrives. There is no second chance at a first impression.<br>
+      <strong>Front Office คือจุดที่แขกสร้างความประทับใจแรกและสุดท้าย</strong> — ทุกระบบ ทุก Script และพนักงานทุกคนต้องพร้อม 100% ก่อนแขกคนแรกมาถึง
+    </div>
+  </div>
+
+  <!-- AREA 1: PMS & SYSTEMS -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">01 — PMS &amp; Technology Systems</span><span class="area-title-th">ระบบ PMS และเทคโนโลยี</span></div>
+      <span class="area-badge ab-crit">CRITICAL</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Select and contract PMS provider (Opera, Mews, Cloudbeds etc.)</div><div class="ct-th">เลือกและทำสัญญากับผู้ให้บริการระบบ PMS</div></td><td><span class="timing-badge red">M-12</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">PMS installation and server/cloud configuration completed</div><div class="ct-th">ติดตั้งและกำหนดค่า PMS บน Server หรือ Cloud</div></td><td><span class="timing-badge red">M-8</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Configure all room types, rates, packages and availability</div><div class="ct-th">กำหนดประเภทห้อง ราคา Package และจำนวนห้องในระบบ</div></td><td><span class="timing-badge">M-6</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Key card system installed, tested and integrated with PMS</div><div class="ct-th">ติดตั้งและทดสอบระบบ Key Card เชื่อมต่อกับ PMS</div></td><td><span class="timing-badge">M-6</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">05</td><td><div class="ct-en">Channel Manager connected — OTAs synced (Booking.com, Agoda, Expedia)</div><div class="ct-th">เชื่อมต่อ Channel Manager กับ OTA ทุกช่องทาง</div><div class="ct-note">All availability and rates must sync in real-time before going live</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">06</td><td><div class="ct-en">Telephone system (PABX) tested — all extensions and wake-up calls</div><div class="ct-th">ทดสอบระบบโทรศัพท์ PABX ทุกหมายเลขภายในและ Wake-up Call</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">07</td><td><div class="ct-en">Full PMS staff training completed — all FO team certified</div><div class="ct-th">ฝึกอบรม PMS ให้พนักงาน FO ทุกคนผ่านการรับรอง</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">08</td><td><div class="ct-en">End-to-end reservation test — booking to check-out cycle completed</div><div class="ct-th">ทดสอบระบบจองครบ Cycle — ตั้งแต่จองถึง Check-out</div></td><td><span class="timing-badge green">M-2</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 2: RESERVATION -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">02 — Reservations &amp; Revenue Setup</span><span class="area-title-th">การจองและการวางกลยุทธ์รายได้</span></div>
+      <span class="area-badge ab-crit">CRITICAL</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Opening rate strategy approved — rack, BAR, package rates</div><div class="ct-th">อนุมัติกลยุทธ์ราคาเปิด — Rack Rate, BAR, Package</div></td><td><span class="timing-badge red">M-12</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">Reservation SOP and scripts finalized (phone, email, walk-in)</div><div class="ct-th">จัดทำ SOP และ Script การรับจอง — โทรศัพท์, Email, Walk-in</div></td><td><span class="timing-badge">M-6</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Hotel website booking engine live and tested</div><div class="ct-th">เว็บไซต์โรงแรมและ Booking Engine พร้อมใช้งาน</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Corporate rate agreements and GDS loaded</div><div class="ct-th">โหลด Corporate Rate และ GDS ในระบบ</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">05</td><td><div class="ct-en">Cancellation and no-show policy finalized</div><div class="ct-th">กำหนดนโยบาย Cancellation และ No-show</div></td><td><span class="timing-badge">M-6</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">06</td><td><div class="ct-en">Overbooking and walk procedure established</div><div class="ct-th">กำหนด Procedure การ Walk Guest เมื่อ Overbook</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-i">Important</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 3: CHECK-IN/OUT -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">03 — Check-In &amp; Check-Out Procedures</span><span class="area-title-th">ขั้นตอน Check-in และ Check-out</span></div>
+      <span class="area-badge ab-crit">CRITICAL</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Standard Check-in SOP — steps 1 to 10 finalized and trained</div><div class="ct-th">SOP Check-in มาตรฐาน ขั้นตอน 1-10 จัดทำและฝึกอบรมแล้ว</div><div class="ct-note">Must include greeting, ID check, payment, key card, room briefing, escort</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">Check-out SOP — bill presentation, settlement, feedback collection</div><div class="ct-th">SOP Check-out — นำเสนอใบเสร็จ, ชำระเงิน, รับ Feedback</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Express check-in and late check-out procedure established</div><div class="ct-th">กำหนดขั้นตอน Express Check-in และ Late Check-out</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Payment systems tested — cash, credit card, city ledger, OTA voucher</div><div class="ct-th">ทดสอบระบบชำระเงินทุกประเภท — เงินสด, บัตรเครดิต, City Ledger</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">05</td><td><div class="ct-en">All FO staff role-play check-in/out — certified before Dry Run</div><div class="ct-th">พนักงาน FO ทุกคน Role-play Check-in/out ผ่านก่อน Dry Run</div></td><td><span class="timing-badge green">M-2</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">06</td><td><div class="ct-en">Room blocking chart for opening day prepared</div><div class="ct-th">จัดทำ Room Blocking Chart สำหรับวันเปิด</div></td><td><span class="timing-badge green">M-1</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 4: VIP & GUEST EXPERIENCE -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">04 — VIP &amp; Guest Experience</span><span class="area-title-th">บริการ VIP และประสบการณ์แขก</span></div>
+      <span class="area-badge ab-imp">IMPORTANT</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">VIP arrival procedure designed — pre-arrival, arrival, in-house</div><div class="ct-th">ออกแบบขั้นตอน VIP Arrival ครบ 3 ระยะ — ก่อนมาถึง, มาถึง, พักอยู่</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">VIP amenity and welcome letter standards set</div><div class="ct-th">กำหนดมาตรฐาน VIP Amenity และ Welcome Letter</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Guest profile system — preferences, repeat guest tracking</div><div class="ct-th">ระบบจัดเก็บ Guest Profile — ความชอบ, แขกประจำ</div></td><td><span class="timing-badge">M-4</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Guest complaint handling procedure — escalation levels defined</div><div class="ct-th">กำหนดขั้นตอนจัดการข้อร้องเรียน — ระดับการ Escalate</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">05</td><td><div class="ct-en">Pre-arrival communication template — confirmation, upsell, welcome</div><div class="ct-th">Template การสื่อสารก่อนเดินทาง — Confirmation, Upsell, Welcome</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">06</td><td><div class="ct-en">Concierge directory — local recommendations, transport, dining</div><div class="ct-th">รายชื่อ Concierge Directory — สถานที่แนะนำ, การเดินทาง, ร้านอาหาร</div></td><td><span class="timing-badge">M-2</span></td><td><span class="pri pri-i">Important</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 5: BELL & CONCIERGE -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">05 — Bell Service &amp; Concierge</span><span class="area-title-th">Bell Service และ Concierge</span></div>
+      <span class="area-badge ab-imp">IMPORTANT</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Luggage handling SOP — arrival, storage, delivery, departure</div><div class="ct-th">SOP การจัดการกระเป๋า — รับ, เก็บ, ส่ง, ส่งออก</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">Room escort procedure — what to say and show during escort</div><div class="ct-th">ขั้นตอน Room Escort — พูดอะไรและแสดงอะไรระหว่างพาแขกขึ้นห้อง</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Transport arrangement procedure — taxi, limousine, airport transfer</div><div class="ct-th">ขั้นตอนจัดการการเดินทาง — Taxi, Limousine, Airport Transfer</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Bell equipment ready — trolleys, luggage tags, storage room organized</div><div class="ct-th">อุปกรณ์ Bell พร้อม — รถเข็น, ป้ายกระเป๋า, ห้องเก็บจัดเรียบร้อย</div></td><td><span class="timing-badge">M-2</span></td><td><span class="pri pri-i">Important</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 6: NIGHT AUDIT & OPERATIONS -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">06 — Night Audit &amp; Daily Operations</span><span class="area-title-th">Night Audit และการดำเนินงานประจำวัน</span></div>
+      <span class="area-badge ab-std">STANDARD</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td><div class="ct-en">Night audit procedure — EOD reports, room status reconciliation</div><div class="ct-th">ขั้นตอน Night Audit — รายงานสิ้นวัน, ตรวจสอบสถานะห้อง</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td><div class="ct-en">Front desk shift handover SOP — log book, pending items, cash float</div><div class="ct-th">SOP การส่งกะ Front Desk — Log Book, งานค้าง, เงินทอน</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td><div class="ct-en">Lost and found procedure — logging, storage, claiming</div><div class="ct-th">ขั้นตอน Lost &amp; Found — บันทึก, เก็บรักษา, การเรียกคืน</div></td><td><span class="timing-badge">M-3</span></td><td><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">04</td><td><div class="ct-en">Emergency procedure for FO — fire, medical, security incident</div><div class="ct-th">ขั้นตอนฉุกเฉินสำหรับ FO — ไฟไหม้, เจ็บป่วย, เหตุการณ์ความปลอดภัย</div></td><td><span class="timing-badge">M-2</span></td><td><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">05</td><td><div class="ct-en">Daily housekeeping coordination procedure — room status updates</div><div class="ct-th">ขั้นตอนประสานงาน Housekeeping ประจำวัน — อัพเดทสถานะห้อง</div></td><td><span class="timing-badge">M-2</span></td><td><span class="pri pri-i">Important</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /checklist -->
+
+<!-- TIMELINE -->
+<div id="sec-timeline" class="sec-pane">
+  <div class="note-box">
+    <div class="note-title">Front Office Timeline Note</div>
+    <div class="note-text">Front Office preparation begins at M-12 with system selection, but the intensive phase is M-6 to M-2. The entire team must complete at least 2 full Dry Runs before Opening Day.<br>
+    การเตรียม FO เริ่มที่ M-12 แต่ช่วงเข้มข้นคือ M-6 ถึง M-2 ทีมทั้งหมดต้องผ่าน Dry Run อย่างน้อย 2 ครั้งก่อนเปิด</div>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl-hd">
+      <div class="tl-hd-title">Front Office — Pre-Opening Timeline</div>
+      <div class="tl-hd-sub">Month -12 to Opening Day / เดือน -12 ถึงวันเปิด</div>
+    </div>
+    <table class="tl-table">
+      <thead><tr><th style="width:90px">Phase</th><th>Task / งาน</th><th style="width:110px">Owner</th><th style="width:90px">Flag</th></tr></thead>
+      <tbody>
+        <tr><td><span class="phase-tag crit">M-12</span></td><td><div class="tl-task-en">Select PMS provider, sign contract, begin implementation</div><div class="tl-task-th">เลือก PMS ทำสัญญา เริ่ม Implementation</div></td><td><span class="tl-owner">GM + FOM + IT</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag crit">M-12</span></td><td><div class="tl-task-en">Set opening rate strategy — approved by GM and Owner</div><div class="tl-task-th">กำหนดกลยุทธ์ราคาเปิด อนุมัติโดย GM และเจ้าของ</div></td><td><span class="tl-owner">GM + DOSM</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-10</span></td><td><div class="tl-task-en">Hire Front Office Manager and Reservations Manager</div><div class="tl-task-th">จ้าง Front Office Manager และ Reservations Manager</div></td><td><span class="tl-owner">HR + GM</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-8</span></td><td><div class="tl-task-en">PMS installation and system configuration complete</div><div class="tl-task-th">ติดตั้ง PMS และกำหนดค่าระบบแล้วเสร็จ</div></td><td><span class="tl-owner">FOM + IT</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-6</span></td><td><div class="tl-task-en">Configure room types, rates, packages in PMS</div><div class="tl-task-th">กำหนดประเภทห้อง ราคา และ Package ใน PMS</div></td><td><span class="tl-owner">FOM + Revenue</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-6</span></td><td><div class="tl-task-en">Key card system installed and integrated</div><div class="tl-task-th">ติดตั้งระบบ Key Card เชื่อมต่อกับ PMS</div></td><td><span class="tl-owner">Engineering + IT</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-6</span></td><td><div class="tl-task-en">Draft all FO SOPs — check-in, check-out, VIP, complaint</div><div class="tl-task-th">จัดทำ SOP ทั้งหมด — Check-in, Check-out, VIP, Complaint</div></td><td><span class="tl-owner">FOM</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-5</span></td><td><div class="tl-task-en">Hire all FO staff — Receptionists, Concierge, Bell team</div><div class="tl-task-th">จ้างพนักงาน FO ครบ — Receptionist, Concierge, Bell</div></td><td><span class="tl-owner">HR + FOM</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-4</span></td><td><div class="tl-task-en">Channel Manager connected — all OTAs live and synced</div><div class="tl-task-th">เชื่อมต่อ Channel Manager กับ OTA ทุกช่องทาง</div></td><td><span class="tl-owner">FOM + Revenue</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-4</span></td><td><div class="tl-task-en">VIP procedure designed and approved by GM</div><div class="tl-task-th">ออกแบบขั้นตอน VIP อนุมัติโดย GM</div></td><td><span class="tl-owner">FOM + GM</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-3</span></td><td><div class="tl-task-en">Full PMS training for all FO staff — certified</div><div class="tl-task-th">ฝึกอบรม PMS พนักงาน FO ทุกคน ผ่านการรับรอง</div></td><td><span class="tl-owner">FOM + IT</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-3</span></td><td><div class="tl-task-en">Role-play training — check-in, complaint, VIP scenarios</div><div class="tl-task-th">ฝึก Role-play — Check-in, Complaint, VIP Scenarios</div></td><td><span class="tl-owner">FOM + HR</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-2</span></td><td><div class="tl-task-en">Full Dry Run 1 — entire check-in to check-out cycle</div><div class="tl-task-th">Dry Run ครั้งที่ 1 — Check-in ถึง Check-out ครบ Cycle</div></td><td><span class="tl-owner">GM + FOM + All</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-2</span></td><td><div class="tl-task-en">Payment systems tested — all methods and edge cases</div><div class="tl-task-th">ทดสอบระบบชำระเงินทุกรูปแบบ รวม Edge Cases</div></td><td><span class="tl-owner">FOM + Finance</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-1</span></td><td><div class="tl-task-en">Full Dry Run 2 — VIP arrival simulation + surprise scenarios</div><div class="tl-task-th">Dry Run ครั้งที่ 2 — จำลอง VIP Arrival + เหตุการณ์ไม่คาดฝัน</div></td><td><span class="tl-owner">GM + FOM</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-1</span></td><td><div class="tl-task-en">Room blocking for opening day finalized</div><div class="tl-task-th">จัดทำ Room Blocking สำหรับวันเปิดเสร็จสมบูรณ์</div></td><td><span class="tl-owner">FOM</span></td><td></td></tr>
+        <tr><td><span class="phase-tag done">M-0</span></td><td><div class="tl-task-en">Opening Day — Front Office fully operational</div><div class="tl-task-th">วันเปิด — Front Office พร้อมใช้งานเต็มรูปแบบ</div></td><td><span class="tl-owner">ALL FO TEAM</span></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- KPI -->
+<div id="sec-kpi" class="sec-pane">
+  <div class="note-box">
+    <div class="note-title">Success Criteria — What does "Ready to Open" mean for Front Office?</div>
+    <div class="note-text">Every KPI below must be achieved before Opening Day. Share this page with the GM and Owner to align on expectations.<br>
+    KPI ทุกข้อต้องผ่านก่อนวันเปิด แชร์หน้านี้กับ GM และเจ้าของเพื่อ Align ความคาดหวัง</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card red"><div class="kpi-v" style="color:var(--red)">100%</div><div class="kpi-label">PMS Trained</div><div class="kpi-label-th">ผ่านการฝึก PMS</div><div class="kpi-target">All FO staff certified</div></div>
+    <div class="kpi-card"><div class="kpi-v" style="color:var(--dept)">2x</div><div class="kpi-label">Dry Runs Done</div><div class="kpi-label-th">ซ้อม Dry Run</div><div class="kpi-target">Min 2 full simulations</div></div>
+    <div class="kpi-card green"><div class="kpi-v" style="color:var(--green)">100%</div><div class="kpi-label">OTA Connected</div><div class="kpi-label-th">OTA เชื่อมต่อแล้ว</div><div class="kpi-target">All channels synced</div></div>
+    <div class="kpi-card gold"><div class="kpi-v" style="color:var(--gold)">&lt;3min</div><div class="kpi-label">Check-in Time</div><div class="kpi-label-th">เวลา Check-in</div><div class="kpi-target">Standard guest target</div></div>
+    <div class="kpi-card red"><div class="kpi-v" style="color:var(--red)">0</div><div class="kpi-label">System Errors</div><div class="kpi-label-th">Error ในระบบ</div><div class="kpi-target">Zero PMS bugs on open</div></div>
+    <div class="kpi-card"><div class="kpi-v" style="color:var(--dept)">100%</div><div class="kpi-label">SOPs Approved</div><div class="kpi-label-th">SOP อนุมัติแล้ว</div><div class="kpi-target">All by GM before M-2</div></div>
+    <div class="kpi-card green"><div class="kpi-v" style="color:var(--green)">Pass</div><div class="kpi-label">Role-play Score</div><div class="kpi-label-th">ผล Role-play</div><div class="kpi-target">All staff pass scenario test</div></div>
+    <div class="kpi-card gold"><div class="kpi-v" style="color:var(--gold)">&gt;9.0</div><div class="kpi-label">Guest Score Target</div><div class="kpi-label-th">คะแนนแขก (เป้าหมาย)</div><div class="kpi-target">30-day post-opening survey</div></div>
+  </div>
+</div>
+
+<!-- DOCUMENTS -->
+<div id="sec-documents" class="sec-pane">
+  <div class="doc-intro">
+    Key documents the Front Office department must prepare before Opening Day, organized by type — SOP, Form, Policy, Template.<br>
+    เอกสารสำคัญที่ Front Office ต้องเตรียมก่อนเปิด แบ่งตามประเภท
+  </div>
+  <div class="stitle">Front Office Documents / รายการเอกสาร Front Office</div>
+  <div class="doc-grid">
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Check-In Standard SOP</div><div class="doc-name-th">SOP Check-in มาตรฐาน</div><div class="doc-desc">10-step check-in procedure with exact wording, actions and timing for each step</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Check-Out SOP</div><div class="doc-name-th">SOP Check-out</div><div class="doc-desc">Bill presentation, payment processing, feedback collection and farewell procedure</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">VIP Arrival SOP</div><div class="doc-name-th">SOP การต้อนรับ VIP</div><div class="doc-desc">Pre-arrival checklist, in-person arrival protocol, in-house care and departure</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Guest Complaint Handling SOP</div><div class="doc-name-th">SOP การจัดการข้อร้องเรียน</div><div class="doc-desc">LEARN model procedure with escalation levels, documentation and follow-up</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Night Audit SOP</div><div class="doc-name-th">SOP Night Audit</div><div class="doc-desc">End-of-day reconciliation, reports, room status check and system close</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Shift Handover SOP</div><div class="doc-name-th">SOP การส่งกะ</div><div class="doc-desc">Log book completion, pending tasks, VIP in-house, cash float handover</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Guest Registration Card</div><div class="doc-name-th">ใบลงทะเบียนแขก</div><div class="doc-desc">Bilingual registration form capturing all required guest information</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Complaint Log Form</div><div class="doc-name-th">แบบฟอร์มบันทึกข้อร้องเรียน</div><div class="doc-desc">Date, room, issue, action taken, resolved by and follow-up tracking</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Lost &amp; Found Log</div><div class="doc-name-th">แบบฟอร์ม Lost and Found</div><div class="doc-desc">Item description, location found, stored by, claimed by and date returned</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">Pre-Arrival Email Template</div><div class="doc-name-th">Template Email ก่อนเดินทาง</div><div class="doc-desc">Welcome, confirmation, upsell offer and local tips — bilingual EN/TH</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">VIP Welcome Letter Template</div><div class="doc-name-th">Template จดหมายต้อนรับ VIP</div><div class="doc-desc">Personalized welcome letter template with amenity note and GM signature</div></div>
+    <div class="doc-card policy"><span class="doc-type-tag dtt-policy">Policy</span><div class="doc-name">Cancellation &amp; No-Show Policy</div><div class="doc-name-th">นโยบาย Cancellation และ No-show</div><div class="doc-desc">Tiered cancellation policy by room type, season and booking channel</div></div>
+    <div class="doc-card policy"><span class="doc-type-tag dtt-policy">Policy</span><div class="doc-name">Check-In Age &amp; ID Policy</div><div class="doc-name-th">นโยบายอายุและเอกสาร Check-in</div><div class="doc-desc">Minimum age, accepted ID types, third-party booking procedures</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">Concierge Local Directory</div><div class="doc-name-th">คู่มือแนะนำสถานที่ท้องถิ่น</div><div class="doc-desc">Restaurants, attractions, transport, shopping — updated before opening</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">FO Daily Operations Checklist</div><div class="doc-name-th">Checklist การดำเนินงาน FO ประจำวัน</div><div class="doc-desc">Morning, afternoon and night shift task checklist for front desk staff</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Overbooking &amp; Walk Procedure</div><div class="doc-name-th">SOP การ Walk Guest เมื่อ Overbook</div><div class="doc-desc">Steps to walk a guest — compensation, alternative hotel, transport, follow-up</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">Room Blocking Chart Template</div><div class="doc-name-th">Template Room Blocking</div><div class="doc-desc">Opening day room assignment plan including VIP, complimentary and group blocks</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Role-Play Evaluation Sheet</div><div class="doc-name-th">แบบประเมิน Role-play</div><div class="doc-desc">Scoring rubric for check-in, complaint and VIP role-play certification</div></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<footer class="pack-footer">
+  <div class="pf-brand">HR Inside Out</div>
+  <div class="pf-copy">Front Office &amp; Guest Experience — Pre-Opening Department Pack<br>Integrity · Compassion · Tolerance · HR Inside Out Consulting</div>
+  <div class="pf-pack">Department Pack 02 of 08<br>v1.0 · Bilingual EN/TH</div>
+</footer>
+
+<script>
+function showSec(name, btn) {
+  document.querySelectorAll('.sec-pane').forEach(function(p){ p.classList.remove('on'); });
+  document.querySelectorAll('.snav').forEach(function(b){ b.classList.remove('on'); });
+  document.getElementById('sec-' + name).classList.add('on');
+  if (btn) btn.classList.add('on');
+}
+</script>
+</body>
+</html>

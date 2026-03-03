@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR & People — Pre-Opening Department Pack | HR Inside Out</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#16213E;--navy2:#1A2744;--gold:#C9A252;--gold-l:#E2C47A;--gold-p:#FBF5E8;--gold-d:#8B6A1F;
+  --cream:#F9F8F4;--off:#F2F1EC;--ink:#0D1117;--mid:#7A7A8C;--bd:#E0DFD8;--wh:#fff;
+  --green:#1E8A4C;--green-p:#E8F5EE;--red:#C0392B;--red-p:#FDECEA;
+  --blue:#1A5F9E;--blue-p:#EAF2FB;--orange:#C86400;--orange-p:#FEF3E6;
+  --dept:#C9A252;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+
+/* TOPBAR */
+.topbar{background:var(--navy);height:52px;display:flex;align-items:center;
+  padding:0 28px;justify-content:space-between;position:sticky;top:0;z-index:200;
+  border-bottom:1px solid rgba(201,162,82,.15)}
+.tb-brand{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold)}
+.tb-dept{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,255,255,.35)}
+.tb-right{display:flex;gap:8px}
+.btn{padding:6px 16px;font-size:10px;font-weight:700;letter-spacing:.8px;border:none;
+  cursor:pointer;font-family:'Lato',sans-serif;transition:all .15s;text-transform:uppercase}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO */
+.hero{background:linear-gradient(155deg,var(--navy) 0%,var(--navy2) 60%,#1a2a50 100%);
+  padding:44px 36px 32px;position:relative;overflow:hidden}
+.hero::before{content:'HR';position:absolute;right:-20px;top:-20px;
+  font-family:'Playfair Display',serif;font-size:220px;font-weight:900;
+  color:rgba(201,162,82,.04);line-height:1;pointer-events:none;user-select:none}
+.hero-top{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;margin-bottom:20px}
+.hero-tag{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px}
+.hero h1{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;
+  color:#fff;line-height:1.1;margin-bottom:6px}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero-th{font-family:'Lato',sans-serif;font-size:16px;color:rgba(255,255,255,.45);
+  font-weight:300;margin-bottom:10px}
+.hero-sub{font-size:12.5px;color:rgba(255,255,255,.4);line-height:1.7;max-width:540px}
+.pack-badge{background:rgba(201,162,82,.08);border:1px solid rgba(201,162,82,.25);
+  padding:16px 20px;text-align:center;min-width:160px}
+.pb-label{font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.35);margin-bottom:4px}
+.pb-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--gold);
+  line-height:1.3}
+.pb-ver{font-size:9px;color:rgba(255,255,255,.25);margin-top:4px}
+.hero-stats{display:flex;gap:0;border:1px solid rgba(255,255,255,.07)}
+.hstat{flex:1;padding:12px 16px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+.hstat:last-child{border-right:none}
+.hstat-v{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold)}
+.hstat-l{font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:rgba(255,255,255,.3);margin-top:2px}
+
+/* SECTION NAV */
+.sec-nav{background:var(--off);border-bottom:1px solid var(--bd);
+  padding:0 28px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.sec-nav::-webkit-scrollbar{display:none}
+.snav{padding:11px 16px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+  border:none;background:transparent;color:var(--mid);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all .15s;white-space:nowrap;font-family:'Lato',sans-serif}
+.snav:hover{color:var(--navy)}
+.snav.on{color:var(--gold-d);border-bottom-color:var(--gold)}
+
+/* MAIN */
+.main{padding:28px 32px;max-width:1280px;margin:0 auto}
+.sec-pane{display:none}.sec-pane.on{display:block}
+
+/* SECTION TITLE */
+.stitle{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;padding-bottom:8px;
+  border-bottom:2px solid var(--gold-p);display:flex;align-items:center;gap:8px}
+.stitle::after{content:'';flex:1;height:1px;background:var(--gold-p)}
+
+/* CRITICAL CHECKLIST */
+.crit-intro{background:var(--red-p);border-left:4px solid var(--red);
+  padding:12px 16px;margin-bottom:20px;display:flex;align-items:flex-start;gap:10px}
+.crit-intro-icon{font-size:20px;flex-shrink:0}
+.crit-intro-text{font-size:11.5px;color:var(--red);line-height:1.6}
+.crit-intro-text strong{font-weight:700}
+
+.area-block{margin-bottom:28px}
+.area-head{background:var(--navy);padding:10px 16px;display:flex;align-items:center;
+  justify-content:space-between;margin-bottom:0}
+.area-title{font-size:12px;font-weight:700;color:#fff;letter-spacing:.3px}
+.area-title-th{font-size:10.5px;color:rgba(255,255,255,.45);margin-left:8px}
+.area-badge{font-size:8px;font-weight:700;letter-spacing:.5px;padding:3px 10px}
+.ab-crit{background:var(--red);color:#fff}
+.ab-imp{background:var(--orange);color:#fff}
+.ab-std{background:var(--blue);color:#fff}
+
+.checklist-table{width:100%;border-collapse:collapse;background:var(--wh);
+  border:1px solid var(--bd);border-top:none}
+.checklist-table th{background:var(--navy2);color:rgba(255,255,255,.5);font-size:9px;
+  font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 12px;text-align:left}
+.checklist-table td{padding:9px 12px;border-bottom:.5px solid var(--bd);vertical-align:top}
+.checklist-table tr:last-child td{border-bottom:none}
+.checklist-table tr:hover td{background:#FAFAFA}
+.ct-num{font-size:10px;font-weight:700;color:var(--mid);width:32px;white-space:nowrap}
+.ct-task{}
+.ct-en{font-size:12px;color:var(--ink);line-height:1.4;font-weight:400}
+.ct-th{font-size:10.5px;color:var(--mid);margin-top:2px;line-height:1.4}
+.ct-timing{white-space:nowrap}
+.timing-badge{display:inline-block;font-size:9.5px;font-weight:700;padding:3px 10px;
+  background:var(--gold-p);color:var(--gold-d)}
+.timing-badge.red{background:var(--red-p);color:var(--red)}
+.timing-badge.green{background:var(--green-p);color:var(--green)}
+.timing-badge.blue{background:var(--blue-p);color:var(--blue)}
+.ct-priority{white-space:nowrap}
+.pri{font-size:8.5px;font-weight:700;padding:2px 8px}
+.pri-c{background:var(--red-p);color:var(--red)}
+.pri-i{background:var(--orange-p);color:var(--orange)}
+.pri-s{background:var(--blue-p);color:var(--blue)}
+.ct-note{font-size:10px;color:var(--mid);font-style:italic;margin-top:3px}
+
+/* TIMELINE */
+.tl-wrap{background:var(--wh);border:1px solid var(--bd);margin-bottom:24px;overflow:hidden}
+.tl-hd{background:var(--navy);padding:12px 16px}
+.tl-hd-title{font-size:12px;font-weight:700;color:#fff}
+.tl-hd-sub{font-size:10px;color:rgba(255,255,255,.38);margin-top:2px}
+.tl-table{width:100%;border-collapse:collapse}
+.tl-table th{background:var(--navy2);color:rgba(255,255,255,.5);font-size:9px;
+  font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:8px 12px;text-align:left;
+  border-right:.5px solid rgba(255,255,255,.08)}
+.tl-table td{padding:10px 12px;border-bottom:.5px solid var(--bd);vertical-align:top;
+  border-right:.5px solid var(--bd)}
+.tl-table td:last-child{border-right:none}
+.tl-table tr:last-child td{border-bottom:none}
+.tl-table tr:nth-child(even) td{background:#FAFAFA}
+.phase-tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;
+  background:var(--gold-p);color:var(--gold-d);white-space:nowrap}
+.phase-tag.crit{background:var(--red-p);color:var(--red)}
+.phase-tag.done{background:var(--green-p);color:var(--green)}
+.tl-task-en{font-size:12px;color:var(--ink);line-height:1.4}
+.tl-task-th{font-size:10.5px;color:var(--mid);margin-top:2px}
+.tl-owner{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 9px;
+  background:var(--off);color:var(--navy)}
+.tl-crit-flag{font-size:9px;font-weight:700;color:var(--red);margin-top:3px}
+
+/* DOCUMENTS */
+.doc-intro{background:var(--blue-p);border-left:4px solid var(--blue);
+  padding:12px 16px;margin-bottom:20px;font-size:11.5px;color:var(--blue);line-height:1.6}
+.doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.doc-card{background:var(--wh);border:1px solid var(--bd);padding:14px 16px;
+  border-left:3px solid var(--gold);transition:all .15s}
+.doc-card:hover{border-left-color:var(--navy);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.doc-card.sop{border-left-color:var(--red)}
+.doc-card.form{border-left-color:var(--green)}
+.doc-card.policy{border-left-color:var(--blue)}
+.doc-card.template{border-left-color:var(--orange)}
+.doc-type-tag{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:2px 8px;margin-bottom:8px;display:inline-block}
+.dtt-sop{background:var(--red-p);color:var(--red)}
+.dtt-form{background:var(--green-p);color:var(--green)}
+.dtt-policy{background:var(--blue-p);color:var(--blue)}
+.dtt-template{background:var(--orange-p);color:var(--orange)}
+.doc-name{font-size:12px;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:3px}
+.doc-name-th{font-size:10.5px;color:var(--mid);line-height:1.4;margin-bottom:6px}
+.doc-desc{font-size:10.5px;color:var(--mid);line-height:1.5}
+
+/* KPI SECTION */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.kpi-card{background:var(--wh);border:1px solid var(--bd);padding:16px;
+  border-top:3px solid var(--gold);text-align:center}
+.kpi-card.red{border-top-color:var(--red)}
+.kpi-card.green{border-top-color:var(--green)}
+.kpi-card.blue{border-top-color:var(--blue)}
+.kpi-v{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--navy)}
+.kpi-label{font-size:10px;font-weight:700;color:var(--mid);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.kpi-label-th{font-size:10px;color:var(--mid);margin-top:2px}
+.kpi-target{font-size:9.5px;color:var(--green);font-weight:700;margin-top:4px}
+
+/* NOTES BOX */
+.note-box{background:var(--gold-p);border:1px solid rgba(201,162,82,.3);
+  border-left:4px solid var(--gold);padding:14px 16px;margin-bottom:20px}
+.note-title{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--gold-d);margin-bottom:6px}
+.note-text{font-size:11.5px;color:var(--ink);line-height:1.7}
+
+/* FOOTER */
+.pack-footer{background:var(--navy);padding:20px 28px;margin-top:32px;
+  display:flex;align-items:center;justify-content:space-between}
+.pf-brand{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--gold)}
+.pf-copy{font-size:9.5px;color:rgba(255,255,255,.28);line-height:1.8;text-align:center}
+.pf-pack{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(255,255,255,.25);text-align:right}
+
+/* PRINT */
+@media print{
+  .topbar,.sec-nav,.btn{display:none!important}
+  .sec-pane{display:block!important}
+  body{background:#fff}
+  .area-block,.doc-card,.kpi-card{break-inside:avoid}
+  .checklist-table tr{break-inside:avoid}
+}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.sec-pane.on > *{animation:fadeIn .2s ease forwards}
+
+@media(max-width:900px){
+  .doc-grid{grid-template-columns:1fr 1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-top{grid-template-columns:1fr}
+  .hero h1{font-size:28px}
+  .main{padding:20px 16px}
+  .hero{padding:28px 20px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="tb-brand">HR Inside Out</div>
+  <div class="tb-dept">HR &amp; People — Pre-Opening Department Pack</div>
+  <div class="tb-right">
+    <button class="btn btn-ghost" onclick="window.print()">Print / PDF</button>
+    <button class="btn btn-gold" onclick="window.scrollTo(0,0)">Top</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-top">
+    <div>
+      <div class="hero-tag">Pre-Opening Department Pack — HR Inside Out Consulting</div>
+      <h1>Human Resources<br>&amp; <em>People</em></h1>
+      <div class="hero-th">แผนกทรัพยากรบุคคลและการพัฒนาคน</div>
+      <p class="hero-sub">The most critical department in any pre-opening. HR must be fully operational before everyone else — setting the culture, hiring the right people, and building a team that delivers excellence from Day 1.<br><br>
+      <em style="color:rgba(255,255,255,.35)">แผนก HR คือรากฐานของทุก Pre-Opening — ต้องพร้อมก่อนทุกแผนก เพื่อสร้างวัฒนธรรมและทีมที่แข็งแกร่ง</em></p>
+    </div>
+    <div class="pack-badge">
+      <div class="pb-label">Department Pack</div>
+      <div class="pb-name">HR &amp; People<br>Pre-Opening Kit</div>
+      <div class="pb-ver">HR Inside Out · v1.0</div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-v">M-18</div><div class="hstat-l">Start Month</div></div>
+    <div class="hstat"><div class="hstat-v">6</div><div class="hstat-l">Critical Areas</div></div>
+    <div class="hstat"><div class="hstat-v">40+</div><div class="hstat-l">Critical Tasks</div></div>
+    <div class="hstat"><div class="hstat-v">20+</div><div class="hstat-l">Key Documents</div></div>
+    <div class="hstat"><div class="hstat-v">100%</div><div class="hstat-l">Staff by M-4</div></div>
+  </div>
+</div>
+
+<!-- SECTION NAV -->
+<nav class="sec-nav">
+  <button class="snav on" onclick="showSec('checklist',this)">Critical Checklist</button>
+  <button class="snav" onclick="showSec('timeline',this)">Timeline</button>
+  <button class="snav" onclick="showSec('kpi',this)">KPI &amp; Success Criteria</button>
+  <button class="snav" onclick="showSec('documents',this)">Key Documents</button>
+</nav>
+
+<div class="main">
+
+<!-- ═══════════ CRITICAL CHECKLIST ═══════════ -->
+<div id="sec-checklist" class="sec-pane on">
+
+  <div class="crit-intro">
+    <div class="crit-intro-icon">&#9888;</div>
+    <div class="crit-intro-text">
+      <strong>HR is the FIRST department to set up — Month -18.</strong> Without people, nothing else can happen. Every delayed hire cascades into delayed training, delayed operations, and delayed opening.<br>
+      <strong>HR คือแผนกแรกที่ต้องจัดตั้ง</strong> — ไม่มีคน ไม่มีการดำเนินงาน ความล่าช้าในการจ้างงานกระทบทุกแผนกอย่างหลีกเลี่ยงไม่ได้
+    </div>
+  </div>
+
+  <!-- AREA 1: RECRUITMENT -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">01 — Recruitment &amp; Hiring</span><span class="area-title-th">การสรรหาและว่าจ้าง</span></div>
+      <span class="area-badge ab-crit">CRITICAL</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td class="ct-task"><div class="ct-en">Appoint HR Manager / Director of HR as first hire</div><div class="ct-th">แต่งตั้ง HR Manager เป็นพนักงานคนแรกขององค์กร</div></td><td class="ct-timing"><span class="timing-badge red">M-18</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td class="ct-task"><div class="ct-en">Finalize organization chart — approved by GM &amp; Owner</div><div class="ct-th">จัดทำและอนุมัติโครงสร้างองค์กรจาก GM และเจ้าของ</div></td><td class="ct-timing"><span class="timing-badge red">M-18</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td class="ct-task"><div class="ct-en">Complete manpower budget — headcount by department &amp; grade</div><div class="ct-th">จัดทำงบประมาณอัตรากำลังแยกตามแผนกและระดับ</div></td><td class="ct-timing"><span class="timing-badge red">M-16</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">04</td><td class="ct-task"><div class="ct-en">Write Job Descriptions for ALL positions (100% complete)</div><div class="ct-th">เขียน Job Description ทุกตำแหน่งให้ครบ 100%</div><div class="ct-note">JD must reflect brand standards and service culture</div></td><td class="ct-timing"><span class="timing-badge red">M-16</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">05</td><td class="ct-task"><div class="ct-en">Set compensation &amp; benefits structure — approved by Owner</div><div class="ct-th">กำหนดและอนุมัติโครงสร้างเงินเดือนและสวัสดิการ</div></td><td class="ct-timing"><span class="timing-badge red">M-16</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">06</td><td class="ct-task"><div class="ct-en">Launch recruitment — all channels (Job boards, LinkedIn, Referral)</div><div class="ct-th">ลงประกาศรับสมัครทุกช่องทาง</div></td><td class="ct-timing"><span class="timing-badge">M-14</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">07</td><td class="ct-task"><div class="ct-en">Complete Executive Committee hiring (GM, DOF, DOSM, EAM, EXC)</div><div class="ct-th">จ้าง Executive Committee ครบ — GM, CFO, Director of Sales, EAM, Chef</div></td><td class="ct-timing"><span class="timing-badge">M-12</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">08</td><td class="ct-task"><div class="ct-en">All Department Heads (HODs) in place and onboarded</div><div class="ct-th">Head of Department ทุกแผนกเข้าทำงานและผ่าน Onboarding</div></td><td class="ct-timing"><span class="timing-badge">M-10</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">09</td><td class="ct-task"><div class="ct-en">Supervisors &amp; senior staff — 80% filled</div><div class="ct-th">ระดับ Supervisor และพนักงานอาวุโส — จ้างได้ 80%</div></td><td class="ct-timing"><span class="timing-badge">M-6</span></td><td class="ct-priority"><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">10</td><td class="ct-task"><div class="ct-en">100% headcount complete — all positions filled before Dry Run</div><div class="ct-th">พนักงานครบ 100% ก่อนการซ้อม Dry Run</div></td><td class="ct-timing"><span class="timing-badge green">M-4</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 2: ONBOARDING -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">02 — Onboarding &amp; Orientation</span><span class="area-title-th">การปฐมนิเทศและต้อนรับพนักงาน</span></div>
+      <span class="area-badge ab-imp">IMPORTANT</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td class="ct-task"><div class="ct-en">Design 30-60-90 day onboarding program by level</div><div class="ct-th">ออกแบบโปรแกรม Onboarding 30-60-90 วัน แยกตามระดับ</div></td><td class="ct-timing"><span class="timing-badge">M-12</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td class="ct-task"><div class="ct-en">Prepare Employee Welcome Kit (Handbook, uniform, access card, schedule)</div><div class="ct-th">จัดเตรียม Welcome Kit — Handbook, ยูนิฟอร์ม, บัตรผ่าน, ตารางงาน</div></td><td class="ct-timing"><span class="timing-badge">M-8</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td class="ct-task"><div class="ct-en">Brand immersion &amp; culture workshop — all staff</div><div class="ct-th">Workshop Brand Immersion และวัฒนธรรมองค์กร — พนักงานทุกคน</div></td><td class="ct-timing"><span class="timing-badge">M-6</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">04</td><td class="ct-task"><div class="ct-en">Uniform fitting and grooming standard briefing</div><div class="ct-th">วัดตัวและอบรมมาตรฐานการแต่งกาย</div></td><td class="ct-timing"><span class="timing-badge">M-5</span></td><td class="ct-priority"><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">05</td><td class="ct-task"><div class="ct-en">All staff complete General Orientation before department training</div><div class="ct-th">พนักงานทุกคนผ่าน General Orientation ก่อนเข้าฝึกอบรมแผนก</div></td><td class="ct-timing"><span class="timing-badge">M-3</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 3: TRAINING -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">03 — Training &amp; Development</span><span class="area-title-th">การฝึกอบรมและพัฒนา</span></div>
+      <span class="area-badge ab-crit">CRITICAL</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td class="ct-task"><div class="ct-en">Design pre-opening training curriculum — by department</div><div class="ct-th">ออกแบบหลักสูตรฝึกอบรมก่อนเปิด แยกตามแผนก</div></td><td class="ct-timing"><span class="timing-badge">M-10</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td class="ct-task"><div class="ct-en">Appoint and train departmental trainers (Train the Trainer)</div><div class="ct-th">คัดเลือกและฝึกอบรม Trainer ประจำแผนก</div></td><td class="ct-timing"><span class="timing-badge">M-8</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td class="ct-task"><div class="ct-en">NLP &amp; Service Excellence workshop — all HODs &amp; Supervisors</div><div class="ct-th">Workshop NLP และ Service Excellence สำหรับ HOD และ Supervisor</div></td><td class="ct-timing"><span class="timing-badge">M-6</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">04</td><td class="ct-task"><div class="ct-en">Department-level SOP training completed for all staff</div><div class="ct-th">ฝึกอบรม SOP ระดับแผนกให้ครบทุกคน</div></td><td class="ct-timing"><span class="timing-badge">M-3</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">05</td><td class="ct-task"><div class="ct-en">Fire safety &amp; emergency response — 100% staff certified</div><div class="ct-th">ฝึกอบรมความปลอดภัยและอัคคีภัย — ผ่านการรับรอง 100%</div></td><td class="ct-timing"><span class="timing-badge">M-2</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">06</td><td class="ct-task"><div class="ct-en">Mock operations / Dry Run — full simulation all departments</div><div class="ct-th">ซ้อม Dry Run เต็มรูปแบบทุกแผนกพร้อมกัน</div></td><td class="ct-timing"><span class="timing-badge green">M-1</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 4: POLICIES -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">04 — HR Policies &amp; Employee Handbook</span><span class="area-title-th">นโยบาย HR และคู่มือพนักงาน</span></div>
+      <span class="area-badge ab-imp">IMPORTANT</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td class="ct-task"><div class="ct-en">Draft and approve Employee Handbook (bilingual)</div><div class="ct-th">จัดทำและอนุมัติ Employee Handbook (สองภาษา)</div></td><td class="ct-timing"><span class="timing-badge">M-10</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td class="ct-task"><div class="ct-en">Finalize all HR policies — leave, attendance, discipline, grievance</div><div class="ct-th">อนุมัตินโยบาย HR ทั้งหมด — ลา, เวลาทำงาน, วินัย, ร้องทุกข์</div></td><td class="ct-timing"><span class="timing-badge">M-10</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">03</td><td class="ct-task"><div class="ct-en">Grooming &amp; uniform policy — photos, standards per department</div><div class="ct-th">นโยบายการแต่งกาย — ภาพตัวอย่างและมาตรฐานแต่ละแผนก</div></td><td class="ct-timing"><span class="timing-badge">M-8</span></td><td class="ct-priority"><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">04</td><td class="ct-task"><div class="ct-en">All staff sign and acknowledge Handbook receipt</div><div class="ct-th">พนักงานทุกคนลงนามรับทราบ Employee Handbook</div></td><td class="ct-timing"><span class="timing-badge">M-3</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 5: SYSTEMS -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">05 — HR Systems &amp; Payroll</span><span class="area-title-th">ระบบ HR และการจ่ายเงินเดือน</span></div>
+      <span class="area-badge ab-std">STANDARD</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td class="ct-task"><div class="ct-en">HRIS system installed — attendance, leave, payroll module</div><div class="ct-th">ติดตั้งระบบ HRIS — โมดูลเวลา, ลา, เงินเดือน</div></td><td class="ct-timing"><span class="timing-badge">M-8</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td class="ct-task"><div class="ct-en">Fingerprint / biometric time attendance installed &amp; tested</div><div class="ct-th">ติดตั้งและทดสอบระบบลงเวลาทำงาน</div></td><td class="ct-timing"><span class="timing-badge">M-6</span></td><td class="ct-priority"><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">03</td><td class="ct-task"><div class="ct-en">First payroll test run — verify calculations, deductions, tax</div><div class="ct-th">ทดสอบรันเงินเดือนครั้งแรก — ยืนยันการคำนวณและภาษี</div></td><td class="ct-timing"><span class="timing-badge">M-2</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">04</td><td class="ct-task"><div class="ct-en">Social security &amp; provident fund registration for all staff</div><div class="ct-th">ขึ้นทะเบียนประกันสังคมและกองทุนสำรองเลี้ยงชีพ</div></td><td class="ct-timing"><span class="timing-badge">M-3</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">05</td><td class="ct-task"><div class="ct-en">Work permits secured for all foreign national employees</div><div class="ct-th">ดำเนินการใบอนุญาตทำงานสำหรับพนักงานต่างชาติครบถ้วน</div></td><td class="ct-timing"><span class="timing-badge red">M-6</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AREA 6: CULTURE -->
+  <div class="area-block">
+    <div class="area-head">
+      <div><span class="area-title">06 — Culture &amp; Employee Experience</span><span class="area-title-th">วัฒนธรรมองค์กรและประสบการณ์พนักงาน</span></div>
+      <span class="area-badge ab-imp">IMPORTANT</span>
+    </div>
+    <table class="checklist-table">
+      <thead><tr><th style="width:36px">#</th><th>Task / งาน</th><th style="width:90px">Timing</th><th style="width:80px">Priority</th></tr></thead>
+      <tbody>
+        <tr><td class="ct-num">01</td><td class="ct-task"><div class="ct-en">Define hotel values, vision &amp; service philosophy (with Owner/GM)</div><div class="ct-th">กำหนดค่านิยม วิสัยทัศน์ และปรัชญาการบริการ ร่วมกับ Owner/GM</div></td><td class="ct-timing"><span class="timing-badge red">M-18</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">02</td><td class="ct-task"><div class="ct-en">Design employee recognition &amp; reward program</div><div class="ct-th">ออกแบบโปรแกรมการยกย่องและให้รางวัลพนักงาน</div></td><td class="ct-timing"><span class="timing-badge">M-6</span></td><td class="ct-priority"><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">03</td><td class="ct-task"><div class="ct-en">Set up employee communication channels (Line Group / notice board)</div><div class="ct-th">จัดตั้งช่องทางสื่อสารภายใน — Line Group, บอร์ดประกาศ</div></td><td class="ct-timing"><span class="timing-badge">M-4</span></td><td class="ct-priority"><span class="pri pri-i">Important</span></td></tr>
+        <tr><td class="ct-num">04</td><td class="ct-task"><div class="ct-en">Pre-opening staff pep rally &amp; motivation event</div><div class="ct-th">จัดงาน Pep Rally และสร้างขวัญกำลังใจก่อนเปิด</div></td><td class="ct-timing"><span class="timing-badge green">M-1</span></td><td class="ct-priority"><span class="pri pri-c">Critical</span></td></tr>
+        <tr><td class="ct-num">05</td><td class="ct-task"><div class="ct-en">Schedule post-opening happiness survey (30 days after opening)</div><div class="ct-th">วางแผน Happiness Survey หลังเปิด 30 วัน</div></td><td class="ct-timing"><span class="timing-badge blue">M+1</span></td><td class="ct-priority"><span class="pri pri-i">Important</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /checklist -->
+
+<!-- ═══════════ TIMELINE ═══════════ -->
+<div id="sec-timeline" class="sec-pane">
+  <div class="note-box">
+    <div class="note-title">How to read this timeline / วิธีอ่านไทม์ไลน์</div>
+    <div class="note-text">M-18 = 18 months before opening day. M-0 = Opening Day. Tasks marked CRITICAL must not be delayed as they block other departments.<br>
+    M-18 = 18 เดือนก่อนเปิด, M-0 = วันเปิดโรงแรม งานที่ระบุว่า CRITICAL ไม่สามารถล่าช้าได้เพราะกระทบแผนกอื่น</div>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl-hd">
+      <div class="tl-hd-title">HR &amp; People — Pre-Opening Timeline</div>
+      <div class="tl-hd-sub">Month -18 to Opening Day / เดือน -18 ถึงวันเปิด</div>
+    </div>
+    <table class="tl-table">
+      <thead><tr><th style="width:90px">Phase</th><th>Task / งาน</th><th style="width:100px">Owner</th><th style="width:90px">Flag</th></tr></thead>
+      <tbody>
+        <tr><td><span class="phase-tag crit">M-18</span></td><td><div class="tl-task-en">Appoint HR Manager — first hire in the organization</div><div class="tl-task-th">แต่งตั้ง HR Manager — พนักงานคนแรกขององค์กร</div></td><td><span class="tl-owner">GM / Owner</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag crit">M-18</span></td><td><div class="tl-task-en">Define hotel brand values &amp; culture with Owner/GM</div><div class="tl-task-th">กำหนดค่านิยมและวัฒนธรรมองค์กรร่วมกับ Owner/GM</div></td><td><span class="tl-owner">HR + GM</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag crit">M-16</span></td><td><div class="tl-task-en">Finalize org chart, manpower plan &amp; compensation structure</div><div class="tl-task-th">อนุมัติโครงสร้างองค์กร แผนอัตรากำลัง และโครงสร้างเงินเดือน</div></td><td><span class="tl-owner">HR + GM</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag crit">M-16</span></td><td><div class="tl-task-en">Write all Job Descriptions (100% complete)</div><div class="tl-task-th">เขียน Job Description ทุกตำแหน่ง</div></td><td><span class="tl-owner">HR</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-14</span></td><td><div class="tl-task-en">Launch recruitment across all channels</div><div class="tl-task-th">เปิดรับสมัครงานทุกช่องทาง</div></td><td><span class="tl-owner">HR</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-12</span></td><td><div class="tl-task-en">Complete Executive Committee hiring</div><div class="tl-task-th">จ้าง Executive Committee ครบถ้วน</div></td><td><span class="tl-owner">GM + HR</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-12</span></td><td><div class="tl-task-en">Draft Employee Handbook &amp; all HR policies</div><div class="tl-task-th">จัดทำ Employee Handbook และนโยบาย HR ทั้งหมด</div></td><td><span class="tl-owner">HR</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-10</span></td><td><div class="tl-task-en">All HODs hired and onboarded</div><div class="tl-task-th">HOD ทุกแผนกเข้าทำงานและผ่าน Onboarding</div></td><td><span class="tl-owner">HR</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-10</span></td><td><div class="tl-task-en">Design pre-opening training curriculum</div><div class="tl-task-th">ออกแบบหลักสูตรฝึกอบรมก่อนเปิด</div></td><td><span class="tl-owner">HR + HODs</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-8</span></td><td><div class="tl-task-en">HRIS system setup — attendance, leave, payroll</div><div class="tl-task-th">ติดตั้งและกำหนดค่าระบบ HRIS</div></td><td><span class="tl-owner">HR + IT</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-8</span></td><td><div class="tl-task-en">Train the Trainer program — departmental trainers</div><div class="tl-task-th">ฝึกอบรม Trainer ประจำแผนก</div></td><td><span class="tl-owner">HR</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-6</span></td><td><div class="tl-task-en">NLP &amp; Service Excellence workshop for all HODs</div><div class="tl-task-th">Workshop NLP และ Service Excellence สำหรับ HOD</div></td><td><span class="tl-owner">HR</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-6</span></td><td><div class="tl-task-en">Brand immersion &amp; culture program — all staff</div><div class="tl-task-th">โปรแกรม Brand Immersion ให้พนักงานทุกคน</div></td><td><span class="tl-owner">HR</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-4</span></td><td><div class="tl-task-en">100% headcount complete</div><div class="tl-task-th">พนักงานครบ 100%</div></td><td><span class="tl-owner">HR</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag">M-3</span></td><td><div class="tl-task-en">General Orientation for all new staff</div><div class="tl-task-th">General Orientation พนักงานทุกคน</div></td><td><span class="tl-owner">HR</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-3</span></td><td><div class="tl-task-en">All staff sign Employee Handbook acknowledgement</div><div class="tl-task-th">พนักงานทุกคนลงนามรับทราบ Employee Handbook</div></td><td><span class="tl-owner">HR</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-2</span></td><td><div class="tl-task-en">Fire safety &amp; emergency training — 100% certified</div><div class="tl-task-th">ฝึกอบรมความปลอดภัย — ผ่านรับรอง 100%</div></td><td><span class="tl-owner">HR + Security</span></td><td></td></tr>
+        <tr><td><span class="phase-tag">M-2</span></td><td><div class="tl-task-en">Payroll test run completed</div><div class="tl-task-th">ทดสอบรันเงินเดือน</div></td><td><span class="tl-owner">HR + Finance</span></td><td></td></tr>
+        <tr><td><span class="phase-tag crit">M-1</span></td><td><div class="tl-task-en">Full Dry Run — mock operations all departments</div><div class="tl-task-th">Dry Run เต็มรูปแบบทุกแผนก</div></td><td><span class="tl-owner">GM + HR + All</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag crit">M-1</span></td><td><div class="tl-task-en">Staff Pep Rally — motivation &amp; culture celebration</div><div class="tl-task-th">งาน Pep Rally สร้างขวัญกำลังใจก่อนเปิด</div></td><td><span class="tl-owner">HR + GM</span></td><td><span class="tl-crit-flag">CRITICAL</span></td></tr>
+        <tr><td><span class="phase-tag done">M-0</span></td><td><div class="tl-task-en">Opening Day — HR fully operational</div><div class="tl-task-th">วันเปิดโรงแรม — HR พร้อมใช้งานเต็มรูปแบบ</div></td><td><span class="tl-owner">ALL</span></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ KPI ═══════════ -->
+<div id="sec-kpi" class="sec-pane">
+  <div class="note-box">
+    <div class="note-title">Success Criteria / เกณฑ์ความสำเร็จ</div>
+    <div class="note-text">These KPIs define what "ready to open" means for the HR department. All targets must be met before Opening Day.<br>
+    KPI เหล่านี้กำหนดความหมายของ "พร้อมเปิด" สำหรับแผนก HR ต้องผ่านทุกเป้าหมายก่อนวันเปิด</div>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card red"><div class="kpi-v" style="color:var(--red)">100%</div><div class="kpi-label">Headcount</div><div class="kpi-label-th">อัตรากำลังคน</div><div class="kpi-target">All positions filled by M-4</div></div>
+    <div class="kpi-card"><div class="kpi-v" style="color:var(--gold)">100%</div><div class="kpi-label">Orientation</div><div class="kpi-label-th">ผ่าน Orientation</div><div class="kpi-target">All staff by M-3</div></div>
+    <div class="kpi-card green"><div class="kpi-v" style="color:var(--green)">100%</div><div class="kpi-label">Fire Safety</div><div class="kpi-label-th">ผ่านอบรมความปลอดภัย</div><div class="kpi-target">Certified by M-2</div></div>
+    <div class="kpi-card blue"><div class="kpi-v" style="color:var(--blue)">40hrs</div><div class="kpi-label">Training Hours</div><div class="kpi-label-th">ชั่วโมงฝึกอบรม/คน</div><div class="kpi-target">Min 40 hrs before opening</div></div>
+    <div class="kpi-card"><div class="kpi-v" style="color:var(--navy)">0</div><div class="kpi-label">Legal Issues</div><div class="kpi-label-th">ปัญหาด้านกฎหมาย</div><div class="kpi-target">Zero compliance violations</div></div>
+    <div class="kpi-card green"><div class="kpi-v" style="color:var(--green)">Pass</div><div class="kpi-label">Dry Run Score</div><div class="kpi-label-th">ผลการซ้อม Dry Run</div><div class="kpi-target">All departments pass simulation</div></div>
+    <div class="kpi-card red"><div class="kpi-v" style="color:var(--red)">&lt;30</div><div class="kpi-label">Days to Fill</div><div class="kpi-label-th">วันในการสรรหา (เฉลี่ย)</div><div class="kpi-target">Average per position</div></div>
+    <div class="kpi-card"><div class="kpi-v" style="color:var(--gold)">&gt;8.0</div><div class="kpi-label">Staff Happiness</div><div class="kpi-label-th">คะแนนความสุขพนักงาน</div><div class="kpi-target">Survey score at M+1</div></div>
+  </div>
+</div>
+
+<!-- ═══════════ DOCUMENTS ═══════════ -->
+<div id="sec-documents" class="sec-pane">
+  <div class="doc-intro">
+    These are the key documents the HR department must prepare before opening. Each document has a type — SOP (process), Form (fillable template), Policy (guideline), or Template (draft framework).<br>
+    เอกสารสำคัญที่แผนก HR ต้องเตรียมก่อนเปิด แบ่งเป็น SOP (กระบวนการ), Form (แบบฟอร์ม), Policy (นโยบาย), Template (เอกสารต้นแบบ)
+  </div>
+  <div class="stitle">HR Documents Checklist / รายการเอกสาร HR</div>
+  <div class="doc-grid">
+    <div class="doc-card policy"><span class="doc-type-tag dtt-policy">Policy</span><div class="doc-name">Employee Handbook</div><div class="doc-name-th">คู่มือพนักงาน</div><div class="doc-desc">Full bilingual handbook covering all HR policies, rules, benefits and code of conduct</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">Organization Chart</div><div class="doc-name-th">แผนภูมิองค์กร</div><div class="doc-desc">Full org chart template by department with grade levels and reporting lines</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">Job Description Template</div><div class="doc-name-th">แบบฟอร์ม Job Description</div><div class="doc-desc">Standard JD template covering responsibilities, requirements, KPIs per role</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Interview Score Sheet</div><div class="doc-name-th">แบบประเมินการสัมภาษณ์</div><div class="doc-desc">Structured scoring form by competency, culture fit and technical skill</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Offer Letter Template</div><div class="doc-name-th">แบบฟอร์มจดหมายเสนองาน</div><div class="doc-desc">Bilingual offer letter with compensation, start date and conditions</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Onboarding Checklist</div><div class="doc-name-th">Checklist การ Onboard พนักงานใหม่</div><div class="doc-desc">Day 1-7-30-90 onboarding checklist for manager and new employee</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Recruitment SOP</div><div class="doc-name-th">SOP การสรรหาพนักงาน</div><div class="doc-desc">Step-by-step recruitment process from requisition to offer acceptance</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Orientation Program SOP</div><div class="doc-name-th">SOP โปรแกรม Orientation</div><div class="doc-desc">General orientation agenda, facilitator guide and evaluation form</div></div>
+    <div class="doc-card policy"><span class="doc-type-tag dtt-policy">Policy</span><div class="doc-name">Grooming &amp; Uniform Standard</div><div class="doc-name-th">มาตรฐานการแต่งกายและยูนิฟอร์ม</div><div class="doc-desc">Department-by-department grooming photos and standards with do/don't examples</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">Training Calendar Template</div><div class="doc-name-th">ตารางการฝึกอบรม</div><div class="doc-desc">Monthly training schedule template with department, topic, trainer and attendance</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Training Attendance &amp; Evaluation Form</div><div class="doc-name-th">แบบฟอร์มเข้าร่วมและประเมินผลการฝึกอบรม</div><div class="doc-desc">Sign-in sheet, pre/post test and trainer evaluation in one form</div></div>
+    <div class="doc-card sop"><span class="doc-type-tag dtt-sop">SOP</span><div class="doc-name">Disciplinary Procedure SOP</div><div class="doc-name-th">SOP กระบวนการทางวินัย</div><div class="doc-desc">Warning levels, investigation steps, documentation and appeal process</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Exit Interview Form</div><div class="doc-name-th">แบบฟอร์ม Exit Interview</div><div class="doc-desc">Structured exit interview questions covering reasons, satisfaction and suggestions</div></div>
+    <div class="doc-card template"><span class="doc-type-tag dtt-template">Template</span><div class="doc-name">Manpower Budget Template</div><div class="doc-name-th">แบบฟอร์มงบประมาณอัตรากำลัง</div><div class="doc-desc">Headcount vs budget by department, grade and month with variance tracking</div></div>
+    <div class="doc-card form"><span class="doc-type-tag dtt-form">Form</span><div class="doc-name">Employee Happiness Survey</div><div class="doc-name-th">แบบสำรวจความสุขพนักงาน</div><div class="doc-desc">10-question survey covering work environment, leadership, growth and wellbeing</div></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer class="pack-footer">
+  <div class="pf-brand">HR Inside Out</div>
+  <div class="pf-copy">HR &amp; People — Pre-Opening Department Pack<br>Integrity · Compassion · Tolerance · HR Inside Out Consulting</div>
+  <div class="pf-pack">Department Pack 01 of 08<br>v1.0 · Bilingual EN/TH</div>
+</footer>
+
+<script>
+function showSec(name, btn) {
+  document.querySelectorAll('.sec-pane').forEach(function(p){ p.classList.remove('on'); });
+  document.querySelectorAll('.snav').forEach(function(b){ b.classList.remove('on'); });
+  document.getElementById('sec-' + name).classList.add('on');
+  if (btn) btn.classList.add('on');
+}
+</script>
+</body>
+</html>
