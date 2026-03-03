@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR Inside Out — Tools & Resources Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0E1A;--navy:#0D1526;--navy2:#162040;--navy3:#1C2844;
+  --gold:#C9A252;--gold-l:#DDB96A;--gold-d:#8B6A1F;--gold-p:#FAF4E8;
+  --cream:#F5F4EF;--off:#EDECE6;--mid:#6B6B80;--bd:#DDDCD4;--wh:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(13,21,38,.96);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(201,162,82,.1);
+  height:58px;display:flex;align-items:center;padding:0 48px;
+  justify-content:space-between}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;
+  color:var(--gold);letter-spacing:.5px}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-tag{font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.1);padding:4px 12px}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--navy);display:flex;align-items:center;
+  position:relative;overflow:hidden;padding:100px 0 60px}
+.hero-mesh{position:absolute;inset:0;pointer-events:none}
+.hero-mesh::before{content:'';position:absolute;width:600px;height:600px;
+  border-radius:50%;background:radial-gradient(circle,rgba(201,162,82,.07) 0%,transparent 65%);
+  top:-100px;right:-100px}
+.hero-mesh::after{content:'';position:absolute;width:400px;height:400px;
+  border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.04) 0%,transparent 65%);
+  bottom:-50px;left:-50px}
+.hero-grid-lines{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(201,162,82,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,162,82,.03) 1px,transparent 1px);
+  background-size:60px 60px}
+.hero-inner{max-width:1160px;margin:0 auto;padding:0 48px;position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.eyebrow-dot{width:6px;height:6px;background:var(--gold);border-radius:50%}
+.eyebrow-line{width:40px;height:1px;background:var(--gold)}
+.eyebrow-text{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:62px;font-weight:900;
+  color:#fff;line-height:1.0;margin-bottom:14px;letter-spacing:-.5px}
+.hero h1 em{color:var(--gold);font-style:italic;display:block}
+.hero h1 span{display:block}
+.hero-th{font-size:15px;color:rgba(255,255,255,.35);font-weight:300;
+  margin-bottom:20px;letter-spacing:.3px}
+.hero-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.85;
+  margin-bottom:32px;max-width:460px}
+.hero-actions{display:flex;gap:12px;align-items:center}
+.btn-gold{background:var(--gold);color:var(--ink);font-size:10px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;padding:13px 28px;border:none;
+  cursor:pointer;font-family:'Jost',sans-serif;text-decoration:none;
+  display:inline-block;transition:all .2s}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,162,82,.25)}
+.btn-ghost{background:transparent;color:rgba(255,255,255,.5);font-size:10px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;padding:13px 22px;
+  border:1px solid rgba(255,255,255,.12);cursor:pointer;font-family:'Jost',sans-serif;
+  text-decoration:none;display:inline-block;transition:all .2s}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO RIGHT — STAT CARDS */
+.hero-cards{display:flex;flex-direction:column;gap:10px}
+.hc{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+  padding:16px 20px;display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center;
+  transition:all .2s;cursor:default}
+.hc:hover{background:rgba(201,162,82,.05);border-color:rgba(201,162,82,.18);
+  transform:translateX(4px)}
+.hc-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  font-size:20px;background:rgba(201,162,82,.08);border:1px solid rgba(201,162,82,.12)}
+.hc-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;
+  color:var(--gold);line-height:1}
+.hc-en{font-size:12px;font-weight:600;color:#fff;margin-bottom:2px}
+.hc-th{font-size:10px;color:rgba(255,255,255,.3)}
+
+/* SCROLL INDICATOR */
+.scroll-ind{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;z-index:1}
+.scroll-line{width:1px;height:32px;background:linear-gradient(180deg,rgba(201,162,82,.6),transparent)}
+.scroll-text{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.2)}
+
+/* SECTION COMMON */
+.section{padding:80px 0}
+.section-inner{max-width:1160px;margin:0 auto;padding:0 48px}
+.section-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.section-dot{width:5px;height:5px;background:var(--gold);border-radius:50%}
+.section-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.sep{flex:1;height:1px;background:linear-gradient(90deg,rgba(201,162,82,.2),transparent);max-width:100px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;
+  color:var(--ink);line-height:1.15;margin-bottom:6px}
+.section-title em{color:var(--gold);font-style:italic}
+.section-sub{font-size:13px;color:var(--mid);line-height:1.7;max-width:540px;margin-bottom:44px}
+
+/* TOOLS GRID */
+.tools-section{background:var(--cream)}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+.tool-card{background:var(--wh);border:1px solid var(--bd);overflow:hidden;
+  transition:all .25s;position:relative;display:flex;flex-direction:column}
+.tool-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,.1);border-color:rgba(201,162,82,.3)}
+.tool-card.coming{opacity:.6}
+.tool-card.coming:hover{transform:none;box-shadow:none;border-color:var(--bd)}
+.tool-card.featured{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+
+.tc-bar{height:4px}
+.tc-body{padding:22px 20px;flex:1}
+.tc-category{font-size:8.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--mid);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.tc-cat-dot{width:5px;height:5px;border-radius:50%}
+.tc-icon{font-size:28px;margin-bottom:12px}
+.tc-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;
+  color:var(--ink);line-height:1.2;margin-bottom:3px}
+.tc-name-th{font-size:11px;color:var(--mid);margin-bottom:14px}
+.tc-desc{font-size:12px;color:var(--mid);line-height:1.7;margin-bottom:16px}
+.tc-tags{display:flex;flex-wrap:wrap;gap:5px}
+.tc-tag{font-size:9px;font-weight:700;padding:2px 9px;background:var(--off);color:var(--mid);
+  letter-spacing:.3px}
+.tc-footer{border-top:1px solid var(--bd);padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between}
+.tc-status{font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px}
+.ts-live{background:#F0FDF4;color:#16A34A;border:1px solid rgba(22,163,74,.2)}
+.ts-coming{background:var(--off);color:var(--mid)}
+.tc-btn{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:7px 16px;border:none;cursor:pointer;font-family:'Jost',sans-serif;
+  text-decoration:none;display:inline-block;transition:all .15s}
+.tc-btn-gold{background:var(--ink);color:#fff}
+.tc-btn-gold:hover{background:var(--navy2)}
+.tc-btn-dis{background:var(--off);color:var(--mid);cursor:default}
+
+/* FEATURED WIDE CARD */
+.tool-card.wide{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;gap:0}
+.tool-card.wide .tc-body{padding:28px 32px;display:flex;gap:32px;align-items:center}
+.wide-left{flex:1}
+.wide-right{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:24px;
+  background:rgba(0,0,0,.02);border-left:1px solid var(--bd);min-width:420px}
+.wr-stat{text-align:center;padding:12px 8px;background:var(--wh);border:1px solid var(--bd)}
+.wr-v{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--gold)}
+.wr-l{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--mid);margin-top:3px}
+
+/* ABOUT SECTION */
+.about-section{background:var(--navy)}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-quote{font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;
+  color:#fff;line-height:1.5;margin-bottom:16px;padding-left:20px;
+  border-left:3px solid var(--gold)}
+.about-quote-th{font-size:13px;color:rgba(255,255,255,.35);font-family:'Jost',sans-serif;
+  line-height:1.7;margin-bottom:24px;padding-left:20px}
+.about-name{font-size:12px;font-weight:700;color:var(--gold)}
+.about-role{font-size:11px;color:rgba(255,255,255,.35);margin-top:3px}
+.about-stats{display:flex;flex-direction:column;gap:12px}
+.about-stat{border:1px solid rgba(255,255,255,.07);padding:16px 20px;
+  display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;
+  transition:all .2s}
+.about-stat:hover{background:rgba(201,162,82,.04);border-color:rgba(201,162,82,.15)}
+.as-v{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold);text-align:center}
+.as-en{font-size:12.5px;font-weight:600;color:#fff}
+.as-th{font-size:10.5px;color:rgba(255,255,255,.3);margin-top:2px}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--navy2) 0%,var(--navy3) 100%);
+  padding:80px 0;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(201,162,82,.05),transparent)}
+.cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 48px}
+.cta-tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:700;
+  color:#fff;line-height:1.1;margin-bottom:12px}
+.cta-title em{color:var(--gold);font-style:italic}
+.cta-sub{font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:32px}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:var(--ink);padding:36px 48px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;align-items:start}
+.foot-brand{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;
+  color:var(--gold);margin-bottom:8px}
+.foot-desc{font-size:11px;color:rgba(255,255,255,.25);line-height:1.8}
+.foot-col-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.2);margin-bottom:12px}
+.foot-link{display:block;font-size:11.5px;color:rgba(255,255,255,.35);text-decoration:none;
+  margin-bottom:6px;transition:color .15s}
+.foot-link:hover{color:var(--gold)}
+.foot-copy{font-size:9px;color:rgba(255,255,255,.15);font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;margin-top:8px}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.hero-inner>*{animation:fadeUp .8s ease both}
+.hero-inner>*:nth-child(2){animation-delay:.15s}
+
+/* COMING SOON RIBBON */
+.ribbon{position:absolute;top:14px;right:-22px;background:var(--mid);color:#fff;
+  font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 28px;transform:rotate(35deg)}
+
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero h1{font-size:46px}
+  .tools-grid{grid-template-columns:1fr 1fr}
+  .tool-card.wide{grid-template-columns:1fr}
+  .wide-right{grid-column:1/-1;min-width:auto}
+  .about-inner{grid-template-columns:1fr;gap:40px}
+  footer{grid-template-columns:1fr;gap:24px}
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  .section-inner,.hero-inner,.cta-inner{padding:0 24px}
+  footer{padding:32px 24px}
+}
+@media(max-width:640px){
+  .tools-grid{grid-template-columns:1fr}
+  .hero h1{font-size:36px}
+  .tool-card.wide .tc-body{flex-direction:column}
+}
+@media print{nav{display:none}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">HR Inside Out</div>
+  <div class="nav-links">
+    <a href="#tools">Tools</a>
+    <a href="#packs">Packs</a>
+    <a href="#about">About</a>
+  </div>
+  <div class="nav-tag">Hospitality HR Consulting</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">
+        <div class="eyebrow-dot"></div>
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">HR Inside Out Consulting — Tools & Resources</div>
+      </div>
+      <h1>
+        <span>Everything</span>
+        <em>Hospitality HR</em>
+        <span>Needs</span>
+      </h1>
+      <div class="hero-th">เครื่องมือ HR โรงแรมครบวงจร — Bilingual EN/TH</div>
+      <p class="hero-desc">
+        Tools, templates and frameworks built from 25+ years of luxury hospitality HR expertise — available free for hotel teams and consultants worldwide.<br><br>
+        เครื่องมือ Template และ Framework จากประสบการณ์กว่า 25 ปีใน Luxury Hospitality HR — ฟรีสำหรับทีม HR และที่ปรึกษาทั่วโลก
+      </p>
+      <div class="hero-actions">
+        <a href="#tools" class="btn-gold">Explore All Tools</a>
+        <a href="#packs" class="btn-ghost">Pre-Opening Packs</a>
+      </div>
+    </div>
+    <div class="hero-cards">
+      <div class="hc">
+        <div class="hc-icon">📋</div>
+        <div>
+          <div class="hc-en">Pre-Opening Department Packs</div>
+          <div class="hc-th">ชุดเอกสารเตรียมเปิดโรงแรม 8 แผนก</div>
+        </div>
+      </div>
+      <div class="hc">
+        <div class="hc-icon">🏥</div>
+        <div>
+          <div class="hc-en">Hotel HR Health Check Tool</div>
+          <div class="hc-th">ประเมินสุขภาพ HR โรงแรมของคุณ</div>
+        </div>
+      </div>
+      <div class="hc">
+        <div class="hc-icon">🧮</div>
+        <div>
+          <div class="hc-en">Manpower Calculator</div>
+          <div class="hc-th">คำนวณกำลังคนตามมาตรฐานโรงแรม</div>
+        </div>
+      </div>
+      <div class="hc">
+        <div class="hc-icon">📚</div>
+        <div>
+          <div class="hc-en">Toxic Workplace Books — Coming Soon</div>
+          <div class="hc-th">หนังสือ Toxic Workplace 3 เล่ม (เตรียมตีพิมพ์)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <div class="scroll-text">Scroll</div>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TOOLS SECTION -->
+<section class="section tools-section" id="tools">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="section-dot"></div><div class="section-tag">All Tools</div><div class="sep"></div></div>
+    <h2 class="section-title">Free Tools for <em>Hotel HR</em></h2>
+    <p class="section-sub">เครื่องมือทุกชิ้นออกแบบมาเพื่อใช้งานจริง — เปิดใน Browser ได้ทันที ไม่ต้องติดตั้ง ไม่มีค่าใช้จ่าย</p>
+
+    <div class="tools-grid" id="tools">
+
+      <!-- TOOL 1: HR HEALTH CHECK -->
+      <div class="tool-card featured">
+        <div class="tc-bar" style="background:#C9A252"></div>
+        <div class="tc-body">
+          <div class="tc-category"><div class="tc-cat-dot" style="background:#C9A252"></div>Diagnostic Tool</div>
+          <div class="tc-icon">🏥</div>
+          <div class="tc-name">HR Health Check</div>
+          <div class="tc-name-th">ประเมินสุขภาพ HR โรงแรม</div>
+          <div class="tc-desc">ตอบ 30 คำถามใน 6 หมวด รับ Score 0-100, Diagnosis และ Action Plan ทันที — สำหรับ Owner, GM, HR Manager และ Consultant<br><br>Answer 30 questions, get your HR Health Score, full diagnosis and prioritized action plan instantly.</div>
+          <div class="tc-tags">
+            <span class="tc-tag">30 Questions</span>
+            <span class="tc-tag">6 Categories</span>
+            <span class="tc-tag">Radar Chart</span>
+            <span class="tc-tag">Action Plan</span>
+            <span class="tc-tag">EN/TH</span>
+          </div>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-status ts-live">✓ Live Now</span>
+          <a href="Hotel_HR_HealthCheck_Tool.html" target="_blank" class="tc-btn tc-btn-gold">Open Tool →</a>
+        </div>
+      </div>
+
+      <!-- TOOL 2: MANPOWER CALCULATOR -->
+      <div class="tool-card">
+        <div class="tc-bar" style="background:#2563EB"></div>
+        <div class="tc-body">
+          <div class="tc-category"><div class="tc-cat-dot" style="background:#2563EB"></div>Planning Tool</div>
+          <div class="tc-icon">🧮</div>
+          <div class="tc-name">Manpower Calculator</div>
+          <div class="tc-name-th">คำนวณกำลังคนโรงแรม</div>
+          <div class="tc-desc">คำนวณจำนวนพนักงานที่เหมาะสมตามมาตรฐานโรงแรม — ครอบคลุมทุกแผนก ทุกประเภทโรงแรม<br><br>Calculate the right staffing levels for every department based on hotel type, occupancy and service standards.</div>
+          <div class="tc-tags">
+            <span class="tc-tag">All Departments</span>
+            <span class="tc-tag">Staffing Ratio</span>
+            <span class="tc-tag">Budget View</span>
+            <span class="tc-tag">EN/TH</span>
+          </div>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-status ts-live">✓ Live Now</span>
+          <a href="Manpower_Calculator.html" target="_blank" class="tc-btn tc-btn-gold">Open Tool →</a>
+        </div>
+      </div>
+
+      <!-- TOOL 3: TOXIC WORKPLACE ASSESSMENT -->
+      <div class="tool-card coming" style="position:relative;overflow:hidden">
+        <div class="ribbon">Coming Soon</div>
+        <div class="tc-bar" style="background:#DC2626"></div>
+        <div class="tc-body">
+          <div class="tc-category"><div class="tc-cat-dot" style="background:#DC2626"></div>Assessment Tool</div>
+          <div class="tc-icon">🔍</div>
+          <div class="tc-name">Toxic Workplace Detector</div>
+          <div class="tc-name-th">ตรวจจับ Toxic Workplace</div>
+          <div class="tc-desc">ประเมินระดับ Toxicity ในองค์กรของคุณ — วิเคราะห์จาก 5 มิติ พร้อมแผนฟื้นฟูและคำแนะนำเฉพาะตัว<br><br>Measure your workplace toxicity level across 5 dimensions with a personalized recovery roadmap.</div>
+          <div class="tc-tags">
+            <span class="tc-tag">5 Dimensions</span>
+            <span class="tc-tag">Team Version</span>
+            <span class="tc-tag">Recovery Plan</span>
+          </div>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-status ts-coming">Coming Soon</span>
+          <span class="tc-btn tc-btn-dis">Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- TOOL 4: INTERVIEW QUESTION GENERATOR -->
+      <div class="tool-card coming" style="position:relative;overflow:hidden">
+        <div class="ribbon">Coming Soon</div>
+        <div class="tc-bar" style="background:#16A34A"></div>
+        <div class="tc-body">
+          <div class="tc-category"><div class="tc-cat-dot" style="background:#16A34A"></div>Hiring Tool</div>
+          <div class="tc-icon">💬</div>
+          <div class="tc-name">Interview Question Generator</div>
+          <div class="tc-name-th">สร้างคำถามสัมภาษณ์อัตโนมัติ</div>
+          <div class="tc-desc">เลือกตำแหน่งและระดับ — ได้คำถามสัมภาษณ์ที่เหมาะสมทันที ครอบคลุมทุกแผนกในโรงแรม<br><br>Select position and level — get the right behavioural and competency questions instantly for any hotel role.</div>
+          <div class="tc-tags">
+            <span class="tc-tag">All Positions</span>
+            <span class="tc-tag">Behavioral</span>
+            <span class="tc-tag">Competency</span>
+          </div>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-status ts-coming">Coming Soon</span>
+          <span class="tc-btn tc-btn-dis">Coming Soon</span>
+        </div>
+      </div>
+
+      <!-- TOOL 5: TURNOVER COST CALCULATOR -->
+      <div class="tool-card coming" style="position:relative;overflow:hidden">
+        <div class="ribbon">Coming Soon</div>
+        <div class="tc-bar" style="background:#7C3AED"></div>
+        <div class="tc-body">
+          <div class="tc-category"><div class="tc-cat-dot" style="background:#7C3AED"></div>Analytics Tool</div>
+          <div class="tc-icon">📊</div>
+          <div class="tc-name">Turnover Cost Calculator</div>
+          <div class="tc-name-th">คำนวณต้นทุนการลาออก</div>
+          <div class="tc-desc">คำนวณต้นทุนจริงของการลาออกในโรงแรมของคุณ — ช่วย GM และ Owner เห็นคุณค่าของการลงทุนใน HR<br><br>Calculate the true cost of staff turnover — help your GM and Owner see the real ROI of investing in people.</div>
+          <div class="tc-tags">
+            <span class="tc-tag">By Department</span>
+            <span class="tc-tag">ROI View</span>
+            <span class="tc-tag">Report</span>
+          </div>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-status ts-coming">Coming Soon</span>
+          <span class="tc-btn tc-btn-dis">Coming Soon</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRE-OPENING PACKS -->
+<section class="section" id="packs" style="background:var(--navy)">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="section-dot"></div><div class="section-tag" style="color:var(--gold)">Pre-Opening Packs</div><div class="sep"></div></div>
+    <h2 class="section-title" style="color:#fff">8 Department <em>Packs</em></h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.4);margin-bottom:36px">ชุดเอกสารเตรียมเปิดโรงแรมครบ 8 แผนก — Critical Checklist, Timeline, KPI และ Key Documents ทุกอย่างใน 1 ไฟล์ต่อแผนก</p>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
+      <a href="HR_People_PreOpening_Pack.html" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(201,162,82,.15);padding:16px;transition:all .2s;cursor:pointer" onmouseover="this.style.background='rgba(201,162,82,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+          <div style="width:4px;height:32px;background:#C9A252;margin-bottom:10px"></div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">01</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px">HR & People</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.3)">ทรัพยากรบุคคล</div>
+        </div>
+      </a>
+      <a href="FrontOffice_PreOpening_Pack.html" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(37,99,235,.2);padding:16px;transition:all .2s" onmouseover="this.style.background='rgba(37,99,235,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+          <div style="width:4px;height:32px;background:#2563EB;margin-bottom:10px"></div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">02</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px">Front Office</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.3)">แผนกต้อนรับ</div>
+        </div>
+      </a>
+      <a href="Housekeeping_PreOpening_Pack.html" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(22,163,74,.2);padding:16px;transition:all .2s" onmouseover="this.style.background='rgba(22,163,74,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+          <div style="width:4px;height:32px;background:#16A34A;margin-bottom:10px"></div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">03</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px">Housekeeping</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.3)">แม่บ้าน</div>
+        </div>
+      </a>
+      <a href="FB_Service_PreOpening_Pack.html" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(234,88,12,.2);padding:16px;transition:all .2s" onmouseover="this.style.background='rgba(234,88,12,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+          <div style="width:4px;height:32px;background:#EA580C;margin-bottom:10px"></div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">04</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px">F&B Service</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.3)">บริการอาหาร</div>
+        </div>
+      </a>
+      <a href="Culinary_PreOpening_Pack.html" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(220,38,38,.2);padding:16px;transition:all .2s" onmouseover="this.style.background='rgba(220,38,38,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+          <div style="width:4px;height:32px;background:#DC2626;margin-bottom:10px"></div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">05</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px">Culinary</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.3)">ครัว</div>
+        </div>
+      </a>
+      <a href="Spa_Wellness_PreOpening_Pack.html" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(124,58,237,.2);padding:16px;transition:all .2s" onmouseover="this.style.background='rgba(124,58,237,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+          <div style="width:4px;height:32px;background:#7C3AED;margin-bottom:10px"></div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">06</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px">Spa & Wellness</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.3)">สปา</div>
+        </div>
+      </a>
+      <a href="Engineering_PreOpening_Pack.html" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(13,148,136,.2);padding:16px;transition:all .2s" onmouseover="this.style.background='rgba(13,148,136,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+          <div style="width:4px;height:32px;background:#0D9488;margin-bottom:10px"></div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">07</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px">Engineering</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.3)">วิศวกรรม</div>
+        </div>
+      </a>
+      <a href="Finance_PreOpening_Pack.html" target="_blank" style="text-decoration:none">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(29,78,216,.2);padding:16px;transition:all .2s" onmouseover="this.style.background='rgba(29,78,216,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+          <div style="width:4px;height:32px;background:#1D4ED8;margin-bottom:10px"></div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">08</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px">Finance</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.3)">การเงิน</div>
+        </div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:28px">
+      <a href="PreOpening_Bundle_LandingPage_v3.html" target="_blank" class="btn-gold">View All 8 Packs →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="section-inner">
+    <div class="section-eyebrow"><div class="section-dot"></div><div class="section-tag" style="color:var(--gold)">About</div><div class="sep"></div></div>
+    <div class="about-inner">
+      <div>
+        <div class="about-quote">"True happiness and exceptional performance emerge from understanding oneself deeply — and that begins with the people who lead."</div>
+        <div class="about-quote-th">"ความสุขที่แท้จริงและผลลัพธ์ที่ยอดเยี่ยมเกิดขึ้นจากการเข้าใจตัวเองอย่างลึกซึ้ง — และนั่นเริ่มต้นจากผู้นำ"</div>
+        <div class="about-name">HR Inside Out Consulting</div>
+        <div class="about-role">Luxury Hospitality HR · NLP · Brain-Based Leadership · Coaching</div>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="as-v">25+</div>
+          <div><div class="as-en">Years in Luxury Hospitality HR</div><div class="as-th">ปีประสบการณ์ใน Luxury Hospitality HR</div></div>
+        </div>
+        <div class="about-stat">
+          <div class="as-v">10+</div>
+          <div><div class="as-en">Free Tools & Packs for Hotel Teams</div><div class="as-th">เครื่องมือและ Pack สำหรับทีมโรงแรม</div></div>
+        </div>
+        <div class="about-stat">
+          <div class="as-v">NLP</div>
+          <div><div class="as-en">Certified NLP & Hypnosis Brain-Based Coach</div><div class="as-th">ผู้เชี่ยวชาญ NLP และ Brain-Based Management</div></div>
+        </div>
+        <div class="about-stat">
+          <div class="as-v">3</div>
+          <div><div class="as-en">Books on Toxic Workplace — Coming Soon</div><div class="as-th">หนังสือ Toxic Workplace 3 เล่ม เตรียมตีพิมพ์</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-tag">HR Inside Out — Free for Everyone</div>
+    <h2 class="cta-title">Start Using<br><em>These Tools</em> Today</h2>
+    <p class="cta-sub">ทุก Tool ฟรี เปิดใน Browser ได้ทันที ไม่ต้องสมัคร ไม่ต้องติดตั้ง<br>All tools are free — open in your browser now, no signup required.</p>
+    <div class="cta-btns">
+      <a href="Hotel_HR_HealthCheck_Tool.html" target="_blank" class="btn-gold">HR Health Check →</a>
+      <a href="PreOpening_Bundle_LandingPage_v3.html" target="_blank" class="btn-ghost">Pre-Opening Packs</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-brand">HR Inside Out</div>
+    <div class="foot-desc">Integrity · Compassion · Tolerance<br>25+ years of luxury hospitality expertise, distilled into practical tools for hotel teams worldwide.<br>ประสบการณ์กว่า 25 ปี สรุปเป็นเครื่องมือที่ใช้ได้จริง</div>
+    <div class="foot-copy" style="margin-top:16px">© 2025 HR Inside Out Consulting</div>
+  </div>
+  <div>
+    <div class="foot-col-title">Tools</div>
+    <a href="Hotel_HR_HealthCheck_Tool.html" target="_blank" class="foot-link">HR Health Check Tool</a>
+    <a href="Manpower_Calculator.html" target="_blank" class="foot-link">Manpower Calculator</a>
+    <a href="PreOpening_Bundle_LandingPage_v3.html" target="_blank" class="foot-link">Pre-Opening Packs</a>
+  </div>
+  <div>
+    <div class="foot-col-title">Pre-Opening Packs</div>
+    <a href="HR_People_PreOpening_Pack.html" target="_blank" class="foot-link">HR & People</a>
+    <a href="FrontOffice_PreOpening_Pack.html" target="_blank" class="foot-link">Front Office</a>
+    <a href="Housekeeping_PreOpening_Pack.html" target="_blank" class="foot-link">Housekeeping</a>
+    <a href="FB_Service_PreOpening_Pack.html" target="_blank" class="foot-link">F&B Service</a>
+    <a href="Culinary_PreOpening_Pack.html" target="_blank" class="foot-link">Culinary</a>
+    <a href="Spa_Wellness_PreOpening_Pack.html" target="_blank" class="foot-link">Spa & Wellness</a>
+    <a href="Engineering_PreOpening_Pack.html" target="_blank" class="foot-link">Engineering</a>
+    <a href="Finance_PreOpening_Pack.html" target="_blank" class="foot-link">Finance</a>
+  </div>
+</footer>
+
+</body>
+</html>
